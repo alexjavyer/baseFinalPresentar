@@ -108,6 +108,8 @@ public class Instantanea extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre de la Publicacion");
 
+        txtNombrePublicacion.setText("pub_instantanea_");
+
         jButton2.setText("Listo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,12 +207,10 @@ public class Instantanea extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +242,7 @@ public class Instantanea extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,59 +417,25 @@ public class Instantanea extends javax.swing.JFrame {
             }
             }
             
-          //  JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
         }
         
         
-        //"exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1 \n" +
-                
-//                "use ["+Clientes.baseInicial+"]\n" +
-//        " exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true '\n" +
-//        "-- Adding the snapshot publication \n " +
-//        "use ["+Clientes.baseInicial+"]\n" +
-//        " exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'"+allowAnonymous+"', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'"+inmediateSync+"', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
-//
-//        "\n" +
-//        "\n" +
-//        " exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', "
-//                + "@frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", "
-//                + "@frequency_relative_interval ="+frequency_relative_interval+", "
-//                + "@frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", "
-//                + "@frequency_subday_interval = "+frequency_subday_interval+", "
-//                + "@active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
-//        "\n" +
-//        "\n" +
-//        " use ["+Clientes.baseInicial+"]\n" +
-//        " exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'Clientes', @source_owner = N'dbo', @source_object = N'Clientes', @type = N'logbased', @description = null, @creation_script = null, @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'manual', @destination_table = N'Clientes', @destination_owner = N'dbo', @vertical_partition = N'true'"+
-//                "\n" +
-//
-//        "\n" +
-//        "\n" +
-//        "\n" +
-//        " "+
-                //sqlFiltro+" "+sqlParte5+" "+sqlFiltroCol1+" "+sqlFiltroCol2+"";
-
-        
-        
-        
-        
-        //JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
         sqlCrearPublicacion="use master\n" +
-"exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true' \n" +
-"\n" +
-"-- Adding the snapshot publication\n" +
-"use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1 \n" +
-"exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1 \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa' \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM' \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy' \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT' \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER' \n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin' \n" +
-"use ["+Clientes.baseInicial+"] \n" +
-"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL' \n" +             
-                   filtros +"  "+ filtroFilas +"  "+ filtroS ;
+                            "exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true' \n" +
+                            "\n" +
+                            "-- Adding the snapshot publication\n" +
+                            "use ["+Clientes.baseInicial+"]\n" +
+                            "exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1 \n" +
+                            "exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1 \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa' \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM' \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy' \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT' \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER' \n" +
+                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin' \n" +
+                            "use ["+Clientes.baseInicial+"] \n" +
+                            "exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL' \n" +             
+                            filtros +"  "+ filtroFilas +"  "+ filtroS ;
         boolean exitosa=true;
         try {
             Statement psd= cn.createStatement();
@@ -485,12 +451,6 @@ public class Instantanea extends javax.swing.JFrame {
             exitosa=false;
             }
         }
-        if(exitosa){
-        //Clientes cli=new Clientes();
-        //cli.show();
-        //this.dispose();
-        }
-
     }
 
     DefaultTableModel modeloR;
@@ -498,9 +458,6 @@ public class Instantanea extends javax.swing.JFrame {
     String sql="";
 
     String nomTabla=jlTablasBase.getSelectedValue().toString();
-//    sql="SELECT COLUMN_NAME \n" +
-//    "FROM [Renta de Autos].INFORMATION_SCHEMA.COLUMNS\n" +
-//    "WHERE TABLE_NAME = N'"+nomTabla+"'";
     sql="SELECT COLUMN_NAME\n" +
         "FROM ["+Clientes.baseInicial+"].INFORMATION_SCHEMA.COLUMNS\n" +
         "WHERE TABLE_NAME = N'Clientes'";

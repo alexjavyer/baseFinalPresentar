@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -233,8 +234,20 @@ public class ReplicacionSns extends javax.swing.JFrame {
         cargarTablasSuscriptor();
        // crearTabla(txtBaseNueva.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+        Calendar calobj = Calendar.getInstance();
+
+    
     public void crearSubscripcion(){
-        String fecha="20160131";
+        String fecha="";
+        String año="";
+        String mes="";
+        String dia="";
+                año=String.valueOf(calobj.get(Calendar.YEAR));
+                mes=String.valueOf(calobj.get(Calendar.MONTH)+1);
+                dia=String.valueOf(calobj.get(Calendar.DAY_OF_MONTH));
+                fecha=año+mes+dia;
+                
         JOptionPane.showMessageDialog(null, Clientes.baseInicial);
         String va=cbSuscriptores.getSelectedItem().toString();
         

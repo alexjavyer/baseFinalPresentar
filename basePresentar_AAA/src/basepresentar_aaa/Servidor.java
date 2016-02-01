@@ -25,6 +25,10 @@ public class Servidor extends javax.swing.JFrame {
 //         cmbServidores.addItem(username);
 //         cmbServidores.addItem(username+"/Sitio_A");
 //         cmbServidores.addItem(username+"/Sitio_B");
+        setLocationRelativeTo(null);
+             this.setTitle("S E R V I D O R");
+             this.getContentPane().setBackground(new java.awt.Color(150,200,255));
+   
     }
     
     /**
@@ -43,6 +47,7 @@ public class Servidor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel1.setText("Nombre del servidor");
 
         cmbServidores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "TOSHIBA\\SITIOA", "TOSHIBA\\SITIOB", "TOSHIBA\\PRINCIPAL", "JAVY-PC", "ADRIAN" }));
@@ -72,16 +77,16 @@ public class Servidor extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbServidores, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(btnAceptar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +117,7 @@ public class Servidor extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        Clientes cli = new Clientes();
-        cli.setExtendedState(MAXIMIZED_BOTH);
-        cli.setVisible(true);
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbServidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbServidoresActionPerformed

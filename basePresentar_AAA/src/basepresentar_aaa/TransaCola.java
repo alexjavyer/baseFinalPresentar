@@ -30,7 +30,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Anita
  */
-public class TransaCola extends javax.swing.JFrame {
+public class TransaCola extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Instantanea
@@ -100,6 +100,7 @@ public class TransaCola extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,6 +201,8 @@ public class TransaCola extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Salir");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -210,7 +213,10 @@ public class TransaCola extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -221,7 +227,9 @@ public class TransaCola extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,11 +427,11 @@ public class TransaCola extends javax.swing.JFrame {
             }
             }
             
-            JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
+      //      JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
         }
         
         
-        JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
+      //  JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
        
         sqlCrearPublicacion="-- Enabling the replication database\n" +
 "use master\n" +
@@ -450,8 +458,6 @@ public class TransaCola extends javax.swing.JFrame {
         try {
             Statement psd= cn.createStatement();
             psd.executeQuery(sqlCrearPublicacion);
-            //ResultSet rs=psd.executeQuery(sqlCrearPublicacion);
-            //sS_Pull_Cont_Inme();
         }catch(Exception ex){
             if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
                 JOptionPane.showMessageDialog(null, "Publicacion Creada!");
@@ -461,12 +467,7 @@ public class TransaCola extends javax.swing.JFrame {
             exitosa=false;
             }
         }
-        if(exitosa){
-        Clientes cli=new Clientes(servidor1);
-        cli.show();
-        this.dispose();
-        }
-
+      
     }
 
     DefaultTableModel modeloR;
@@ -562,17 +563,13 @@ public class TransaCola extends javax.swing.JFrame {
         String sql="USE msdb ;\n" +
         "EXEC dbo.sp_start_job N'"+nombreJob+"' ;";
         Conexion cc = new Conexion();
-        //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         Connection cn=cc.conectar(servidor1);
-       // escribir(sqlCrearSubs);
         try {
             Statement psd = cn.createStatement();
             psd.executeQuery(sql);
             }catch(Exception ex){
                 if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Publicacion corriendo");
-                    Clientes cli=new Clientes(servidor1);
-                    cli.show();
+   //                 JOptionPane.showMessageDialog(null,"Publicacion corriendo");
                 }else{
                 JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
                 }
@@ -743,6 +740,7 @@ public class TransaCola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;

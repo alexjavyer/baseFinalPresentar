@@ -29,7 +29,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Anita
  */
-public class Instantanea extends javax.swing.JFrame {
+public class Instantanea extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Instantanea
@@ -41,7 +41,7 @@ public class Instantanea extends javax.swing.JFrame {
     public Instantanea()
             {
                initComponents();
-     
+        this.setFocusable(true);     
             }
     
     
@@ -50,6 +50,7 @@ public class Instantanea extends javax.swing.JFrame {
         initComponents();
         cargarTabla(servidor);
         servidor1=servidor;
+        this.setFocusable(true);
        // servidor2="JAVY-PC";
     }
     String tiempo,intervalo;
@@ -97,8 +98,9 @@ public class Instantanea extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(jlTablasBase);
 
@@ -196,6 +198,13 @@ public class Instantanea extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -206,7 +215,10 @@ public class Instantanea extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -217,7 +229,9 @@ public class Instantanea extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,7 +274,7 @@ public class Instantanea extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -337,6 +351,11 @@ public class Instantanea extends javax.swing.JFrame {
         tc.setCellEditor(tce);
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
       public void crearPub(){
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
@@ -438,15 +457,13 @@ public class Instantanea extends javax.swing.JFrame {
         try {
             Statement psd= cn.createStatement();
             psd.executeQuery(sqlCrearPublicacion);
-            //ResultSet rs=psd.executeQuery(sqlCrearPublicacion);
-            //sS_Pull_Cont_Inme();
         }catch(Exception ex){
             if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
                 JOptionPane.showMessageDialog(null, "Publicacion Creada!");
                 exitosa=true;
             }else{
             JOptionPane.showMessageDialog(null, ex);
-            exitosa=false;
+              exitosa=false;
             }
         }
     }
@@ -530,7 +547,6 @@ public class Instantanea extends javax.swing.JFrame {
             while(rs1.next()){
                 nombreJob=(rs1.getString("name"));
             }
-        //    JOptionPane.showMessageDialog(null, nombreJob);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex+"al cargar tabla");
         }   
@@ -549,9 +565,7 @@ public class Instantanea extends javax.swing.JFrame {
             psd.executeQuery(sql);
             }catch(Exception ex){
                 if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Publicacion corriendo");
-                    Clientes cli=new Clientes(servidor1);
-                    cli.show();
+  //                  JOptionPane.showMessageDialog(null,"Publicacion corriendo");
                 }else{
                 JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
                 }
@@ -611,9 +625,6 @@ public class Instantanea extends javax.swing.JFrame {
         FFcedula= "";FFnombre= "";FFapellido= ""; FFtelefono="";
         String FScedula, FSnombre, FSapellido, FStelefono;
         FScedula= ""; FSnombre= ""; FSapellido= ""; FStelefono="";
-        
-        
-        
         if(jTable1.getValueAt(0,0).toString().equals("true")&&jTable1.getValueAt(0,3)!=null)
          {
              contador++;
@@ -716,12 +727,13 @@ public class Instantanea extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Instantanea().setVisible(true);
+                new Instantanea().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;

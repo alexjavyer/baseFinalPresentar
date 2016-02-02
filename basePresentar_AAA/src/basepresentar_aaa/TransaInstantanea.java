@@ -30,7 +30,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Anita
  */
-public class TransaInstantanea extends javax.swing.JFrame {
+public class TransaInstantanea extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Instantanea
@@ -100,6 +100,7 @@ public class TransaInstantanea extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,6 +198,13 @@ public class TransaInstantanea extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -210,6 +218,8 @@ public class TransaInstantanea extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -220,7 +230,9 @@ public class TransaInstantanea extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -340,6 +352,11 @@ public class TransaInstantanea extends javax.swing.JFrame {
         tc.setCellEditor(tce);
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
       public void crearPub(){
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
@@ -395,34 +412,6 @@ public class TransaInstantanea extends javax.swing.JFrame {
         boolean allowAnonymous=true;
         boolean inmediateSync=true;
 
-//        if(txtFiltro.getText().isEmpty()&&txtFiltro1.getText().isEmpty()){
-//            conFiltros=false;
-//        }
-        
-//        if(conFiltros){
-//            if(cbFiltro.getSelectedItem().equals("Fila")){
-//                inmediateSync=true;
-//                sqlParte4=", @filter_clause = N'["+cbCampos.getSelectedItem().toString()+"]"+cbSigno.getSelectedItem().toString()+"''"+txtFiltro1.getText()+"'''";
-//                sqlFiltro=" -- Adding the article filter \n" +
-//                        " exec sp_articlefilter @publication = N'"+nombrePub+"', @article = N'"+nombreTabla+"', @filter_name = N'FLTR_Clientes_1__58', @filter_clause = N'["+cbCampos.getSelectedItem()+"] =''"+txtFiltro1.getText()+"''', @force_invalidate_snapshot = 1, @force_reinit_subscription = 1";
-//                sqlParte5=" -- Adding the article synchronization object \n" +
-//                    "exec sp_articleview @publication = N'"+nombrePub+"', @article = \n" +
-//                    "N'"+nombreTabla+"', @view_name = N'SYNC_Clientes_1__58', @filter_clause = N'["+cbCampos.getSelectedItem()+"] \n" +cbSigno.getSelectedItem()+
-//                    "''"+txtFiltro1.getText()+"''', @force_invalidate_snapshot = 1, @force_reinit_subscription = 1 \n";
-//            }else{
-//                JOptionPane.showMessageDialog(null,"Filtro columnas");
-//                verticalPartition=true;
-//                allowAnonymous=true;
-//                inmediateSync=true;
-//                sqlFiltroCol1="-- Adding the article's partition column(s)\n" +
-//" \n" +
-//"exec sp_articlecolumn @publication = N'"+nombrePub+"', @article = N'Clientes', @column = N'CED_RENT', @operation = N'add', @force_invalidate_snapshot = 1, @force_reinit_subscription = 1\n" +
-//"";
-//                sqlFiltroCol2="-- Adding the article synchronization object\n" +
-//" \n" +
-//"exec sp_articleview @publication = N'"+nombrePub+"', @article = N'Clientes', @view_name = N'SYNC_Clientes_1__65', @filter_clause = null, @force_invalidate_snapshot = 1, @force_reinit_subscription = 1";
-//            }
-//        }
         if(jComboBox1.getSelectedItem().equals("Tiempo")){   
             if(jcTiempo.getSelectedItem().equals("segundos")){
             frequency_type="1";
@@ -446,11 +435,11 @@ public class TransaInstantanea extends javax.swing.JFrame {
             }
             }
             
-            JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
+      //      JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
         }
         
         
-        JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
+      //  JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
         sqlCrearPublicacion="-- Enabling the replication database\n" +
 "use master\n" +
 "exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true'\n" +
@@ -484,11 +473,6 @@ public class TransaInstantanea extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
             exitosa=false;
             }
-        }
-        if(exitosa){
-        Clientes cli=new Clientes(servidor1);
-        cli.show();
-        this.dispose();
         }
 
     }
@@ -594,9 +578,7 @@ public class TransaInstantanea extends javax.swing.JFrame {
             psd.executeQuery(sql);
             }catch(Exception ex){
                 if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Publicacion corriendo");
-                    Clientes cli=new Clientes(servidor1);
-                    cli.show();
+      //              JOptionPane.showMessageDialog(null,"Publicacion corriendo");
                 }else{
                 JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
                 }
@@ -767,6 +749,7 @@ public class TransaInstantanea extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;

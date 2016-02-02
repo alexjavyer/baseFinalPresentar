@@ -1417,16 +1417,17 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Server: "+servidor1);
         Merge mer=new Merge(servidor1);
+        jDesktopPane1.add(mer);
         mer.show();
-        this.hide();
+        //this.hide();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         MergeSubcripcion mergsub=new MergeSubcripcion(servidor1);
-        mergsub.show();
-        this.hide()
-                ;
+        jDesktopPane1.add(mergsub);
+        //this.hide()
+                mergsub.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed

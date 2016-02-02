@@ -21,7 +21,7 @@ import javax.swing.JCheckBox;
  *
  * @author Anita
  */
-public class Merge extends javax.swing.JFrame {
+public class Merge extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Merge
@@ -438,8 +438,8 @@ public class Merge extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Clientes cli=new Clientes(servidor1);
-        cli.show();
+//        Clientes cli=new Clientes(servidor1);
+//        cli.show();
     }//GEN-LAST:event_btnCancelarActionPerformed
     DefaultListModel modeloCondicion=new DefaultListModel();    
     public void crearPubli(String servidor){

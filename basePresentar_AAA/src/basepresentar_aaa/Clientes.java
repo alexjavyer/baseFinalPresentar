@@ -1410,6 +1410,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void btnSelSusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelSusActionPerformed
         // TODO add your handling code here:
+       jButton1.setEnabled(true);
         DefaultMutableTreeNode selectedNode =
         (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
         nombrePubli=selectedNode.toString();
@@ -1446,7 +1447,7 @@ public class Clientes extends javax.swing.JFrame {
         jMenu3.setEnabled(true);
         jMenu4.setEnabled(true);
         jPanel2.setVisible(true);
-  
+       btnCargarBase.setEnabled(true);
         
         String tablaActual=jtBaseDatos.getLastSelectedPathComponent().toString();
         DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jtBaseDatos.getLastSelectedPathComponent();

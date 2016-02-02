@@ -26,7 +26,7 @@ public class Conexion {
     
     public Connection conectar(String server){
         Connection cn=null;
-            JOptionPane.showMessageDialog(null, "Servidor"+server);
+    //        JOptionPane.showMessageDialog(null, "Servidor"+server);
                 String instancia="";
                 
         if(server.equals("ADRIAN")){
@@ -74,7 +74,8 @@ public class Conexion {
                 instancia="192.168.1.3";
             }else{
                 if(server.equals("TOSHIBA")){
-                    instancia="192.168.1.4";
+                    //instancia="192.168.1.4";
+                    instancia="172.21.103.215";
                 }
             }
         }

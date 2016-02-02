@@ -81,10 +81,8 @@ public class Clientes extends javax.swing.JFrame {
         jDesktopPane1.setBorder(new ImagenFondo());
         this.setExtendedState(Clientes.MAXIMIZED_BOTH);
        // JOptionPane.showMessageDialog(null, servidor);
-
         setTitle(servidor);
-        servidor1=servidor;
- 
+        servidor1=servidor; 
     }
     
     public void cargarPublicaciones(String servidor){

@@ -27,8 +27,8 @@ public class Servidor extends javax.swing.JFrame {
 //         cmbServidores.addItem(username+"/Sitio_B");
         setLocationRelativeTo(null);
              this.setTitle("S E R V I D O R");
-             this.getContentPane().setBackground(new java.awt.Color(150,200,255));
-   
+             //this.getContentPane().setBackground(new java.awt.Color(150,200,255));
+            this.getContentPane().setBackground(new java.awt.Color(213,193,193));
     }
     
     /**

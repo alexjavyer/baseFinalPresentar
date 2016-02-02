@@ -85,6 +85,7 @@ public class Clientes extends javax.swing.JFrame {
         this.setExtendedState(Clientes.MAXIMIZED_BOTH);
        // JOptionPane.showMessageDialog(null, servidor);
         setTitle(servidor);
+        jMenu4.setEnabled(true);
         servidor1=servidor; 
     }
     
@@ -660,7 +661,8 @@ public class Clientes extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
 
         jLabel1.setText("Nombre del servidor");
 
@@ -1110,7 +1112,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jMenu2.setText("SNAPSHOT");
+        jMenu2.setText("Snapshot");
 
         jMenuItem3.setText("PUBLICACION");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -1122,7 +1124,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("TRANSACCIONAL");
+        jMenu3.setText("Transaccional");
 
         jMenuItem1.setText("INSTANTANEA");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -1150,7 +1152,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("MERGE");
+        jMenu4.setText("Merge");
 
         jMenuItem5.setText("Publicacion");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -1170,9 +1172,9 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu1.setText("OPCIONES");
+        jMenu1.setText("Opciones");
 
-        jMenuItem7.setText("CONECTAR");
+        jMenuItem7.setText("Otra Conexion");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -1180,15 +1182,23 @@ public class Clientes extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem7);
 
-        jMenuItem8.setText("SALIR");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem9.setText("Nueva Conexion");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
+        jMenu1.add(jMenuItem9);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu5.setText("Salir");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -1460,13 +1470,9 @@ public class Clientes extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_btnEditarTablaActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
+
         Servidor ser = new Servidor();
         ser.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
@@ -1478,6 +1484,18 @@ public class Clientes extends javax.swing.JFrame {
         else
             btnSelSus.setEnabled(false);
     }//GEN-LAST:event_cbSeleccionarActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Servidor ser=new Servidor();
+        ser.show();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        // TODO add your handling code here:
+                System.exit(0);
+    }//GEN-LAST:event_jMenu5ActionPerformed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -1742,6 +1760,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -1750,7 +1769,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

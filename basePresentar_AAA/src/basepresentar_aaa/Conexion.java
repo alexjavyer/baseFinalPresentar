@@ -71,7 +71,8 @@ public class Conexion {
             instancia="192.168.1.6";
         }else{
             if(server.equals("JAVY-PC")){
-                instancia="192.168.1.3";
+                //instancia="192.168.1.3";
+                instancia="172.21.103.117";
             }else{
                 if(server.equals("TOSHIBA")){
                     //instancia="192.168.1.4";

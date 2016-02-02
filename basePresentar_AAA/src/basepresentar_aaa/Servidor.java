@@ -28,7 +28,7 @@ public class Servidor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
              this.setTitle("S E R V I D O R");
              //this.getContentPane().setBackground(new java.awt.Color(150,200,255));
-            this.getContentPane().setBackground(new java.awt.Color(213,193,193));
+            this.getContentPane().setBackground(new java.awt.Color(233,225,225));
     }
     
     /**
@@ -47,7 +47,7 @@ public class Servidor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel1.setText("Nombre del servidor");
 
         cmbServidores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "JAVY-PC", "ADRIAN" }));

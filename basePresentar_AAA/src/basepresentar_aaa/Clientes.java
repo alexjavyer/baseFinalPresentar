@@ -639,7 +639,7 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    //Snap
+    //Snap peer
 
     
     

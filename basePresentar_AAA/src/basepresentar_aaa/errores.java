@@ -185,6 +185,20 @@ public class errores {
                         saltoLinea +
                         mensajeFinal;
                     break;
+                                 case 5:
+                    mensaje = problema +
+                        saltoLinea +
+                        "1.- No existe conexion con la Instancia " +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verifique que exista conexion con la intancia mensionada" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+   
                 // Errores con mensajes personalizados
                 default:
                     mensaje = "ERROR DESCONOCIDO: " +

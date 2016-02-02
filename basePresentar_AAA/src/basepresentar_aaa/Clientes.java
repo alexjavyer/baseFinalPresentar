@@ -81,8 +81,8 @@ public class Clientes extends javax.swing.JFrame {
         txtbase.setSize(10, 10);
         txtTabla.setSize(10, 10);
         
-        jDesktopPane1.setBorder(new ImagenFondo());
-        this.setExtendedState(Clientes.MAXIMIZED_BOTH);
+//        jDesktopPane1.setBorder(new ImagenFondo());
+//        this.setExtendedState(Clientes.MAXIMIZED_BOTH);
        // JOptionPane.showMessageDialog(null, servidor);
         setTitle(servidor);
         jMenu4.setEnabled(true);
@@ -599,8 +599,8 @@ public class Clientes extends javax.swing.JFrame {
         Connection cn=cc.conectarBase(ser, base);
         String sql="";
         sql="        -- Adding the snapshot publication\n" +
-            "use ["+base+"]\n" +
-            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Snapshot publication of database ''"+base+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
+            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Snapshot publication of database ''"+jcbBases.getSelectedItem().toString()+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
             "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 0, @publisher_login = N'sa', @publisher_password = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
@@ -609,7 +609,7 @@ public class Clientes extends javax.swing.JFrame {
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'distributor_admin'\n" +
             "-- Adding the snapshot articles\n" +
-            "use ["+base+"]\n" +
+            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
             "exec sp_addarticle @publication = N'"+publicacion+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL'\n";
         try {
             Statement psd= cn.createStatement();
@@ -626,9 +626,9 @@ public class Clientes extends javax.swing.JFrame {
         Connection cn=cc.conectarBase(ser, base);
         String sql="";
         sql=" -- Adding the snapshot subscriptions\n" +
-            "use ["+base+"]\n" +
-            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+jcbBases.getSelectedItem().toString()+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
-            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+jcbBases.getSelectedItem().toString()+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
+            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
         try {
             Statement psd= cn.createStatement();
             ResultSet rs=psd.executeQuery(sql);
@@ -705,7 +705,6 @@ public class Clientes extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -714,6 +713,8 @@ public class Clientes extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         jLabel1.setText("Nombre del servidor");
 
@@ -1193,14 +1194,6 @@ public class Clientes extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem4.setText("P2P");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem4);
-
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Merge");
@@ -1259,6 +1252,23 @@ public class Clientes extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
+
+        jMenuItem4.setText("Peer to Peer");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem10.setText("P2P");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenuItem4.add(jMenuItem10);
+
+        jMenuBar1.add(jMenuItem4);
 
         setJMenuBar(jMenuBar1);
 
@@ -1354,21 +1364,6 @@ public class Clientes extends javax.swing.JFrame {
  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        if(jcb_1.getText()==servidor1)
-            jcb_1.setEnabled(false);
-        if(jcb_2.getText()==servidor1)
-            jcb_2.setEnabled(false);
-        if(jcb_3.getText()==servidor1)
-            jcb_3.setEnabled(false);
-        P2P.setBounds(200, 200, 500, 280);
-        P2P.setLocationRelativeTo(null);
-        P2P.setVisible(true);
-        cargarBase();
-        cargarTabla();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Server: "+servidor1);
@@ -1388,21 +1383,22 @@ public class Clientes extends javax.swing.JFrame {
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed
         // TODO add your handling code here:
         //Snapshot
-        System.out.println("jcm "+jcb_1.isSelected()+"  "+ jcb_2.isSelected()+"  "+jcb_3.isSelected());
-        if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
-            //crearBase(bas, servidor);
-            //crearTabla(bas, servidor);
-            bas=jcbBases.getSelectedItem().toString();
-            P2PPublicacion(txtNombrePubP2P.getText());
-            P2PSuscripcion(txtNombrePubP2P.getText());
-        }else{
-            if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
-                JOptionPane.showMessageDialog(null, "Debe elegir una instancia");
-            if(txtNombrePubP2P.getText().equals(""))
-                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la publicación");
-            if(txtNombre_Base.getText().equals(""))
-                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la base");
-        }
+//        if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
+//            //crearBase(bas, servidor);
+//            //crearTabla(bas, servidor);
+//            bas=jcbBases.getSelectedItem().toString();
+//            P2PPublicacion(txtNombrePubP2P.getText());
+//            P2PSuscripcion(txtNombrePubP2P.getText());
+//        }else{
+//            if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
+//                JOptionPane.showMessageDialog(null, "Debe elegir una instancia");
+//            if(txtNombrePubP2P.getText().equals(""))
+//                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la publicación");
+//            if(txtNombre_Base.getText().equals(""))
+//                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la base");
+//        }
+        crearBase(txtNombre_Base.getText(), servidor1);
+        //SnapPubli(jcbBases.getSelectedItem().toString(),txtNombrePubP2P.getText() , servidor1);
     }//GEN-LAST:event_btnAceptarP2PActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -1560,6 +1556,26 @@ public class Clientes extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        if(jcb_1.getText()==servidor1)
+            jcb_1.setEnabled(false);
+        if(jcb_2.getText()==servidor1)
+            jcb_2.setEnabled(false);
+        if(jcb_3.getText()==servidor1)
+            jcb_3.setEnabled(false);
+        P2P.setBounds(200, 200, 500, 280);
+        P2P.setLocationRelativeTo(null);
+        P2P.setVisible(true);
+        cargarBase();
+        cargarTabla();        
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -1827,9 +1843,10 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

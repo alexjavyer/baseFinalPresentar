@@ -5,6 +5,7 @@
  */
 package basepresentar_aaa;
 
+import static basepresentar_aaa.Clientes.baseInicial;
 import static basepresentar_aaa.Clientes.servidor;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,6 +35,9 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
     
     public ReplicacionSns(String publicador,String nombrePub) {
         initComponents();
+        
+        
+        
             jVisBase.setEnabled(false);
             jVisBase1.setEnabled(false);
             jVisBase2.setEnabled(false);
@@ -44,10 +48,12 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
             
             jComboBox2.setVisible(false);
             jLabel4.setVisible(false);
-   
+ 
+            JOptionPane.showMessageDialog(null, "pub"+nombrePub);
             publicadorS=publicador;
             nombrePublicacion=nombrePub;
                     setTitle("S U S C R I P C I O N "+Clientes.nombrePubPasar);
+        
     }
 
     /**
@@ -317,9 +323,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
         if(jcbSuscriptor2.isSelected()){
             crearSubscripcion(jcbSuscriptor2.getText(),cbBasesSuscriptores1.getSelectedItem().toString());
         }
-        if(jcbSuscriptor3.isSelected()){
-           // JOptionPane.showMessageDialog(null, jcbSuscriptor3.getText().toString()+""+cbBasesSuscriptores3.getSelectedItem().toString());
-                    
+        if(jcbSuscriptor3.isSelected()){                    
             crearSubscripcion(jcbSuscriptor3.getText(),cbBasesSuscriptores3.getSelectedItem().toString());
         }
         
@@ -453,10 +457,15 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                 fecha=año+mes+dia;
                
                 System.out.println(fecha);
+     
+        String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
+             
         String va = suscriptor;
         
+        JOptionPane.showMessageDialog(null, "Sucrip"+va+ Clientes.baseInicial);
+    
         String sqlCrearSubs="-----------------BEGIN: Script to be run at Publisher '"+publicadorS+"'----------------- \n" +
-        "use ["+Clientes.baseInicial+"]\n" +
+        "use ["+baseOrigen+"]\n" +
         " exec sp_addsubscription @publication = N'"+nombrePublicacion+"',@subscriber = N'"+va+"', @destination_db = N'"+lugar+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0 \n"
         + "exec sp_addpushsubscription_agent @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @subscriber_db = N'"+lugar+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 0, @frequency_relative_interval = 0, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = "+fecha+", @active_end_date = 99991231, @enabled_for_syncmgr = N'False', @dts_package_location = N'Distributor'"+
         "";
@@ -475,6 +484,32 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
             }
         
     }
+    
+    
+     public String cargarBasedePublicaciones(String servidor, String publicacion){
+        JOptionPane.showMessageDialog(null, "Ver base");
+        String sqlCargarPublicaciones="";
+          sqlCargarPublicaciones="Use distribution  SELECT\n" +
+"*\n" +
+"            FROM\n" +
+"                DBO.MSpublications AS MSA\n" +
+"            INNER JOIN DBO.MSpublications AS MSP\n" +
+"                    ON MSA.publication_id = MSP.publication_id\n" +
+"                    AND MSA.publication='"+publicacion+"'";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectar(servidor);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarPublicaciones);
+            while(rs.next()){
+                return rs.getString("publisher_db");
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al cargar publicacion");
+        }
+        return null;
+    }
+    
     
      public void crearSubscripcionDeCola(){
         String fecha="20160131";

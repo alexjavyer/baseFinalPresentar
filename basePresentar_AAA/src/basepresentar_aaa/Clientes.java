@@ -54,7 +54,7 @@ public class Clientes extends javax.swing.JFrame {
         
         
     }
-        String servidor1;
+        public static String servidor1;
         public static String baseInicial="";
         
     public Clientes(String servidor){
@@ -199,6 +199,7 @@ public class Clientes extends javax.swing.JFrame {
     int resta=0;
     public void CargarTabla(String servidor){
         int nColumnas=modeloNombreColumnas.getSize();
+        JOptionPane.showMessageDialog(null,"Cargar Tabla");
         model = new DefaultTableModel();
         String column="";
         //jtbDatos.setModel(model);
@@ -235,11 +236,6 @@ public class Clientes extends javax.swing.JFrame {
                 for(int k=0;k<nColumnas;k++){
                     registros[k]=rs.getString(modeloNombreColumnas.getElementAt(k).toString());
                 }
-//                
-//                registros[0]=rs.getString("CI_RENT");
-//                registros[1]=rs.getString("NOM_RENT");
-//                registros[2]=rs.getString("APE_RENT");
-//                registros[3]=rs.getString("TEL_RENT");
                 model.addRow(registros);
             }
             model.addRow(vacio);
@@ -1512,13 +1508,11 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerTablasActionPerformed
 
     private void btnEditarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTablaActionPerformed
-        // TODO add your handling code here:
         jMenu2.setEnabled(true);
         jMenu3.setEnabled(true);
         jMenu4.setEnabled(true);
         jPanel2.setVisible(true);
        btnCargarBase.setEnabled(true);
-        
         String tablaActual=jtBaseDatos.getLastSelectedPathComponent().toString();
         DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jtBaseDatos.getLastSelectedPathComponent();
         txtTabla.setText(tablaActual);
@@ -1527,7 +1521,6 @@ public class Clientes extends javax.swing.JFrame {
         cargarColumnas(txtTabla.getText());
         CargarTabla(servidor1);
         baseInicial = baseActual;
-                
     }//GEN-LAST:event_btnEditarTablaActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -1565,6 +1558,7 @@ public class Clientes extends javax.swing.JFrame {
     public void cargarColumnas(String tabla){
             String sql="";
             String base_de_autos=txtbase.getText();
+            //JOptionPane.showMessageDialog(null,"Cargar Columnas");
         //    sql="SELECT COLUMN_NAME \n" +
         //    "FROM [Renta de Autos].INFORMATION_SCHEMA.COLUMNS\n" +
         //    "WHERE TABLE_NAME = N'"+nomTabla+"'";
@@ -1597,6 +1591,7 @@ public class Clientes extends javax.swing.JFrame {
         //String sql ="SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = BASE TABLE AND TABLE_SCHEMA=dbName";
         
         String base_de_datos1=jtBaseDatos.getLastSelectedPathComponent().toString();
+        //String base_de_datos=txtbase.getText();
         
         String sql ="USE ["+base_de_datos1+"]\n" +
         "SELECT name FROM sysobjects where xtype='U' and category <> 2";

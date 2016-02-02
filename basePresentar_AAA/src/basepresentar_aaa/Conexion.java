@@ -5,6 +5,8 @@
 package basepresentar_aaa;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,8 +41,8 @@ public class Conexion {
             }
         }
 
-            JOptionPane.showMessageDialog(null, instancia);
-            try
+           // JOptionPane.showMessageDialog(null, instancia);
+       try
         {
         
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -48,11 +50,15 @@ public class Conexion {
         }catch(SQLException ex){
               errores.Gestionar(ex);
               errores.mensaje();
+              System.out.println("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
+        } catch (ClassNotFoundException ex) {
+            
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(Exception ex){
-            errores.Gestionar(ex);
-            errores.mensaje();
-        }
+        
+        
+        
+        
         return cn;
     }
     
@@ -78,20 +84,22 @@ public class Conexion {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cn=DriverManager.getConnection("jdbc:sqlserver://"+instancia+"\\"+server+":1433;"
                     + "databaseName="+base+";User = sa; Password= sa");
-            char caracter=92;
-//            cn=DriverManager.getConnection("jdbc:sqlserver://JAvy-PC"+caracter+"JAVY-PC"
-//                    +";User = sa; Password= sa; integratedSecurity=true");
-//            cn=DriverManager.getConnection("jdbc:sqlserver://192.168.1.3:1433"
-//                    +";user = sa; password= sa");
+
+
+
             System.out.println("exito  ");
         }catch(SQLException ex){
-              errores.Gestionar(ex);
-              errores.mensaje();
+             errores.Gestionar(ex);
+             errores.mensaje();
+             System.out.println("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(Exception ex){
-            errores.Gestionar(ex);
-            errores.mensaje();
-        }
+        
+        
+        
+        
+        
          return cn;
     }
     

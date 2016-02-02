@@ -67,6 +67,104 @@ public class errores {
                         mensajeFinal;
                     break;
 
+                    case 20026:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- No existe la publicación" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verique el nombre de la publicación" +
+                        saltoLinea +
+                        "2.- Cree la publiccón para trabajar con ella" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+                    
+                        case 21745:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- Error de filtros" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verique los fitros" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+                            
+                            case 14016:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- La publicación ya existe" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Cambie el nombre de la publicación" +
+                        saltoLinea +
+                        "2.- Vaya a las publicaciones y trabaje con ella" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+                        
+                                case 2714:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- La tabla ya existe" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verique el nombre de la tabla" +
+                        saltoLinea +
+                        "2.- Cree o escoja una nueva base para crear la tabla" +
+                        saltoLinea +
+                        "3.- Borre la tabla para crear en la misma base" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+                                    
+                            case 14058:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- La suscripcion ya existe" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verique el nombre de la suscripcion" +
+                        saltoLinea +
+                        "2.- Borre la sucripcion para crear nuevamente" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;        
+                                  case 102:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "1.- Error en el SELET" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Verique el contenido del SELECT" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
                 //case 53:
                 //    //Error personalizado
                 // esta mal el servidor

@@ -458,7 +458,8 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                
                 System.out.println(fecha);
      
-        String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
+        
+                String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
              
         String va = suscriptor;
         

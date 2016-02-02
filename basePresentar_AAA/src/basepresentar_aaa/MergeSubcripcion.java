@@ -159,7 +159,7 @@ public class MergeSubcripcion extends javax.swing.JFrame {
 
         jLabel1.setText("Subscriptores");
 
-        cbSubscriptores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "TOSHIBA\\SITIOA", "ADRIAN", "JAVY-PC" }));
+        cbSubscriptores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "ADRIAN", "JAVY-PC" }));
 
         btnOtroSubs.setText("Añadir");
         btnOtroSubs.addActionListener(new java.awt.event.ActionListener() {
@@ -378,8 +378,10 @@ public class MergeSubcripcion extends javax.swing.JFrame {
         // TODO add your handling code here:
         //"Crear Base de Datos",
         String nombreBaseNueva=JOptionPane.showInputDialog("Escriba el nombre de la base de datos nueva: ");
+        //if(String.valueOf(JOptionPane.YES_OPTION)==nombreBaseNueva){
+            crearBase(nombreBaseNueva);
+        //}
         
-        crearBase(nombreBaseNueva);
         
     }//GEN-LAST:event_btnCrearBaseActionPerformed
 
@@ -540,10 +542,13 @@ public class MergeSubcripcion extends javax.swing.JFrame {
     if(seCreo){
         correrPublicacion();
         JOptionPane.showMessageDialog(null,"Subscripción creada correctamente");
+        Clientes cli=new Clientes(servidor1);
+        cli.show();
+        
         this.dispose();
     }
     }
-    void seleccionaJob(){
+     String seleccionaJob(){
      String sql="";
      JOptionPane.showMessageDialog(null,"Seleccionando Job");
         sql = "SELECT  name \n" +
@@ -557,16 +562,20 @@ public class MergeSubcripcion extends javax.swing.JFrame {
                     ResultSet rs1=psd1.executeQuery(sql);
                     while(rs1.next()){
                         nombreJob=(rs1.getString("name"));
+                        JOptionPane.showMessageDialog(null,"Nombre del job "+nombreJob);
+                        return nombreJob;
+                        
                     }
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(null, ex+"al cargar tabla");
                 }   
+             return "";
     }
     void correrPublicacion(){
     JOptionPane.showMessageDialog(null,"Corriendo el agente");
-        seleccionaJob();
+        
             String sql="USE msdb ;\n" +
-            "EXEC dbo.sp_start_job N'"+nombreJob+"' ;";
+            "EXEC dbo.sp_start_job N'"+seleccionaJob()+"' ;";
             Conexion cc = new Conexion();
             //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
             Connection cn=cc.conectar(servidor1);

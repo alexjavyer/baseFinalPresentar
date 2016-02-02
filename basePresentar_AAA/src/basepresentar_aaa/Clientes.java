@@ -45,7 +45,7 @@ public class Clientes extends javax.swing.JFrame {
         
         jMenu2.setEnabled(false);
         jMenu3.setEnabled(false);
-        jMenu4.setEnabled(false);
+      //  jMenu4.setEnabled(false);
         jPanel2.setVisible(false);
        
         this.getContentPane().setBackground(new java.awt.Color(204,204,204));
@@ -1617,7 +1617,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

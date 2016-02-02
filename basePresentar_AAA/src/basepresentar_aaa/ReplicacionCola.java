@@ -18,6 +18,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,8 +34,19 @@ public class ReplicacionCola extends javax.swing.JFrame {
     
     public ReplicacionCola(String publicador,String nombrePub) {
         initComponents();
-        publicadorS=publicador;
-        nombrePublicacion=nombrePub;
+            jVisBase.setEnabled(false);
+            jVisBase1.setEnabled(false);
+            jVisBase2.setEnabled(false);
+            
+            cbBasesSuscriptores.setEnabled(false);
+            cbBasesSuscriptores1.setEnabled(false);
+            cbBasesSuscriptores3.setEnabled(false);
+            
+            jComboBox2.setVisible(false);
+            jLabel4.setVisible(false);
+   
+            publicadorS=publicador;
+            nombrePublicacion=nombrePub;
     }
 
     /**
@@ -46,18 +58,27 @@ public class ReplicacionCola extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cbBasesSuscriptores2 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbSuscriptores = new javax.swing.JComboBox();
-        cbBasesSuscriptores = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
+        btnFinalizar = new javax.swing.JButton();
         txtBaseNueva = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jVisBase1 = new javax.swing.JButton();
+        jVisBase2 = new javax.swing.JButton();
+        jcbSuscriptor2 = new javax.swing.JCheckBox();
+        jcbSuscriptor3 = new javax.swing.JCheckBox();
+        jcbSuscriptor1 = new javax.swing.JCheckBox();
+        jVisBase = new javax.swing.JButton();
+        cbBasesSuscriptores1 = new javax.swing.JComboBox();
+        cbBasesSuscriptores3 = new javax.swing.JComboBox();
+        cbBasesSuscriptores = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,44 +89,117 @@ public class ReplicacionCola extends javax.swing.JFrame {
 
         jLabel3.setText("Subscriptores");
 
-        cbSuscriptores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ADRIAN", "TOSHIBA", "JAVY-PC" }));
-        cbSuscriptores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cbSuscriptoresMouseEntered(evt);
-            }
-        });
-        cbSuscriptores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSuscriptoresActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Inicializar la subscripcion");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Inmediatamente", "Primera Sincronización" }));
 
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Nombre Base Nueva");
 
-        jButton2.setText("jButton1");
+        jButton2.setText("CREAR BASE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("COLA");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setText("BASES");
+
+        jVisBase1.setText("jButton1");
+        jVisBase1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jVisBase1ActionPerformed(evt);
             }
         });
+
+        jVisBase2.setText("jButton1");
+        jVisBase2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVisBase2ActionPerformed(evt);
+            }
+        });
+
+        jcbSuscriptor2.setText("TOSHIBA");
+        jcbSuscriptor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSuscriptor2ActionPerformed(evt);
+            }
+        });
+
+        jcbSuscriptor3.setText("JAVY-PC");
+        jcbSuscriptor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSuscriptor3ActionPerformed(evt);
+            }
+        });
+
+        jcbSuscriptor1.setText("ADRIAN");
+        jcbSuscriptor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSuscriptor1ActionPerformed(evt);
+            }
+        });
+
+        jVisBase.setText("jButton1");
+        jVisBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVisBaseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbSuscriptor1)
+                    .addComponent(jcbSuscriptor2)
+                    .addComponent(jcbSuscriptor3))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jVisBase2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVisBase1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVisBase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbBasesSuscriptores, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbBasesSuscriptores1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbBasesSuscriptores3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cbBasesSuscriptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbBasesSuscriptores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbBasesSuscriptores3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbSuscriptor1)
+                            .addComponent(jVisBase))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbSuscriptor2)
+                            .addComponent(jVisBase1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbSuscriptor3)
+                            .addComponent(jVisBase2))))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,80 +208,103 @@ public class ReplicacionCola extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3))
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(41, 41, 41)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBaseNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(cbSuscriptores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jLabel2)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbBasesSuscriptores, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(21, 21, 21))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtBaseNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addContainerGap()))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnFinalizar)
+                                        .addContainerGap())))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)
-                                .addGap(11, 11, 11)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbSuscriptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbBasesSuscriptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 64, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBaseNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBaseNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFinalizar)))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     String suscriptorName;
-    private void cbSuscriptoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbSuscriptoresMouseEntered
-        suscriptorName=cbSuscriptores.getSelectedItem().toString();
-        
-    }//GEN-LAST:event_cbSuscriptoresMouseEntered
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jVisBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVisBaseActionPerformed
         // TODO add your handling code here:
-                cbBasesSuscriptores.removeAllItems();
-        cargarTablasSuscriptor();
+        suscriptorName=jcbSuscriptor1.getText();
+        cbBasesSuscriptores.removeAllItems();
+        cargarTablasSuscriptor(cbBasesSuscriptores);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jVisBaseActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        // TODO add your handling code here:
+        if(jcbSuscriptor1.isSelected()){
+            crearSubscripcion(jcbSuscriptor1.getText(),cbBasesSuscriptores.getSelectedItem().toString());
+        }
+        if(jcbSuscriptor2.isSelected()){
+            crearSubscripcion(jcbSuscriptor2.getText(),cbBasesSuscriptores1.getSelectedItem().toString());
+        }
+        if(jcbSuscriptor3.isSelected()){
+           // JOptionPane.showMessageDialog(null, jcbSuscriptor3.getText().toString()+""+cbBasesSuscriptores3.getSelectedItem().toString());
+                    
+            crearSubscripcion(jcbSuscriptor3.getText(),cbBasesSuscriptores3.getSelectedItem().toString());
+        }
+        
+      //  correrPublicacion();
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     void correrPublicacion(){
 
@@ -218,45 +335,114 @@ public class ReplicacionCola extends javax.swing.JFrame {
     
     
     
-    private void cbSuscriptoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSuscriptoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbSuscriptoresActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        crearBase(txtBaseNueva.getText());
-        cbBasesSuscriptores.removeAllItems();
-        cargarTablasSuscriptor();
+         if(jcbSuscriptor1.isSelected()){
+            suscriptorName = jcbSuscriptor1.getText();
+            crearBase(txtBaseNueva.getText());
+            cbBasesSuscriptores.removeAllItems();
+            cargarTablasSuscriptor(cbBasesSuscriptores);
+        }
+         if(jcbSuscriptor2.isSelected()){
+            suscriptorName = jcbSuscriptor2.getText();
+            crearBase(txtBaseNueva.getText());
+            cbBasesSuscriptores1.removeAllItems();
+            cargarTablasSuscriptor(cbBasesSuscriptores1);
+        }
+         if(jcbSuscriptor3.isSelected()){
+            suscriptorName = jcbSuscriptor3.getText();
+            crearBase(txtBaseNueva.getText());
+            cbBasesSuscriptores3.removeAllItems();
+            cargarTablasSuscriptor(cbBasesSuscriptores3);
+        }
+        
+        
        // crearTabla(txtBaseNueva.getText());
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jVisBase1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVisBase1ActionPerformed
         // TODO add your handling code here:
-        crearSubscripcionDeCola();
-    }//GEN-LAST:event_jButton3ActionPerformed
-    public void crearSubscripcion(){
-        String fecha="20160131";
-        JOptionPane.showMessageDialog(null, Clientes.baseInicial);
-        String va="ADRIAN";
+        suscriptorName=jcbSuscriptor2.getText();
+        cbBasesSuscriptores1.removeAllItems();
+        cargarTablasSuscriptor(cbBasesSuscriptores1);
+    }//GEN-LAST:event_jVisBase1ActionPerformed
+
+    private void jVisBase2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVisBase2ActionPerformed
+        // TODO add your handling code here:
+        suscriptorName=jcbSuscriptor3.getText();
+        cbBasesSuscriptores3.removeAllItems();
+        cargarTablasSuscriptor(cbBasesSuscriptores3);
+    }//GEN-LAST:event_jVisBase2ActionPerformed
+
+    private void jcbSuscriptor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSuscriptor1ActionPerformed
+        // TODO add your handling code here:
+        if(jcbSuscriptor1.isSelected()){
+            jVisBase.setEnabled(true);   
+            cbBasesSuscriptores.setEnabled(true);
+            
+        }else{
+            jVisBase.setEnabled(false);
+            cbBasesSuscriptores.setEnabled(false);
+        }
+    }//GEN-LAST:event_jcbSuscriptor1ActionPerformed
+
+    private void jcbSuscriptor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSuscriptor2ActionPerformed
+        // TODO add your handling code here:
+         if(jcbSuscriptor2.isSelected()){
+            jVisBase1.setEnabled(true);   
+            cbBasesSuscriptores1.setEnabled(true);
+         
+        }else{
+            jVisBase1.setEnabled(false);
+            cbBasesSuscriptores1.setEnabled(false);
+        }
+    }//GEN-LAST:event_jcbSuscriptor2ActionPerformed
+
+    private void jcbSuscriptor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSuscriptor3ActionPerformed
+        // TODO add your handling code here:
+         if(jcbSuscriptor3.isSelected()){
+            jVisBase2.setEnabled(true);   
+            cbBasesSuscriptores3.setEnabled(true);
+        }else{
+            jVisBase2.setEnabled(false);
+            cbBasesSuscriptores3.setEnabled(false);
+        }
+    }//GEN-LAST:event_jcbSuscriptor3ActionPerformed
+    
+        Calendar calobj = Calendar.getInstance();
+
+    
+    public void crearSubscripcion(String suscriptor,String lugar){
+        String fecha;
+        String año;
+        String mes;
+        String dia;
+                año=String.valueOf(calobj.get(Calendar.YEAR));
+                mes=String.valueOf(calobj.get(Calendar.MONTH)+1);
+                if(Integer.valueOf(mes)<10)
+                    mes = "0"+mes;
+                dia=String.valueOf(calobj.get(Calendar.DAY_OF_MONTH));
+                if(Integer.valueOf(dia)<10)
+                    dia = "0"+dia;
+               
+                fecha=año+mes+dia;
+               
+                System.out.println(fecha);
+        String va = suscriptor;
         
-        
-        String sqlCrearSubs="-----------------BEGIN: Script to be run at Publisher '"+publicadorS+"'----------------- \n" +
-        "use ["+Clientes.baseInicial+"]\n" +
-        " exec sp_addsubscription @publication = N'"+nombrePublicacion+"',@subscriber = N'"+va+"', @destination_db = N'"+cbBasesSuscriptores.getSelectedItem()+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0 \n"
-        + "exec sp_addpushsubscription_agent @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @subscriber_db = N'"+cbBasesSuscriptores.getSelectedItem()+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 0, @frequency_relative_interval = 0, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = "+fecha+", @active_end_date = 99991231, @enabled_for_syncmgr = N'False', @dts_package_location = N'Distributor'"+
-        "";
-       
+    String sqlCrearSubs="use ["+Clientes.baseInicial+"]\n" +
+                        "exec sp_addsubscription @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @destination_db = N'"+lugar+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'queued failover', @subscriber_type = 0\n" +
+                        "exec sp_addpushsubscription_agent @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @subscriber_db = N'"+lugar+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+   
         Conexion cc = new Conexion();
-        //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         Connection cn=cc.conectar(publicadorS);
-       // escribir(sqlCrearSubs);
         try {
             Statement psd = cn.createStatement();
             psd.executeQuery(sqlCrearSubs);
             }catch(Exception ex){
                 if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
                     JOptionPane.showMessageDialog(null,"Subscripción Creada ");
-                    Clientes cli=new Clientes(publicadorS);
+                    Clientes cli=new Clientes(servidor);
                     cli.show();
                 }else{
                 JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
@@ -264,21 +450,12 @@ public class ReplicacionCola extends javax.swing.JFrame {
             }
         
     }
-    Calendar calobj = Calendar.getInstance();
     
      public void crearSubscripcionDeCola(){
-        String fecha="";
-        String año="";
-        String mes="";
-        String dia="";
-                año=String.valueOf(calobj.get(Calendar.YEAR));
-                mes=String.valueOf(calobj.get(Calendar.MONTH)+1);
-                dia=String.valueOf(calobj.get(Calendar.DAY_OF_MONTH));
-                fecha=año+mes+dia;
-    
+        String fecha="20160131";
         JOptionPane.showMessageDialog(null, Clientes.baseInicial);
         
-        String va=cbSuscriptores.getSelectedItem().toString();
+        String va="ADRIAN";
         
         String sqlCrearSubs="use ["+Clientes.baseInicial+"]\n" +
 "exec sp_addsubscription @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @destination_db = N'"+cbBasesSuscriptores.getSelectedItem()+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'queued failover', @subscriber_type = 0\n" +
@@ -295,7 +472,7 @@ public class ReplicacionCola extends javax.swing.JFrame {
             }catch(Exception ex){
                 if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
                     JOptionPane.showMessageDialog(null,"Subscripción Creada ");
-                    Clientes cli=new Clientes(servidor);
+                    Clientes cli=new Clientes(publicadorS);
                     cli.show();
                 }else{
                 JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
@@ -322,9 +499,9 @@ public class ReplicacionCola extends javax.swing.JFrame {
         bw.close();
         }catch(IOException e){};
     }
-    public void cargarTablasSuscriptor(){
+    public void cargarTablasSuscriptor(JComboBox jc){
         //String[] tablas=new String();
-        suscriptorName=cbSuscriptores.getSelectedItem().toString();
+        //suscriptorName=cbSuscriptores.getSelectedItem().toString();
         JOptionPane.showMessageDialog(null,"servidor"+suscriptorName);
         char slash=92;
 //        suscriptorName="TOSHIBA".concat(String.valueOf(slash)).concat("SITIOA");
@@ -340,7 +517,7 @@ public class ReplicacionCola extends javax.swing.JFrame {
             ResultSet rs=psd.executeQuery(sqlTablasSuscriptor);
                 while(rs.next()){
                    //tablas.addElement(rs.getString("name"));
-                   cbBasesSuscriptores.addItem(rs.getString("name"));
+                  jc.addItem(rs.getString("name"));
                    //JOptionPane.showMessageDialog(null,rs.getString("name"));
                 }
                 
@@ -475,17 +652,26 @@ public class ReplicacionCola extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JComboBox cbBasesSuscriptores;
-    private javax.swing.JComboBox cbSuscriptores;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox cbBasesSuscriptores1;
+    private javax.swing.JComboBox cbBasesSuscriptores2;
+    private javax.swing.JComboBox cbBasesSuscriptores3;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jVisBase;
+    private javax.swing.JButton jVisBase1;
+    private javax.swing.JButton jVisBase2;
+    private javax.swing.JCheckBox jcbSuscriptor1;
+    private javax.swing.JCheckBox jcbSuscriptor2;
+    private javax.swing.JCheckBox jcbSuscriptor3;
     private javax.swing.JTextField txtBaseNueva;
     // End of variables declaration//GEN-END:variables
 }

@@ -80,13 +80,10 @@ public class Clientes extends javax.swing.JFrame {
         int fila=jtbDatos.getSelectedRow();
         System.out.println(jtbDatos.getSelectedRow());
         String cedula,nombre,apellido,telefono;
-//        cedula=(String) jtbDatos.getValueAt(fila, 0); 
-//        nombre=(String) jtbDatos.getValueAt(fila, 1);
-//        apellido=(String) jtbDatos.getValueAt(fila, 2); 
-//        telefono=(String) jtbDatos.getValueAt(fila, 3);
         String nomCol="", values="";
-        for(int i=0;i<modeloNombreColumnas.getSize();i++){
-            if(i<modeloNombreColumnas.getSize()-1){
+        
+        for(int i=0;i<modeloNombreColumnas.getSize()-resta;i++){
+            if(i<modeloNombreColumnas.getSize()-1-resta){
                 nomCol=nomCol+modeloNombreColumnas.getElementAt(i).toString()+",";
                 values=values+"?,";
             }else{
@@ -98,7 +95,7 @@ public class Clientes extends javax.swing.JFrame {
         //JOptionPane.showMessageDialog(null,"sql "+sql);
         try{
         PreparedStatement psd = cn.prepareStatement(sql);
-        for(int j=0;j<modeloNombreColumnas.getSize();j++){
+        for(int j=0;j<modeloNombreColumnas.getSize()-resta;j++){
             psd.setString(j+1, jtbDatos.getValueAt(fila, j).toString());
         }
         
@@ -159,6 +156,7 @@ public class Clientes extends javax.swing.JFrame {
         }
         }
     }
+    int resta=0;
     public void CargarTabla(String servidor){
         int nColumnas=modeloNombreColumnas.getSize();
         model = new DefaultTableModel();
@@ -168,10 +166,16 @@ public class Clientes extends javax.swing.JFrame {
             if(j==nColumnas-1){
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
+                
+                if(column.equals("msrepl_tran_version"))
+                  resta = 1;
+                else
+                    resta=0;
             }else{
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
             }
+                
         }
     //    JOptionPane.showMessageDialog(null,"Columnas"+column);
         //String []titulos={column};

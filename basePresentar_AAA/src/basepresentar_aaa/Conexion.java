@@ -36,7 +36,8 @@ public class Conexion {
                 instancia="192.168.1.3";
             }else{
                 if(server.equals("TOSHIBA")){
-                    instancia="192.168.1.4";
+                    //instancia="192.168.1.4";
+                    instancia="172.21.103.215";
                 }
             }
         }

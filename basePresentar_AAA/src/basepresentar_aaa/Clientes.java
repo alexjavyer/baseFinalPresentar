@@ -542,13 +542,13 @@ public class Clientes extends javax.swing.JFrame {
     public void crearBase(String baseNueva, String ser){
         String sql="";
         Conexion cc = new Conexion();
-        Connection cn=cc.conectarBase(servidor.toString().trim()+ser, "master");
+        Connection cn=cc.conectarBase(ser, "master");
         sql="USE [master]\n" +
             "/****** Object:  Database ["+baseNueva+"]    Script Date: 01/17/2016 19:05:20 ******/\n" +
             "CREATE DATABASE ["+baseNueva+"] ON  PRIMARY \n" +
-            "( NAME = N'prueba_renta', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL10."+ser+"\\MSSQL\\DATA\\"+baseNueva+".mdf' , SIZE = 6144KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )\n" +
+            "( NAME = N'prueba_renta', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL10.MSSQLSERVER\\MSSQL\\DATA\\"+baseNueva+".mdf' , SIZE = 6144KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )\n" +
             " LOG ON \n" +
-            "( NAME = N'prueba_renta_log', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL10."+ser+"\\MSSQL\\DATA\\"+baseNueva+"_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)\n" +
+            "( NAME = N'prueba_renta_log', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL10.MSSQLSERVER\\MSSQL\\DATA\\"+baseNueva+"_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)\n" +
             "ALTER DATABASE ["+baseNueva+"] SET COMPATIBILITY_LEVEL = 100\n" +
             "IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))\n" +
             "begin\n" +
@@ -587,12 +587,61 @@ public class Clientes extends javax.swing.JFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE");
-            jtbDatos.setModel(model);
+            SnapPubli(txtNombre_Base.getText(),txtNombrePubP2P.getText(), ser);
+            SnapSus(txtNombre_Base.getText(),txtNombrePubP2P.getText(), ser);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }     
     }
+    //Snap Peer
+    void SnapPubli(String base,String publicacion, String ser){
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(ser, base);
+        String sql="";
+        sql="        -- Adding the snapshot publication\n" +
+            "use ["+base+"]\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Snapshot publication of database ''"+base+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
+            "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 0, @publisher_login = N'sa', @publisher_password = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'ADRIAN\\sony vaio'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\SQLSERVERAGENT'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'distributor_admin'\n" +
+            "-- Adding the snapshot articles\n" +
+            "use ["+base+"]\n" +
+            "exec sp_addarticle @publication = N'"+publicacion+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL'\n";
+        try {
+            Statement psd= cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            
+            JOptionPane.showMessageDialog(null, "Se creo la pub Snap para peer");
+            jtbDatos.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    void SnapSus(String base, String publicacion, String ser){
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(ser, base);
+        String sql="";
+        sql=" -- Adding the snapshot subscriptions\n" +
+            "use ["+base+"]\n" +
+            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+jcbBases.getSelectedItem().toString()+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
+            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+jcbBases.getSelectedItem().toString()+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+        try {
+            Statement psd= cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            
+            JOptionPane.showMessageDialog(null, "Se creo la subscripcion para peer");
+            jtbDatos.setModel(model);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

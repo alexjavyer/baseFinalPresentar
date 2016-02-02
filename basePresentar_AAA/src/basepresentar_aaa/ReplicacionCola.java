@@ -451,11 +451,14 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                     dia = "0"+dia;
                
                 fecha=año+mes+dia;
-               
+    
+                String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
+        
+                
                 System.out.println(fecha);
         String va = suscriptor;
-        
-    String sqlCrearSubs="use ["+Clientes.baseInicial+"]\n" +
+       JOptionPane.showMessageDialog(null, "Sucrip"+va);
+    String sqlCrearSubs="use ["+baseOrigen+"]\n" +
                         "exec sp_addsubscription @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @destination_db = N'"+lugar+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'queued failover', @subscriber_type = 0\n" +
                         "exec sp_addpushsubscription_agent @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @subscriber_db = N'"+lugar+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
    
@@ -473,6 +476,34 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             }
         
     }
+    
+    public String cargarBasedePublicaciones(String servidor, String publicacion){
+        JOptionPane.showMessageDialog(null, "Ver base");
+        String sqlCargarPublicaciones="";
+          sqlCargarPublicaciones="Use distribution  SELECT\n" +
+"*\n" +
+"            FROM\n" +
+"                DBO.MSpublications AS MSA\n" +
+"            INNER JOIN DBO.MSpublications AS MSP\n" +
+"                    ON MSA.publication_id = MSP.publication_id\n" +
+"                    AND MSA.publication='"+publicacion+"'";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectar(servidor);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarPublicaciones);
+            while(rs.next()){
+                return rs.getString("publisher_db");
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al cargar publicacion");
+        }
+        return null;
+    }
+    
+    
+    
+    
     
      public void crearSubscripcionDeCola(){
         String fecha="20160131";

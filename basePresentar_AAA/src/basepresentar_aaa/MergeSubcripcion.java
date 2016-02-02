@@ -499,7 +499,8 @@ public class MergeSubcripcion extends javax.swing.JFrame {
                 subscription_priority="0";
             }
             //Subscriptor con contraseña
-            String subscriber_security_mode =" 0 ",subscriber_login=",@subscriber_login = N'sa'",subscriber_password=", @subscriber_password = N'sa'";
+            String subscriber_security_mode =" 0 ",subscriber_login=",@subscriber_login = N'sa'",
+                    subscriber_password=", @subscriber_password = N'sa'";
             //Subscriptor sin contraseña
             //String subscriber_security_mode =" 1 ";
             
@@ -547,7 +548,7 @@ public class MergeSubcripcion extends javax.swing.JFrame {
      JOptionPane.showMessageDialog(null,"Seleccionando Job");
         sql = "SELECT  name \n" +
               "FROM    msdb.dbo.sysjobs J\n" +
-              "WHERE   name like '%"+Clientes.baseInicial+"-"+cbPublicaciones.getSelectedItem()+"%'\n" + "";
+              "WHERE   name like '%"+cbBasedeDatos.getSelectedItem()+"-"+cbPublicaciones.getSelectedItem()+"%'\n" + "";
             Conexion cc = new Conexion();
             Connection cn=cc.conectar(servidor1);
 

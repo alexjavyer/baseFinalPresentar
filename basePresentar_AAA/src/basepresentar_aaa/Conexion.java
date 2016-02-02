@@ -44,7 +44,7 @@ public class Conexion {
             }
         }
 
-            JOptionPane.showMessageDialog(null, instancia);
+           // JOptionPane.showMessageDialog(null, instancia);
        try
         {
         
@@ -87,7 +87,7 @@ public class Conexion {
                 
             }
             }
-            JOptionPane.showMessageDialog(null, instancia);
+         //   JOptionPane.showMessageDialog(null, instancia);
         
         try
         {

@@ -706,13 +706,13 @@ public class Clientes extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
 
         jLabel1.setText("Nombre del servidor");
 
@@ -1214,6 +1214,23 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenuItem4.setText("Peer to Peer");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem10.setText("P2P");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenuItem4.add(jMenuItem10);
+
+        jMenuBar1.add(jMenuItem4);
+
         jMenu1.setText("Opciones");
 
         jMenuItem7.setText("Otra Conexion");
@@ -1250,23 +1267,6 @@ public class Clientes extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
-
-        jMenuItem4.setText("Peer to Peer");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem10.setText("P2P");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenuItem4.add(jMenuItem10);
-
-        jMenuBar1.add(jMenuItem4);
 
         setJMenuBar(jMenuBar1);
 

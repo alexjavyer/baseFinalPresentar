@@ -55,7 +55,7 @@ public class Clientes extends javax.swing.JFrame {
         
         
     }
-        String servidor1;
+        public static String servidor1;
         public static String baseInicial="";
         
     public Clientes(String servidor){
@@ -1586,9 +1586,7 @@ public class Clientes extends javax.swing.JFrame {
         txtbase.setText(baseActual);
         cargarColumnas(txtTabla.getText());
         CargarTabla(servidor1);
-        //JOptionPane.showMessageDialog(null,"Tabla Actual "+tablaActual);
         baseInicial = baseActual;
-              //modeloNombreColumnas.removeAllElements();
     }//GEN-LAST:event_btnEditarTablaActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed

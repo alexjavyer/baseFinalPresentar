@@ -12,6 +12,8 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
  */
 public class Servidor extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form Servidor
      */

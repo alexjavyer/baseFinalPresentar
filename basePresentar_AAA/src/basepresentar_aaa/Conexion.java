@@ -31,20 +31,20 @@ public class Conexion {
                 
         if(server.equals("ADRIAN")){
             //instancia="192.168.1.6";
-              instancia="172.21.103.49";
+              instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-                //instancia="192.168.1.3";
-                instancia="172.21.103.117";
+               // instancia="192.168.1.3";
+               instancia="172.21.105.123";
             }else{
                 
                 //   instancia="192.168.1.4";
-                   instancia="172.21.103.215";
+                   instancia="172.21.105.248";
                 
             }
         }
 
-           // JOptionPane.showMessageDialog(null, instancia);
+            JOptionPane.showMessageDialog(null, instancia);
        try
         {
         
@@ -73,18 +73,20 @@ public class Conexion {
         String instancia="";
         if(server.equals("ADRIAN")){
             //instancia="192.168.1.6";
-              instancia="172.21.103.49";
+              instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-                //instancia="192.168.1.3";
-                instancia="172.21.103.117";
+               // instancia="192.168.1.3";
+               instancia="172.21.105.123";
             }else{
                 
-                //    instancia="192.168.1.4";
-                    instancia="172.21.103.215";
+                //   instancia="192.168.1.4";
+                   instancia="172.21.105.248";
                 
             }
-        }
+            }
+            JOptionPane.showMessageDialog(null, instancia);
+        
         try
         {
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

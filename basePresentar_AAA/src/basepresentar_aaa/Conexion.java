@@ -49,7 +49,9 @@ public class Conexion {
         {
         
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            cn=DriverManager.getConnection("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
+            String cadenaConexion="jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa";
+            System.out.println(cadenaConexion);
+            cn=DriverManager.getConnection(cadenaConexion);
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
@@ -91,8 +93,10 @@ public class Conexion {
 //            cn=DriverManager.getConnection("jdbc:sqlserver://"+instancia+"\\"+server+":1433;"
 //                    + "databaseName="+base+";User = sa; Password= sa");
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            cn=DriverManager.getConnection("jdbc:sqlserver://"+instancia+"\\"+server+":1433;"
-                    + "databaseName="+base+";User = sa; Password= sa");
+            String cadenaConexion="jdbc:sqlserver://"+instancia+"\\"+server+":1433;"
+                    + "databaseName="+base+";User = sa; Password= sa";
+            System.out.println(cadenaConexion);
+            cn=DriverManager.getConnection(cadenaConexion);
 
 
 

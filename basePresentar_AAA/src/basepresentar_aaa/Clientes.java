@@ -199,7 +199,7 @@ public class Clientes extends javax.swing.JFrame {
     int resta=0;
     public void CargarTabla(String servidor){
         int nColumnas=modeloNombreColumnas.getSize();
-        JOptionPane.showMessageDialog(null,"Cargar Tabla");
+        //JOptionPane.showMessageDialog(null,"Cargar Tabla");
         model = new DefaultTableModel();
         String column="";
         //jtbDatos.setModel(model);

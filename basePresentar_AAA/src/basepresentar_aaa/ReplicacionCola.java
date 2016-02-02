@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  *
  * @author Anita
  */
-public class ReplicacionCola extends javax.swing.JFrame {
+public class ReplicacionCola extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReplicacionSns
@@ -47,6 +47,7 @@ public class ReplicacionCola extends javax.swing.JFrame {
    
             publicadorS=publicador;
             nombrePublicacion=nombrePub;
+            setTitle("S U S C R I P C I O N  C O L A");
     }
 
     /**
@@ -84,7 +85,7 @@ public class ReplicacionCola extends javax.swing.JFrame {
 
         jButton1.setText("Salir");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Replicacion");
@@ -206,6 +207,11 @@ public class ReplicacionCola extends javax.swing.JFrame {
         );
 
         jButton3.setText("Salir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,7 +295,7 @@ public class ReplicacionCola extends javax.swing.JFrame {
                         .addComponent(btnFinalizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         pack();
@@ -422,6 +428,11 @@ public class ReplicacionCola extends javax.swing.JFrame {
             cbBasesSuscriptores3.setEnabled(false);
         }
     }//GEN-LAST:event_jcbSuscriptor3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
     
         Calendar calobj = Calendar.getInstance();
 

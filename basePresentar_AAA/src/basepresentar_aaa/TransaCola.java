@@ -42,7 +42,7 @@ public class TransaCola extends javax.swing.JInternalFrame {
     public TransaCola()
             {
                initComponents();
-     
+             setTitle("P U B L I C A C I O N  T R A N S A C C I O N A L  C O L A");
             }
     
     
@@ -51,7 +51,7 @@ public class TransaCola extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla(servidor);
         servidor1=servidor;
-        
+                setTitle("P U B L I C A C I O N  T R A N S A C C I O N A L  C O L A");
     }
     String tiempo,intervalo;
     
@@ -102,7 +102,7 @@ public class TransaCola extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(jlTablasBase);
 
@@ -202,6 +202,11 @@ public class TransaCola extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -272,7 +277,7 @@ public class TransaCola extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -349,6 +354,11 @@ public class TransaCola extends javax.swing.JInternalFrame {
         tc.setCellEditor(tce);
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
       public void crearPub(){
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);

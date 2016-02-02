@@ -33,13 +33,26 @@ public class Clientes extends javax.swing.JFrame {
     public static int P2P1=0,P2P2=0,P2P3=0;
     public Clientes() {
         initComponents();
-//        setTitle("Local");
-//        servidor1="JAVY-PC";
-//        CargarTabla(servidor1);
-//        baseInicial = "Renta de Auto ";
-//        lblNombreBase.setText("B A S E  "+baseInicial);
         jDesktopPane1.setBorder(new ImagenFondo());
         this.setExtendedState(Clientes.MAXIMIZED_BOTH);
+          btnEditarTabla.setEnabled(false);
+        btnVerTablas.setEnabled(false);
+        
+        btnSelSus.setEnabled(false);
+        btnVerSubs.setEnabled(false);
+        cbSeleccionar.setEnabled(false);
+        
+        jMenu2.setEnabled(false);
+        jMenu3.setEnabled(false);
+        jMenu4.setEnabled(false);
+        jPanel2.setVisible(false);
+       
+        this.getContentPane().setBackground(new java.awt.Color(204,204,204));
+        jPanel2.setBackground(new java.awt.Color(204,204,204));
+        jPanel3.setBackground(new java.awt.Color(204,204,204));
+        jPanel5.setBackground(new java.awt.Color(204,204,204));
+        
+        
     }
         String servidor1;
         public static String baseInicial="";
@@ -47,9 +60,27 @@ public class Clientes extends javax.swing.JFrame {
     public Clientes(String servidor){
         initComponents();
         
+        btnEditarTabla.setEnabled(false);
+        btnVerTablas.setEnabled(false);
+        
+        btnSelSus.setEnabled(false);
+        btnVerSubs.setEnabled(false);
+        cbSeleccionar.setEnabled(false);
+        
+        jMenu2.setEnabled(false);
+        jMenu3.setEnabled(false);
+        jMenu4.setEnabled(false);
+        
+        jPanel2.setVisible(false);
+        
+        this.getContentPane().setBackground(new java.awt.Color(204,204,204));
+        jPanel2.setBackground(new java.awt.Color(204,204,204));
+        jPanel3.setBackground(new java.awt.Color(204,204,204));
+        jPanel5.setBackground(new java.awt.Color(204,204,204));
+        
         jDesktopPane1.setBorder(new ImagenFondo());
         this.setExtendedState(Clientes.MAXIMIZED_BOTH);
-               JOptionPane.showMessageDialog(null, servidor);
+        JOptionPane.showMessageDialog(null, servidor);
 
         setTitle(servidor);
         servidor1=servidor;
@@ -601,7 +632,7 @@ public class Clientes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSelSus = new javax.swing.JButton();
         btnVerSubs = new javax.swing.JButton();
         cbSeleccionar = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
@@ -851,6 +882,7 @@ public class Clientes extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
 
         jtbDatos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtbDatos.setModel(new javax.swing.table.DefaultTableModel(
@@ -910,7 +942,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addComponent(btnEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -939,10 +971,10 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Suscripcion");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSelSus.setText("Suscripcion");
+        btnSelSus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSelSusActionPerformed(evt);
             }
         });
 
@@ -954,6 +986,11 @@ public class Clientes extends javax.swing.JFrame {
         });
 
         cbSeleccionar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SELECCIONAR", "SNAPSHOT", "TRANSACTIONAL STANDAR", "TRANSACTIONAL QUEUE" }));
+        cbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSeleccionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -967,7 +1004,7 @@ public class Clientes extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVerSubs, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSelSus, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -986,7 +1023,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerSubs)
-                    .addComponent(jButton2))
+                    .addComponent(btnSelSus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -1032,7 +1069,7 @@ public class Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnVerTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(8, 8, 8)
                         .addComponent(btnEditarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1041,7 +1078,8 @@ public class Clientes extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCargarBase)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1066,6 +1104,8 @@ public class Clientes extends javax.swing.JFrame {
         txtbase.setEditable(false);
 
         txtTabla.setEditable(false);
+
+        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
         jMenu2.setText("SNAPSHOT");
 
@@ -1172,7 +1212,8 @@ public class Clientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtbase, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 185, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1369,7 +1410,7 @@ public class Clientes extends javax.swing.JFrame {
         correrPublicacion(nombrePubli);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSelSusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelSusActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode selectedNode =
         (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
@@ -1379,25 +1420,36 @@ public class Clientes extends javax.swing.JFrame {
 
 
         //JOptionPane.showMessageDialog(null, "publicacion seleccionada "+nombrePubli);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSelSusActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cargarPublicaciones(servidor1);
+        cbSeleccionar.setEnabled(true);
+        btnVerSubs.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCargarBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarBaseActionPerformed
         // TODO add your handling code here:
         cargarBases(servidor1);
+        btnVerTablas.setEnabled(true);
+        btnCargarBase.setEnabled(false);
     }//GEN-LAST:event_btnCargarBaseActionPerformed
 
     private void btnVerTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTablasActionPerformed
         // TODO add your handling code here:
         cargarTabla(servidor1);
+        btnEditarTabla.setEnabled(true);
     }//GEN-LAST:event_btnVerTablasActionPerformed
 
     private void btnEditarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTablaActionPerformed
         // TODO add your handling code here:
+        jMenu2.setEnabled(true);
+        jMenu3.setEnabled(true);
+        jMenu4.setEnabled(true);
+        jPanel2.setVisible(true);
+  
+        
         String tablaActual=jtBaseDatos.getLastSelectedPathComponent().toString();
         DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jtBaseDatos.getLastSelectedPathComponent();
         txtTabla.setText(tablaActual);
@@ -1419,6 +1471,14 @@ public class Clientes extends javax.swing.JFrame {
         Servidor ser = new Servidor();
         ser.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void cbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeleccionarActionPerformed
+        // TODO add your handling code here:
+        if(!cbSeleccionar.getSelectedItem().equals("SELECCIONAR"))
+            btnSelSus.setEnabled(true);
+        else
+            btnSelSus.setEnabled(false);
+    }//GEN-LAST:event_cbSeleccionarActionPerformed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -1581,24 +1641,32 @@ public class Clientes extends javax.swing.JFrame {
             }
     }
 
-    
+    static String nombrePubPasar;
     void suscripcionAcceder(String servidor, String publcacion){
       
         if(cbSeleccionar.getSelectedItem().equals("SNAPSHOT")){
+            nombrePubPasar = "  S N A P S H O T";
             ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+            jDesktopPane1.add(repl);
             repl.show();
+                   
+     
         }else{
             if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL STANDAR")){
+            nombrePubPasar = "  T R A N S A C C I O N A L    E S T A N D A R";
             ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+            jDesktopPane1.add(repl);
             repl.show();
+     
         }else{
                 if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL QUEUE")){
             ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
+            jDesktopPane1.add(repl);
             repl.show();
               }
             }
     }
-            this.dispose();
+        //    this.dispose();
    
     }
     
@@ -1654,12 +1722,12 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarTabla;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnInsertar;
+    private javax.swing.JButton btnSelSus;
     private javax.swing.JButton btnVerSubs;
     private javax.swing.JButton btnVerTablas;
     private javax.swing.JComboBox cbSeleccionar;
     private javax.swing.JComboBox cmbServidores;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

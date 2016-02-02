@@ -42,7 +42,7 @@ public class TransaInstantanea extends javax.swing.JInternalFrame {
     public TransaInstantanea()
             {
                initComponents();
-     
+             setTitle("P U B L I C A C I O N  T R A N S A C C I O N A L  E S T A N D A R");
             }
     
     
@@ -51,7 +51,7 @@ public class TransaInstantanea extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla(servidor);
         servidor1=servidor;
-        
+        setTitle("P U B L I C A C I O N  T R A N S A C C I O N A L  E S T A N D A R");
     }
     String tiempo,intervalo;
     

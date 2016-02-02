@@ -42,6 +42,7 @@ public class Instantanea extends javax.swing.JInternalFrame {
             {
                initComponents();
         this.setFocusable(true);     
+         setTitle("P U B L I C A C I O N  S N A P S H O T");
             }
     
     
@@ -51,6 +52,7 @@ public class Instantanea extends javax.swing.JInternalFrame {
         cargarTabla(servidor);
         servidor1=servidor;
         this.setFocusable(true);
+                 setTitle("P U B L I C A C I O N  S N A P S H O T");
        // servidor2="JAVY-PC";
     }
     String tiempo,intervalo;

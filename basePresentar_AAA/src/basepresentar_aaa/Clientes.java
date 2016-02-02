@@ -1383,21 +1383,21 @@ public class Clientes extends javax.swing.JFrame {
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed
         // TODO add your handling code here:
         //Snapshot
-//        if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
-//            //crearBase(bas, servidor);
-//            //crearTabla(bas, servidor);
-//            bas=jcbBases.getSelectedItem().toString();
-//            P2PPublicacion(txtNombrePubP2P.getText());
-//            P2PSuscripcion(txtNombrePubP2P.getText());
-//        }else{
-//            if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
-//                JOptionPane.showMessageDialog(null, "Debe elegir una instancia");
-//            if(txtNombrePubP2P.getText().equals(""))
-//                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la publicación");
-//            if(txtNombre_Base.getText().equals(""))
-//                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la base");
-//        }
-        crearBase(txtNombre_Base.getText(), servidor1);
+        if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
+            //crearBase(bas, servidor);
+            //crearTabla(bas, servidor);
+            bas=jcbBases.getSelectedItem().toString();
+            P2PPublicacion(txtNombrePubP2P.getText());
+            P2PSuscripcion(txtNombrePubP2P.getText());
+        }else{
+            if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
+                JOptionPane.showMessageDialog(null, "Debe elegir una instancia");
+            if(txtNombrePubP2P.getText().equals(""))
+                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la publicación");
+            if(txtNombre_Base.getText().equals(""))
+                JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la base");
+        }
+        //crearBase(txtNombre_Base.getText(), servidor1);
         //SnapPubli(jcbBases.getSelectedItem().toString(),txtNombrePubP2P.getText() , servidor1);
     }//GEN-LAST:event_btnAceptarP2PActionPerformed
 

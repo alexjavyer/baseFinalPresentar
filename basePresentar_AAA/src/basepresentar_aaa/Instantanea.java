@@ -57,7 +57,7 @@ public class Instantanea extends javax.swing.JFrame {
     public void cargarTabla(String servidor){
         //String sql ="SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = BASE TABLE AND TABLE_SCHEMA=dbName";
         String sql ="USE ["+Clientes.baseInicial+"]\n" +
-"SELECT name FROM sysobjects where xtype='U' and name='Clientes' ";
+            "SELECT name FROM sysobjects where xtype='U' and name='Clientes' ";
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor, Clientes.baseInicial);
         model = new DefaultListModel();
@@ -65,10 +65,8 @@ public class Instantanea extends javax.swing.JFrame {
             Statement psd = cn.createStatement();
             ResultSet rs=psd.executeQuery(sql);
             while(rs.next()){
-                //registros[0]=rs.getString("name");
                 model.addElement(rs.getString("name"));
             }
-            //model.addRow(vacio);
             jlTablasBase.setModel(model);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex+"al cargar tabla");

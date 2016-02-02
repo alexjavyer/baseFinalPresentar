@@ -50,7 +50,7 @@ public class Servidor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel1.setText("Nombre del servidor");
 
-        cmbServidores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "TOSHIBA\\SITIOA", "TOSHIBA\\SITIOB", "TOSHIBA\\PRINCIPAL", "JAVY-PC", "ADRIAN" }));
+        cmbServidores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "JAVY-PC", "ADRIAN" }));
         cmbServidores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbServidoresActionPerformed(evt);

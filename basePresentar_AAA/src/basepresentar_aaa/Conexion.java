@@ -26,7 +26,7 @@ public class Conexion {
     
     public Connection conectar(String server){
         Connection cn=null;
-            JOptionPane.showMessageDialog(null, server);
+            JOptionPane.showMessageDialog(null, "Servidor"+server);
                 String instancia="";
                 
         if(server.equals("ADRIAN")){
@@ -50,10 +50,11 @@ public class Conexion {
         }catch(SQLException ex){
               errores.Gestionar(ex);
               errores.mensaje();
-              System.out.println("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
-        } catch (ClassNotFoundException ex) {
             
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception ex){
+              errores.Gestionar(ex);
+              errores.mensaje();
+            
         }
         
         
@@ -92,8 +93,9 @@ public class Conexion {
              errores.Gestionar(ex);
              errores.mensaje();
              System.out.println("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception ex){
+              errores.Gestionar(ex);
+              errores.mensaje();  
         }
         
         

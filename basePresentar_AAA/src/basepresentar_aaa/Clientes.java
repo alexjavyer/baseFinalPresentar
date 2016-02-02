@@ -1337,7 +1337,7 @@ public class Clientes extends javax.swing.JFrame {
         (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
         nombrePubli=selectedNode.toString();
         
-        suscripcionAcceder(servidor , nombrePubli);
+        suscripcionAcceder(servidor1 , nombrePubli);
 
 
         //JOptionPane.showMessageDialog(null, "publicacion seleccionada "+nombrePubli);
@@ -1533,18 +1533,18 @@ public class Clientes extends javax.swing.JFrame {
     }
 
     
-    void suscripcionAcceder(String servidor, String nodo){
+    void suscripcionAcceder(String servidor, String publcacion){
       
         if(cbSeleccionar.getSelectedItem().equals("SNAPSHOT")){
-            ReplicacionSns repl=new ReplicacionSns(servidor,nombrePubli);
+            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
             repl.show();
         }else{
             if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL STANDAR")){
-            ReplicacionSns repl=new ReplicacionSns(servidor,nombrePubli);
+            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
             repl.show();
         }else{
                 if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL QUEUE")){
-            ReplicacionCola repl=new ReplicacionCola(servidor,nombrePubli);
+            ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
             repl.show();
               }
             }

@@ -37,10 +37,10 @@ public class Conexion {
                 //instancia="192.168.1.3";
                 instancia="172.21.103.117";
             }else{
-                if(server.equals("TOSHIBA")){
-                    //instancia="192.168.1.4";
-                    instancia="172.21.103.215";
-                }
+                
+                //   instancia="192.168.1.4";
+                   instancia="172.21.103.215";
+                
             }
         }
 
@@ -51,11 +51,13 @@ public class Conexion {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             cn=DriverManager.getConnection("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
         }catch(SQLException ex){
-              errores.Gestionar(ex);
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
               errores.mensaje();
             
         } catch(Exception ex){
-              errores.Gestionar(ex);
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
               errores.mensaje();
             
         }
@@ -77,10 +79,10 @@ public class Conexion {
                 //instancia="192.168.1.3";
                 instancia="172.21.103.117";
             }else{
-                if(server.equals("TOSHIBA")){
-                    //instancia="192.168.1.4";
+                
+                //    instancia="192.168.1.4";
                     instancia="172.21.103.215";
-                }
+                
             }
         }
         try
@@ -96,10 +98,12 @@ public class Conexion {
 
             System.out.println("exito  ");
         }catch(SQLException ex){
-             errores.Gestionar(ex);
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
              errores.mensaje();
              System.out.println("jdbc:sqlserver://"+instancia+"\\"+server+":1433;User=sa; Password= sa");
         } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }

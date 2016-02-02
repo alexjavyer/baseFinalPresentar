@@ -47,7 +47,7 @@ public class Servidor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel1.setText("Nombre del servidor");
 
         cmbServidores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TOSHIBA", "JAVY-PC", "ADRIAN" }));

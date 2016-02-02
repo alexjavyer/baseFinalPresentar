@@ -1382,7 +1382,6 @@ public class Clientes extends javax.swing.JFrame {
 
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed
         // TODO add your handling code here:
-        //Snapshot
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
             //crearBase(bas, servidor);
             //crearTabla(bas, servidor);

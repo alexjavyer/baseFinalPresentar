@@ -34,17 +34,17 @@ public class Conexion {
               instancia="172.21.103.49";
         }else{
             if(server.equals("JAVY-PC")){
-                //instancia="192.168.1.3";
-                instancia="172.21.103.117";
+                instancia="192.168.1.3";
+              //  instancia="172.21.103.117";
             }else{
                 if(server.equals("TOSHIBA")){
-                    //instancia="192.168.1.4";
-                    instancia="172.21.103.215";
+                    instancia="192.168.1.4";
+                   // instancia="172.21.103.215";
                 }
             }
         }
 
-           // JOptionPane.showMessageDialog(null, instancia);
+            JOptionPane.showMessageDialog(null, instancia);
        try
         {
         
@@ -74,15 +74,17 @@ public class Conexion {
               instancia="172.21.103.49";
         }else{
             if(server.equals("JAVY-PC")){
-                //instancia="192.168.1.3";
-                instancia="172.21.103.117";
+                instancia="192.168.1.3";
+                //instancia="172.21.103.117";
             }else{
                 if(server.equals("TOSHIBA")){
-                    //instancia="192.168.1.4";
-                    instancia="172.21.103.215";
+                    instancia="192.168.1.4";
+                    //instancia="172.21.103.215";
                 }
             }
         }
+            JOptionPane.showMessageDialog(null, instancia);
+        
         try
         {
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

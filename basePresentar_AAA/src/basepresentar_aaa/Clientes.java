@@ -1475,7 +1475,7 @@ public class Clientes extends javax.swing.JFrame {
         String baseActual=nodo.getParent().toString();
         txtbase.setText(baseActual);
         cargarColumnas(txtTabla.getText());
-        CargarTabla(servidor);
+        CargarTabla(servidor1);
         baseInicial = baseActual;
                 
     }//GEN-LAST:event_btnEditarTablaActionPerformed

@@ -369,6 +369,7 @@ public class Clientes extends javax.swing.JFrame {
         Connection cn=cc.conectarBase(ser, bas);
         String sql="",sql2="";
         if(jcb_2.getText()==ser){
+            crearBase(txtNombre_Base.getText(), ser);
             sql="-- Enabling the replication database\n" +
             "use master\n" +
             "exec sp_replicationdboption @dbname = N'"+bas+"', @optname = N'publish', @value = N'true'\n" +
@@ -396,6 +397,7 @@ public class Clientes extends javax.swing.JFrame {
             } 
         }
         if(jcb_3.getText()==ser){
+            crearBase(txtNombre_Base.getText(), ser);
             sql2="-- Enabling the replication database\n" +
             "use master\n" +
             "exec sp_replicationdboption @dbname = N'"+bas+"', @optname = N'publish', @value = N'true'\n" +

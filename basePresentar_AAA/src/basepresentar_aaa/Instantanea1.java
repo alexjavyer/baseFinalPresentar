@@ -813,6 +813,8 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                 return sqlAdicionalVertical;
             }
             
+  
+  
   public String filtroVertical1()
           {       
               String sqlAdicionalVertical1="";

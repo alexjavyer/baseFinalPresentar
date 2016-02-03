@@ -462,7 +462,7 @@ public class TransaCola extends javax.swing.JInternalFrame {
 "\n" +
 "-- Adding the transactional articles\n" +
 "use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x0000000008035CDF, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'CALL [dbo].[sp_MSins_dboCLIENTES]', @del_cmd = N'VCALL [dbo].[sp_MSdel_dboCLIENTES]', @upd_cmd = N'VCALL [dbo].[sp_MSupd_dboCLIENTES]'\n" +
+"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x0000000008035CDF, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'true', @ins_cmd = N'CALL [dbo].[sp_MSins_dboCLIENTES]', @del_cmd = N'VCALL [dbo].[sp_MSdel_dboCLIENTES]', @upd_cmd = N'VCALL [dbo].[sp_MSupd_dboCLIENTES]'\n" +
                       filtros +"  "+ filtroFilas +"  "+ filtroS ;
         boolean exitosa=true;
         try {

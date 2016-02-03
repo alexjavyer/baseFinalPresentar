@@ -34,8 +34,8 @@ public class Conexion {
               instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-               // instancia="192.168.1.3";
-               instancia="172.21.105.123";
+                instancia="192.168.1.3";
+              // instancia="172.21.105.123";
             }else{
                 
                 //   instancia="192.168.1.4";
@@ -76,8 +76,8 @@ public class Conexion {
               instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-               // instancia="192.168.1.3";
-               instancia="172.21.105.123";
+                instancia="192.168.1.3";
+               //instancia="172.21.105.123";
             }else{
                 
                 //   instancia="192.168.1.4";

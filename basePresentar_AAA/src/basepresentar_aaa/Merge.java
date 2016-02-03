@@ -21,7 +21,7 @@ import javax.swing.JCheckBox;
  *
  * @author Anita
  */
-public class Merge extends javax.swing.JFrame {
+public class Merge extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Merge
@@ -443,8 +443,8 @@ public class Merge extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Clientes cli=new Clientes(servidor1);
-        cli.show();
+//        Clientes cli=new Clientes(servidor1);
+//        cli.show();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void chSinFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chSinFiltroActionPerformed
@@ -532,20 +532,20 @@ public class Merge extends javax.swing.JFrame {
             Statement psd= cn.createStatement();
             psd.executeQuery(sqlPubliMerge);
         }catch(Exception ex){
-//            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
-//            seCreo=true;
-//            }else{
-//              JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
-//              seCreo=false;
-//            }
-                         JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
+            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
+            seCreo=true;
+            }else{
+              JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
+              seCreo=false;
+            }
+    //                     JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
         }
-//        if(seCreo){
-//              JOptionPane.showMessageDialog(null,"Publicacion Merge creada");
-//              this.dispose();
-//              Clientes cli =new Clientes();
-//              cli.show();
-//        }
+        if(seCreo){
+              JOptionPane.showMessageDialog(null,"Publicacion Merge creada");
+              this.dispose();
+              Clientes cli =new Clientes();
+              cli.show();
+        }
         
     }
       public void escribir(String codigo){

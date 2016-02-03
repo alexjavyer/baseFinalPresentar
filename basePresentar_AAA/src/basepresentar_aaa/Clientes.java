@@ -31,6 +31,7 @@ public class Clientes extends javax.swing.JFrame {
     DefaultTableModel model;
     public static String servidor="",bas="";
     public static int P2P1=0,P2P2=0,P2P3=0;
+    public static int P2P1control=0,P2P2control=0,P2P3control=0;
     public Clientes() {
         initComponents();
         jDesktopPane1.setBorder(new ImagenFondo());
@@ -44,7 +45,7 @@ public class Clientes extends javax.swing.JFrame {
         
         jMenu2.setEnabled(false);
         jMenu3.setEnabled(false);
-        jMenu4.setEnabled(false);
+      //  jMenu4.setEnabled(false);
         jPanel2.setVisible(false);
        
         this.getContentPane().setBackground(new java.awt.Color(204,204,204));
@@ -199,7 +200,7 @@ public class Clientes extends javax.swing.JFrame {
     int resta=0;
     public void CargarTabla(String servidor){
         int nColumnas=modeloNombreColumnas.getSize();
-        JOptionPane.showMessageDialog(null,"Cargar Tabla");
+        //JOptionPane.showMessageDialog(null,"Cargar Tabla");
         model = new DefaultTableModel();
         String column="";
         //jtbDatos.setModel(model);
@@ -369,7 +370,6 @@ public class Clientes extends javax.swing.JFrame {
         Connection cn=cc.conectarBase(ser, bas);
         String sql="",sql2="";
         if(jcb_2.getText()==ser){
-            crearBase(txtNombre_Base.getText(), ser);
             sql="-- Enabling the replication database\n" +
             "use master\n" +
             "exec sp_replicationdboption @dbname = N'"+bas+"', @optname = N'publish', @value = N'true'\n" +
@@ -397,7 +397,6 @@ public class Clientes extends javax.swing.JFrame {
             } 
         }
         if(jcb_3.getText()==ser){
-            crearBase(txtNombre_Base.getText(), ser);
             sql2="-- Enabling the replication database\n" +
             "use master\n" +
             "exec sp_replicationdboption @dbname = N'"+bas+"', @optname = N'publish', @value = N'true'\n" +
@@ -537,7 +536,7 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    public void crearBase(String baseNueva, String ser){
+    void crearBase(String baseNueva, String ser){
         String sql="";
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, "master");
@@ -585,8 +584,6 @@ public class Clientes extends javax.swing.JFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE");
-            SnapPubli(txtNombre_Base.getText(),txtNombrePubP2P.getText(), ser);
-            SnapSus(txtNombre_Base.getText(),txtNombrePubP2P.getText(), ser);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }     
@@ -610,29 +607,83 @@ public class Clientes extends javax.swing.JFrame {
             "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
             "exec sp_addarticle @publication = N'"+publicacion+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL'\n";
         try {
-            Statement psd= cn.createStatement();
-            ResultSet rs=psd.executeQuery(sql);
-            
-            JOptionPane.showMessageDialog(null, "Se creo la pub Snap para peer");
-            jtbDatos.setModel(model);
+            PreparedStatement psd= cn.prepareStatement(sql);
+            psd.execute();
+            JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
     }
     void SnapSus(String base, String publicacion, String ser){
+        int numero_ins;
+        numero_ins=P2P1+P2P2+P2P3;
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, base);
-        String sql="";
-        sql=" -- Adding the snapshot subscriptions\n" +
+        String sql="",sus="",sus1="",sus2="";
+//        sql=" -- Adding the snapshot subscriptions\n" +
+//            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+//            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
+//            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+        sus=" -- Adding the snapshot subscriptions\n" +
             "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
             "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
             "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+        sus1=" -- Adding the snapshot subscriptions\n" +
+            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'JAVY-PC', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
+            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'JAVY-PC', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+        sus2 =" -- Adding the snapshot subscriptions\n" +
+            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'TOSHIBA', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
+            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'TOSHIBA', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
+        if(P2P1==1){
+                if(numero_ins==3){
+                    sql=sus1+"\n"+sus2;
+                }
+                else{
+                    if(P2P2==1){
+                        sql=sus1;
+                    }
+                    else{
+                        sql=sus2;
+                    }
+                }
+                P2P1=0;
+                //System.out.println("sql1 "+sql);
+            }
+            else{
+                if(P2P2==1){
+                    P2P1=1;
+                    if(numero_ins==3){
+                        sql=sus+"\n"+sus2;
+                    }
+                    else{
+                        if(P2P1==1)
+                            sql=sus;
+                        else{
+                            sql=sus2;
+                        }
+                    }
+                    P2P1=0; P2P2=0;
+                }
+                else{
+                    if(P2P3==1){
+                        P2P1=1;
+                        if(numero_ins==3)
+                            sql=sus+"\n"+sus1;
+                        else{
+                            if(P2P1==1)
+                                sql=sus;
+                            else
+                                sql=sus1;
+                        }
+                    }
+                }
+            }
         try {
-            Statement psd= cn.createStatement();
-            ResultSet rs=psd.executeQuery(sql);
-            
-            JOptionPane.showMessageDialog(null, "Se creo la subscripcion para peer");
-            jtbDatos.setModel(model);
+            PreparedStatement psd= cn.prepareStatement(sql);
+            psd.execute();
+            JOptionPane.showMessageDialog(null, "Se creo la suscrip snap para peer");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -706,13 +757,13 @@ public class Clientes extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
 
         jLabel1.setText("Nombre del servidor");
 
@@ -1214,6 +1265,23 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenuItem4.setText("Peer to Peer");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem10.setText("P2P");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenuItem4.add(jMenuItem10);
+
+        jMenuBar1.add(jMenuItem4);
+
         jMenu1.setText("Opciones");
 
         jMenuItem7.setText("Otra Conexion");
@@ -1250,23 +1318,6 @@ public class Clientes extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
-
-        jMenuItem4.setText("Peer to Peer");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem10.setText("P2P");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenuItem4.add(jMenuItem10);
-
-        jMenuBar1.add(jMenuItem4);
 
         setJMenuBar(jMenuBar1);
 
@@ -1366,16 +1417,17 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Server: "+servidor1);
         Merge mer=new Merge(servidor1);
+        jDesktopPane1.add(mer);
         mer.show();
-        this.hide();
+        //this.hide();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         MergeSubcripcion mergsub=new MergeSubcripcion(servidor1);
-        mergsub.show();
-        this.hide()
-                ;
+        jDesktopPane1.add(mergsub);
+        //this.hide()
+                mergsub.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed
@@ -1383,6 +1435,24 @@ public class Clientes extends javax.swing.JFrame {
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_1.isSelected()==true||jcb_1.isSelected()==true)){
             //crearBase(bas, servidor);
             //crearTabla(bas, servidor);
+            if(P2P1control==1){
+                SnapPubli(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText());
+                SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText());
+                crearBase(txtNombre_Base.getText(), jcb_2.getText());
+                crearBase(txtNombre_Base.getText(), jcb_3.getText());
+            }
+            if(P2P2control==1){
+                SnapPubli(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText());
+                SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText());
+                crearBase(txtNombre_Base.getText(), jcb_1.getText());
+                crearBase(txtNombre_Base.getText(), jcb_3.getText());
+            }
+            if(P2P3control==1){
+                SnapPubli(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText());
+                SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText());
+                crearBase(txtNombre_Base.getText(), jcb_1.getText());
+                crearBase(txtNombre_Base.getText(), jcb_2.getText());
+            }
             bas=jcbBases.getSelectedItem().toString();
             P2PPublicacion(txtNombrePubP2P.getText());
             P2PSuscripcion(txtNombrePubP2P.getText());
@@ -1548,7 +1618,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -1558,12 +1628,18 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
-        if(jcb_1.getText()==servidor1)
+        if(jcb_1.getText()==servidor1){
             jcb_1.setEnabled(false);
-        if(jcb_2.getText()==servidor1)
+            P2P1control=1;
+        }
+        if(jcb_2.getText()==servidor1){
             jcb_2.setEnabled(false);
-        if(jcb_3.getText()==servidor1)
+            P2P2control=1;
+        }
+        if(jcb_3.getText()==servidor1){
             jcb_3.setEnabled(false);
+            P2P3control=1;
+        }
         P2P.setBounds(200, 200, 500, 280);
         P2P.setLocationRelativeTo(null);
         P2P.setVisible(true);

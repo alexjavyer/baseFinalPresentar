@@ -49,6 +49,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
         servidor1=servidor;
         jPanel1.setVisible(false);
         btnCrearSubs.setVisible(false);
+        jtAgente.setEnabled(true);
 //          jtAgente.setEnabled(false);
 //        jtAgente.setVisible(false);
         //jtAgente.setVisible(false);

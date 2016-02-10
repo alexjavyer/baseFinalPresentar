@@ -38,8 +38,8 @@ public class Conexion {
                instancia="172.21.105.123";
             }else{
                 
-                //   instancia="192.168.1.4";
-                   instancia="172.21.105.248";
+                   instancia="192.168.1.5";
+                   //instancia="172.21.105.248";
                 
             }
         }
@@ -82,8 +82,8 @@ public class Conexion {
                instancia="172.21.105.123";
             }else{
                 
-                //   instancia="192.168.1.4";
-                   instancia="172.21.105.248";
+                   instancia="192.168.1.5";
+                   //instancia="172.21.105.248";
                 
             }
             }

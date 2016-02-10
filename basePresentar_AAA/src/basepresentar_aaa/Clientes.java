@@ -1399,7 +1399,7 @@ public class Clientes extends javax.swing.JFrame {
     
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Instantanea ins=new Instantanea(servidor1);
+        Instantanea1 ins=new Instantanea1(servidor1);
         jDesktopPane1.add(ins);
         ins.show();
     

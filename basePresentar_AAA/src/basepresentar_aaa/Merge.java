@@ -326,6 +326,11 @@ public class Merge extends javax.swing.JInternalFrame {
                 chSinFiltroItemStateChanged(evt);
             }
         });
+        chSinFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chSinFiltroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -441,7 +446,12 @@ public class Merge extends javax.swing.JInternalFrame {
 //        Clientes cli=new Clientes(servidor1);
 //        cli.show();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void chSinFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chSinFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chSinFiltroActionPerformed
     DefaultListModel modeloCondicion=new DefaultListModel();    
+    
     public void crearPubli(String servidor){
         String nombrePubli=txtNombrePubli.getText();
         String base_de_datos=cbBaseDeDatos.getSelectedItem().toString();

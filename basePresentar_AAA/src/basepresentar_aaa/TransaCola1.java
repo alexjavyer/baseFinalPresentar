@@ -30,7 +30,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Anita
  */
-public class Instantanea1 extends javax.swing.JInternalFrame {
+public class TransaCola1 extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Instantanea
@@ -39,7 +39,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     String servidor2;
     DefaultListModel model;
     String sqlFiltro;
-    public Instantanea1()
+    public TransaCola1()
             {
                initComponents();
         this.setFocusable(true);     
@@ -48,7 +48,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     
     
    
-    public Instantanea1(String servidor) {
+    public TransaCola1(String servidor) {
         initComponents();
         cargarTabla(servidor);
         servidor1=servidor;
@@ -75,8 +75,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
-              errores.mensaje();
-            
+              errores.mensaje();    
         } catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
@@ -588,47 +587,8 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
-      public void crearPub(){
-        Conexion cc = new Conexion();
-        //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
-        //Connection cn=cc.conectarBase(servidor1, "Renta de Autos");
-        //String servidor33="TOSHIBA".concat("'\'").concat("PRINCIPAL");
-        Connection cn=cc.conectarBase(servidor1, "Renta de Auto");
-        String sqlCrearPublicacion="";
-        sqlCrearPublicacion="-- Enabling the replication database\n" +
-"use master\n" +
-"exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true'\n" +
-
-"\n" +
-"-- Adding the snapshot publication\n" +
-"use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addpublication @publication = N'Pub_11', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''TOSHIBA''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
-
-"\n" +
-"\n" +
-"exec sp_addpublication_snapshot @publication = N'Pub_11', @frequency_type = 1, @frequency_interval = 0, @frequency_relative_interval = 0, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
-"\n" +
-"\n" +
-"use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addarticle @publication = N'Pub_11', @article = N'Clientes', @source_owner = N'dbo', @source_object = N'Clientes', @type = N'logbased', @description = null, @creation_script = null, @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'manual', @destination_table = N'Clientes', @destination_owner = N'dbo', @vertical_partition = N'false'\n" +
-
-"\n" +
-"\n" +
-"\n" +
-"";
-        //JOptionPane.showMessageDialog(null, "sentencia sql "+sqlCrearPublicacion);
-        try {
-            Statement psd= cn.createStatement();
-            ResultSet rs=psd.executeQuery(sqlCrearPublicacion);
-            //sS_Pull_Cont_Inme();
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex+"Reportar");
-        }
-
-    }
-    
-      public void crearPublicacion(){
+  
+    public void crearPublicacion(){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1, Clientes.baseInicial);
         String sqlCrearPublicacion="";
@@ -645,83 +605,73 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 
         if(jComboBox1.getSelectedItem().equals("Tiempo")){   
             if(jcTiempo.getSelectedItem().equals("segundos")){
-            frequency_type="4";
-            frequency_interval="1";
-            frequency_relative_interval="1";
+            frequency_type="1";
+            frequency_interval="0";
+            frequency_relative_interval="0";
             frequency_subday=intervalo;
             frequency_subday_interval=tiempo;
             }else{
             if(jcTiempo.getSelectedItem().equals("horas")){
-                frequency_type="4";
-                frequency_interval="1";
-                frequency_relative_interval="1";
+                frequency_type="1";
+                frequency_interval="0";
+                frequency_relative_interval="0";
                 frequency_subday=intervalo;
                 frequency_subday_interval=tiempo;
             }else{
-                frequency_type="4";
-                frequency_interval="1";
-                frequency_relative_interval="1";
+                frequency_type="1";
+                frequency_interval="0";
+                frequency_relative_interval="0";
                 frequency_subday=intervalo;
                 frequency_subday_interval=tiempo;
             }
             }
             
+      //      JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
         }
         
-        filtros = getSQLFIltros();
-        filtroFilas= filtroVertical();
-        filtroS = filtroVertical1();
         
-        JOptionPane.showMessageDialog(null, filtros+"\n"+filtroFilas+"\n"+filtroS);
-        
-        sqlCrearPublicacion="use master\n" +
-                            "exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true' \n" +
-                            "\n" +
-                            "-- Adding the snapshot publication\n" +
-                            "use ["+Clientes.baseInicial+"]\n" +
-                            "exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1 \n" +
-                            "exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1 \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin' \n" +
-                            "use ["+Clientes.baseInicial+"] \n" +
-                            "exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'true', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL' \n" +             
-                            filtros +"  "+ filtroFilas+" "+filtroS ;
+      //  JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
+       
+        sqlCrearPublicacion="-- Enabling the replication database\n" +
+"use master\n" +
+"exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true'\n" +
+"\n" +
+"-- Adding the transactional publication\n" +
+"use ["+Clientes.baseInicial+"]\n" +
+"exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Transactional publication with updatable subscriptions of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'concurrent', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'true', @autogen_sync_procs = N'true', @allow_queued_tran = N'true', @allow_dts = N'false', @conflict_policy = N'pub wins', @centralized_conflicts = N'true', @conflict_retention = 14, @queue_type = N'sql', @replicate_ddl = 1, @allow_initialize_from_backup = N'false', @enabled_for_p2p = N'false', @enabled_for_het_sub = N'false'\n" +
+"\n" +
+"\n" +
+"exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa'\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy'\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT'\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
+"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin'\n" +
+"\n" +
+"-- Adding the transactional articles\n" +
+"use ["+Clientes.baseInicial+"]\n" +
+"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x0000000008035CDF, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'true', @ins_cmd = N'CALL [dbo].[sp_MSins_dboCLIENTES]', @del_cmd = N'VCALL [dbo].[sp_MSdel_dboCLIENTES]', @upd_cmd = N'VCALL [dbo].[sp_MSupd_dboCLIENTES]'\n" +
+                      filtros +"  "+ filtroFilas +"  "+ filtroS ;
         boolean exitosa=true;
-        try {
+         try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearPublicacion);
             psd.execute();
-            JOptionPane.showMessageDialog(null, "Publicacion Creada!");
-             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
-              errores.mensaje();
-            
+            errores.mensaje();    
         } catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
-              errores.mensaje();   
+            errores.mensaje();   
         }
+      
     }
 
     DefaultTableModel modeloR;
       DefaultTableModel model1;
-    public void filtrarColumna(){
-//        int tamaño=modeloR.size();
-//        String []titulo=new String[tamaño];
-//        sqlFiltro="SELECT "+txtFiltro.getText()+" FROM "+jlTablasBase.getSelectedValue();
-//        JOptionPane.showMessageDialog(null, "Filtro Columna sql: "+sqlFiltro);
-    }
-    public void filtrarFila(){
-//        sqlFiltro="SELECT * FROM "+jlTablasBase.getSelectedValue()+" "
-//                + "where "+cbCampos.getSelectedItem()+" "+cbSigno.getSelectedItem()+" '"+txtFiltro1.getText()+"'";
-//        JOptionPane.showMessageDialog(null, "Filtro Fila sql: "+sqlFiltro);
-    }
-    
+   
    public static  String nombreJob="";
     
     void seleccionaJob(){
@@ -729,16 +679,25 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         sql = "SELECT  name \n" +
               "FROM    msdb.dbo.sysjobs J\n" +
               "WHERE   name like '%"+Clientes.baseInicial+"-"+txtNombrePublicacion.getText()+"%'\n" + "";
-            Conexion cc = new Conexion();
-            Connection cn=cc.conectar(servidor1);
-        try {
+    
+    
+    Conexion cc = new Conexion();
+    Connection cn=cc.conectar(servidor1);
+
+     try {
             Statement psd1 = cn.createStatement();
             ResultSet rs1=psd1.executeQuery(sql);
             while(rs1.next()){
                 nombreJob=(rs1.getString("name"));
             }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex+"al cargar tabla");
+        } catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
         }   
     }
     
@@ -747,7 +706,9 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         String sql="USE msdb ;\n" +
         "EXEC dbo.sp_start_job N'"+nombreJob+"' ;";
         Conexion cc = new Conexion();
+        //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         Connection cn=cc.conectar(servidor1);
+       // escribir(sqlCrearSubs);
          try {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
@@ -843,9 +804,13 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     public void cargarColumnas(String tabla){
             String sql="";
             base_de_autos= Clientes.baseInicial;
+        //    sql="SELECT COLUMN_NAME \n" +
+        //    "FROM [Renta de Autos].INFORMATION_SCHEMA.COLUMNS\n" +
+        //    "WHERE TABLE_NAME = N'"+nomTabla+"'";
             sql="SELECT COLUMN_NAME\n" +
-                "        FROM ["+base_de_autos+"].INFORMATION_SCHEMA.COLUMNS\n" +
-                "        WHERE TABLE_NAME ='"+tabla+"'";
+        "        FROM ["+base_de_autos+"].INFORMATION_SCHEMA.COLUMNS\n" +
+        "        WHERE TABLE_NAME ='"+tabla+"'";
+           // JOptionPane.showMessageDialog(null,"cl "+Clientes.baseInicial);
             String [] ListaColumnas=new String[4];
             Conexion cc = new Conexion();
             Connection cn=cc.conectarBase(servidor1,base_de_autos);
@@ -860,15 +825,16 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                         modelo.addElement(rs1.getString("COLUMN_NAME"));
                     }
                     jlColumnas.setModel(modelo);
-                }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null,"SQLException "+ex);
-                    errores.Gestionar(ex);
-                    errores.mensaje(); 
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,"Exception "+ex);  
-                    errores.Gestionar(ex);
-                    errores.mensaje();   
-                }
+             }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null,"SQLException "+ex);
+                errores.Gestionar(ex);
+                errores.mensaje();    
+              } catch(Exception ex){
+                 JOptionPane.showMessageDialog(null,"Exception "+ex);  
+                 errores.Gestionar(ex);
+                 errores.mensaje();   
+        }
+
     }
     
     public void PasarDatosConsulta(){
@@ -903,20 +869,20 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Instantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Instantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Instantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Instantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Instantanea1().setVisible(true);
+                new TransaCola1().setVisible(true);
             }
         });
     }

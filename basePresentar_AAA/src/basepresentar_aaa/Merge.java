@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -562,11 +563,24 @@ public class Merge extends javax.swing.JInternalFrame {
         try {
             Statement psd= cn.createStatement();
             psd.executeQuery(sqlPubliMerge);
-        }catch(Exception ex){
+        }
+        catch(SQLException ex){
+            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
+            seCreo=true;
+            }else{
+            //JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();   
+              seCreo=false;
+            }
+        }
+        catch(Exception ex){
             if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
             seCreo=true;
             }else{
               JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
+                  errores.Gestionar(ex);
+              errores.mensaje();
               seCreo=false;
             }
     //                     JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);

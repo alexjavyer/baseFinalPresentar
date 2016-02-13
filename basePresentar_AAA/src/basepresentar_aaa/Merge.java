@@ -574,8 +574,8 @@ public class Merge extends javax.swing.JInternalFrame {
         if(seCreo){
               JOptionPane.showMessageDialog(null,"Publicacion Merge creada");
               this.dispose();
-              Clientes cli =new Clientes();
-              cli.show();
+//              Clientes cli =new Clientes();
+//              cli.show();
         }
         
     }

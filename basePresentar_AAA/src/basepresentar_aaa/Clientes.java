@@ -80,8 +80,7 @@ public class Clientes extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(204,204,204));
         
         txtbase.setSize(10, 10);
-        txtTabla.setSize(10, 10);
-        
+        txtTabla.setSize(10, 10);   
 //        jDesktopPane1.setBorder(new ImagenFondo());
 //        this.setExtendedState(Clientes.MAXIMIZED_BOTH);
        // JOptionPane.showMessageDialog(null, servidor);
@@ -89,7 +88,6 @@ public class Clientes extends javax.swing.JFrame {
         jMenu4.setEnabled(true);
         servidor1=servidor; 
     }
-    //Listo
     public void cargarPublicaciones(String servidor){
         String sqlCargarPublicaciones="Use distribution  SELECT\n" +
 "           *\n" +

@@ -652,6 +652,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
                 }   
              return "";
     }
+     
     void correrPublicacion(){
     //JOptionPane.showMessageDialog(null,"Corriendo el agente");
             String sql="USE msdb ;\n" +

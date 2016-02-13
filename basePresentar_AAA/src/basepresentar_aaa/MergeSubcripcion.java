@@ -54,6 +54,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
 //        jtAgente.setVisible(false);
         //jtAgente.setVisible(false);
         cargarPublicaciones(servidor1);
+        System.out.println("MergeSubscripcion");
     }
     public void cargarBasedePublicaciones(String servidor, String publicacion){
         

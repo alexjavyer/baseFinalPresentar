@@ -5,6 +5,7 @@
  */
 package basepresentar_aaa;
 
+import static basepresentar_aaa.Clientes.baseInicial;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -384,12 +385,40 @@ public class Merge extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    boolean permitir_pub=false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cargarTabla(servidor1);
+        
+            cargarTabla(servidor1);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public boolean baseYaEnPubAct(){
+        String sql="";
+        sql="Use distribution  SELECT MSA.publisher_db\n" +
+            "\n" +
+            "            FROM\n" +
+            " DBO.MSpublications AS MSA\n" +
+            "           INNER JOIN DBO.MSpublications AS MSP\n" +
+            "                    ON MSA.publication_id = MSP.publication_id\n" +
+            "                    WHERE MSA.publisher_db='"+cbBaseDeDatos.getSelectedItem()+"'";
+        
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(servidor1, baseInicial);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            if(rs.next()){
+                //cbBasedeDatos.addItem(rs.getString("publisher_db"));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al comprobar");
+             return false;
+        }
+    }
     private void chVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chVerticalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chVerticalActionPerformed
@@ -416,7 +445,9 @@ public class Merge extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chHorizontalActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        
         crearPubli(servidor1);
+        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnAgregarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFiltroActionPerformed

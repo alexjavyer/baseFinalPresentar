@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Vector;
@@ -335,17 +336,17 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
         Connection cn=cc.conectar(Instantanea.servidor1);
        // escribir(sqlCrearSubs);
         try {
-            Statement psd = cn.createStatement();
-            psd.executeQuery(sql);
-            }catch(Exception ex){
-                if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Publicacion corriendo");
-                    Clientes cli=new Clientes(Instantanea.servidor1);
-                    cli.show();
-                }else{
-                JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
-                }
-            }
+            PreparedStatement psd= cn.prepareStatement(sql);
+            psd.execute();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
+        }
     }
     
     
@@ -465,15 +466,17 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
         Conexion cc = new Conexion();
         Connection cn=cc.conectar(publicadorS);
         try {
-            Statement psd = cn.createStatement();
-            psd.executeQuery(sqlCrearSubs);
-            }catch(Exception ex){
-                if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Subscripción Creada ");
-                }else{
-                JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
-                }
-            }
+            PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
+            psd.execute();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
+        }
         
     }
     
@@ -495,8 +498,14 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             while(rs.next()){
                 return rs.getString("publisher_db");
             }
-        }catch(Exception ex){
-             JOptionPane.showMessageDialog(null,ex+ "Error al cargar publicacion");
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
         }
         return null;
     }
@@ -521,39 +530,22 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
         Connection cn=cc.conectar(publicadorS);
        // escribir(sqlCrearSubs);
         try {
-            Statement psd = cn.createStatement();
-            psd.executeQuery(sqlCrearSubs);
-            }catch(Exception ex){
-                if(ex.getMessage()=="La instrucción no devolvió un conjunto de resultados."){
-                    JOptionPane.showMessageDialog(null,"Subscripción Creada ");
-                    Clientes cli=new Clientes(publicadorS);
-                    cli.show();
-                }else{
-                JOptionPane.showMessageDialog(null,"Error al crear la subscripción"+ex);
-                }
-            }
+            PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
+            psd.execute();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
+        }
         
     }
     
     
-    public void escribir(String codigo){
-        File f;
-        f = new File("C:\\Users\\Anita\\Documents\\DOCUMENTOS\\UNIVERSIDAD\\SEMESTRES\\6. SEXTO\\SBD DISTRIBUIDOS\\Segundo Parcial\\Proyecto\\GenerardoSubsSnap\\ProbandoSubs.txt");
-
-        //Escritura
-        try{
-        FileWriter w = new FileWriter(f);
-        BufferedWriter bw = new BufferedWriter(w);
-        PrintWriter wr = new PrintWriter(bw);	
-        wr.write(codigo);//escribimos en el archivo 
-        //wr.append(" - y aqui continua"); //concatenamos en el archivo sin borrar lo existente
-                      //ahora cerramos los flujos de canales de datos, al cerrarlos el archivo quedará guardado con información escrita
-                      //de no hacerlo no se escribirá nada en el archivo
-        wr.close();
-        bw.close();
-        }catch(IOException e){};
-    }
-    public void cargarTablasSuscriptor(JComboBox jc){
+       public void cargarTablasSuscriptor(JComboBox jc){
         //String[] tablas=new String();
         //suscriptorName=cbSuscriptores.getSelectedItem().toString();
         JOptionPane.showMessageDialog(null,"servidor"+suscriptorName);
@@ -575,10 +567,15 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                    //JOptionPane.showMessageDialog(null,rs.getString("name"));
                 }
                 
-            }catch(Exception ex)
-            {
-                    JOptionPane.showMessageDialog(null,"Error al cargar las tablas"+ex);
-            }
+            }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
+        }
         }
     
     public void crearBase(String baseNueva){
@@ -630,8 +627,14 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
         }     
     }
     public void crearTabla(String baseNueva){
@@ -664,9 +667,15 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
           PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la TABLA");
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }     
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();    
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+            errores.Gestionar(ex);
+              errores.mensaje();   
+        }
     }
     
     

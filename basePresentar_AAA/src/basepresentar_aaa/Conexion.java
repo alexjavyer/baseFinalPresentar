@@ -57,8 +57,7 @@ public class Conexion {
         } catch(Exception ex){
             JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
-              errores.mensaje();
-            
+              errores.mensaje();   
         }
         
         

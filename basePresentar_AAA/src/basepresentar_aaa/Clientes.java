@@ -1522,7 +1522,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        TransaCola trans = new TransaCola(servidor1);
+        TransaCola1 trans = new TransaCola1(servidor1);
         jDesktopPane1.add(trans);
         trans.show();
        
@@ -1818,8 +1818,6 @@ public class Clientes extends javax.swing.JFrame {
             ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
             jDesktopPane1.add(repl);
             repl.show();
-                   
-     
         }else{
             if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL STANDAR")){
             nombrePubPasar = "  T R A N S A C C I O N A L    E S T A N D A R";

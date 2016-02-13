@@ -5,6 +5,7 @@
 package basepresentar_aaa;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Servidor extends javax.swing.JFrame {
     public static String servidor="";
     public Servidor() {
         initComponents();
+        btnAceptar.requestFocus();
         //obtener el usuario
 //         cmbServidores.removeAllItems();
 //         String username = "JAVY-PC";
@@ -64,6 +66,11 @@ public class Servidor extends javax.swing.JFrame {
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
+            }
+        });
+        btnAceptar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnAceptarKeyPressed(evt);
             }
         });
 
@@ -127,11 +134,22 @@ public class Servidor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbServidoresActionPerformed
 
+    private void btnAceptarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAceptarKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+             String instancia=cmbServidores.getSelectedItem().toString();
+        Clientes cli = new Clientes(instancia);
+        cli.setExtendedState(MAXIMIZED_BOTH);
+        cli.setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_btnAceptarKeyPressed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Nimbuifs look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

@@ -45,7 +45,7 @@ public class Clientes extends javax.swing.JFrame {
         
         jMenu2.setEnabled(false);
         jMenu3.setEnabled(false);
-        jMenu4.setEnabled(false);
+      //  jMenu4.setEnabled(false);
         jPanel2.setVisible(false);
        
         this.getContentPane().setBackground(new java.awt.Color(204,204,204));
@@ -89,6 +89,7 @@ public class Clientes extends javax.swing.JFrame {
         jMenu4.setEnabled(true);
         servidor1=servidor; 
     }
+    //Listo
     public void cargarPublicaciones(String servidor){
         String sqlCargarPublicaciones="Use distribution  SELECT\n" +
 "           *\n" +
@@ -220,7 +221,7 @@ public class Clientes extends javax.swing.JFrame {
     int resta=0;
     public void CargarTabla(String servidor){
         int nColumnas=modeloNombreColumnas.getSize();
-        JOptionPane.showMessageDialog(null,"Cargar Tabla");
+        //JOptionPane.showMessageDialog(null,"Cargar Tabla");
         model = new DefaultTableModel();
         String column="";
         //jtbDatos.setModel(model);
@@ -901,13 +902,13 @@ public class Clientes extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
 
         jLabel1.setText("Nombre del servidor");
 
@@ -1409,6 +1410,23 @@ public class Clientes extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenuItem4.setText("Peer to Peer");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem10.setText("P2P");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenuItem4.add(jMenuItem10);
+
+        jMenuBar1.add(jMenuItem4);
+
         jMenu1.setText("Opciones");
 
         jMenuItem7.setText("Otra Conexion");
@@ -1445,23 +1463,6 @@ public class Clientes extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
-
-        jMenuItem4.setText("Peer to Peer");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem10.setText("P2P");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
-            }
-        });
-        jMenuItem4.add(jMenuItem10);
-
-        jMenuBar1.add(jMenuItem4);
 
         setJMenuBar(jMenuBar1);
 
@@ -1543,7 +1544,7 @@ public class Clientes extends javax.swing.JFrame {
     
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Instantanea ins=new Instantanea(servidor1);
+        Instantanea1 ins=new Instantanea1(servidor1);
         jDesktopPane1.add(ins);
         ins.show();
     
@@ -1561,16 +1562,17 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null,"Server: "+servidor1);
         Merge mer=new Merge(servidor1);
+        jDesktopPane1.add(mer);
         mer.show();
-        this.hide();
+        //this.hide();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         MergeSubcripcion mergsub=new MergeSubcripcion(servidor1);
-        mergsub.show();
-        this.hide()
-                ;
+        jDesktopPane1.add(mergsub);
+        //this.hide()
+                mergsub.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void btnAceptarP2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2PActionPerformed
@@ -1725,7 +1727,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed

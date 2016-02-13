@@ -5,6 +5,7 @@
  */
 package basepresentar_aaa;
 
+import static basepresentar_aaa.Clientes.baseInicial;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -21,7 +23,7 @@ import javax.swing.JCheckBox;
  *
  * @author Anita
  */
-public class Merge extends javax.swing.JFrame {
+public class Merge extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Merge
@@ -326,6 +328,11 @@ public class Merge extends javax.swing.JFrame {
                 chSinFiltroItemStateChanged(evt);
             }
         });
+        chSinFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chSinFiltroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -379,12 +386,40 @@ public class Merge extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    boolean permitir_pub=false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cargarTabla(servidor1);
+        
+            cargarTabla(servidor1);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public boolean baseYaEnPubAct(){
+        String sql="";
+        sql="Use distribution  SELECT MSA.publisher_db\n" +
+            "\n" +
+            "            FROM\n" +
+            " DBO.MSpublications AS MSA\n" +
+            "           INNER JOIN DBO.MSpublications AS MSP\n" +
+            "                    ON MSA.publication_id = MSP.publication_id\n" +
+            "                    WHERE MSA.publisher_db='"+cbBaseDeDatos.getSelectedItem()+"'";
+        
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(servidor1, baseInicial);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            if(rs.next()){
+                //cbBasedeDatos.addItem(rs.getString("publisher_db"));
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al comprobar");
+             return false;
+        }
+    }
     private void chVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chVerticalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chVerticalActionPerformed
@@ -411,7 +446,9 @@ public class Merge extends javax.swing.JFrame {
     }//GEN-LAST:event_chHorizontalActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        
         crearPubli(servidor1);
+        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnAgregarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFiltroActionPerformed
@@ -438,10 +475,15 @@ public class Merge extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Clientes cli=new Clientes(servidor1);
-        cli.show();
+//        Clientes cli=new Clientes(servidor1);
+//        cli.show();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void chSinFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chSinFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chSinFiltroActionPerformed
     DefaultListModel modeloCondicion=new DefaultListModel();    
+    
     public void crearPubli(String servidor){
         String nombrePubli=txtNombrePubli.getText();
         String base_de_datos=cbBaseDeDatos.getSelectedItem().toString();
@@ -521,21 +563,34 @@ public class Merge extends javax.swing.JFrame {
         try {
             Statement psd= cn.createStatement();
             psd.executeQuery(sqlPubliMerge);
-        }catch(Exception ex){
-//            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
-//            seCreo=true;
-//            }else{
-//              JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
-//              seCreo=false;
-//            }
-                         JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
         }
-//        if(seCreo){
-//              JOptionPane.showMessageDialog(null,"Publicacion Merge creada");
-//              this.dispose();
+        catch(SQLException ex){
+            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
+            seCreo=true;
+            }else{
+            //JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+              errores.mensaje();   
+              seCreo=false;
+            }
+        }
+        catch(Exception ex){
+            if(ex.getMessage().equals("La instrucción no devolvió un conjunto de resultados.")){
+            seCreo=true;
+            }else{
+              JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
+                  errores.Gestionar(ex);
+              errores.mensaje();
+              seCreo=false;
+            }
+    //                     JOptionPane.showMessageDialog(null,"Error al crear publicacion Merge"+ex);
+        }
+        if(seCreo){
+              JOptionPane.showMessageDialog(null,"Publicacion Merge creada");
+              this.dispose();
 //              Clientes cli =new Clientes();
 //              cli.show();
-//        }
+        }
         
     }
       public void escribir(String codigo){

@@ -176,6 +176,7 @@ public class Clientes extends javax.swing.JFrame {
             CargarTabla(servidor1);
         }
     }
+    
     public void Eliminar (){
         if(JOptionPane.showConfirmDialog(null,"Estas Seguro que Deseas borrar El Dato","Borrar Registro",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
         Conexion cc = new Conexion();

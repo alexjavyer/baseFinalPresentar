@@ -472,7 +472,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
         String subscriptor="";
         subscriptor=jlSubscriptores.getSelectedValue().toString();
         Conexion cc = new Conexion();
-        JOptionPane.showMessageDialog(null,"suscriptor "+subscriptor);
+        //JOptionPane.showMessageDialog(null,"suscriptor "+subscriptor);
         Connection cn=cc.conectar(subscriptor);
         
         
@@ -653,8 +653,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
              return "";
     }
     void correrPublicacion(){
-    JOptionPane.showMessageDialog(null,"Corriendo el agente");
-        
+    //JOptionPane.showMessageDialog(null,"Corriendo el agente");
             String sql="USE msdb ;\n" +
             "EXEC dbo.sp_start_job N'"+seleccionaJob()+"' ;";
             Conexion cc = new Conexion();

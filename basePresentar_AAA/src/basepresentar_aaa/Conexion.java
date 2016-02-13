@@ -29,14 +29,14 @@ public class Conexion {
 //      JOptionPane.showMessageDialog(null, "Servidor"+server);
         String instancia="";
         if(server.equals("ADRIAN")){
-            //instancia="192.168.1.6";
-              instancia="172.21.105.124";
+            instancia="192.168.1.4";
+            //  instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-                instancia="192.168.1.3";
+                instancia="192.168.1.5";
               // instancia="172.21.105.123";
             }else{
-                   instancia="192.168.1.5";
+                   instancia="192.168.1.6";
                    //instancia="172.21.105.248";
             }
         }
@@ -71,15 +71,15 @@ public class Conexion {
         Connection cn=null;
         String instancia="";
         if(server.equals("ADRIAN")){
-            //instancia="192.168.1.6";
-              instancia="172.21.105.124";
+            instancia="192.168.1.4";
+              //instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
-                instancia="192.168.1.3";
+                instancia="192.168.1.5";
                //instancia="172.21.105.123";
             }else{
                 
-                   instancia="192.168.1.5";
+                   instancia="192.168.1.6";
                    //instancia="172.21.105.248";
                 
             }

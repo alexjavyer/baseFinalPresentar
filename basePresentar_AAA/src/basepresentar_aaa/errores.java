@@ -23,7 +23,7 @@ public class errores {
         {
             String saltoLinea = "\n";
             //Mensajes personalizados para el usuario
-            String problema = "EL PROBLEMA GENERADO PUEDE DEBERSE A LOS SIGUIETNES FACTORES:";
+            String problema = "EL PROBLEMA GENERADO PUEDE DEBERSE A LOS SIGUIENTES FACTORES:";
             String solucion = "POR FAVOR, PRUEBE LA SIGUIENTE SOLUCIÓN";
             String mensajeFinal = "NOTA: EN caso de persistir el problema, llame a Soporte Técnico. " +
                 saltoLinea +
@@ -83,7 +83,16 @@ public class errores {
                         saltoLinea +
                         mensajeFinal;
                     break;
-                    
+                    case 14043:
+                         mensaje=problema+
+                                 saltoLinea+
+                                 "La publicación debe tener un nombre."
+                                +saltoLinea+
+                                 saltoLinea+
+                                 solucion+
+                                 saltoLinea+
+                                 "Asigne un nombre a la publicación.";
+                    break;
                         case 21745:
                     //Error personalizado
                 mensaje = problema +

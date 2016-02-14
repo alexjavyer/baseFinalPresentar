@@ -73,12 +73,12 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             }
             jlTablasBase.setModel(model);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+      //      JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
               errores.mensaje();
             
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -717,7 +717,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
               errores.mensaje();
             
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+          //  JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -768,11 +768,11 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+        //    JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -877,11 +877,11 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                     }
                     jlColumnas.setModel(modelo);
                 }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null,"SQLException "+ex);
+             //       JOptionPane.showMessageDialog(null,"SQLException ");
                     errores.Gestionar(ex);
                     errores.mensaje(); 
                 }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,"Exception "+ex);  
+              //      JOptionPane.showMessageDialog(null,"Exception ");  
                     errores.Gestionar(ex);
                     errores.mensaje();   
                 }

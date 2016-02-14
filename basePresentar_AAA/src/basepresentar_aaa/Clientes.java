@@ -830,6 +830,7 @@ public class Clientes extends javax.swing.JFrame {
               errores.mensaje();  
         }
     }
+    //control
     void ControlP2P(){
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
             //crearBase(bas, servidor);

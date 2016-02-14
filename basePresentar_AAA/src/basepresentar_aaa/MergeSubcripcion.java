@@ -107,7 +107,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
             "FROM\n" +
             "    DBO.MSarticles AS MSA\n" +
             "INNER JOIN DBO.MSpublications AS MSP\n" +
-            "        ON MSA.publication_id = MSP.publication_id\n" ;
+            "    ON MSA.publication_id = MSP.publication_id\n" ;
         String descripcion="";
 //        descripcion="'Transactional publication of database ''"+cbBasedeDatos.getSelectedItem()+"'' from Publisher ''"+servidor+"''.'";
 //        descripcion="Snapshot publication of database 'ANITA' from Publisher 'TOSHIBA'.";

@@ -50,7 +50,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
             jComboBox2.setVisible(false);
             jLabel4.setVisible(false);
  
-            JOptionPane.showMessageDialog(null, "pub"+nombrePub);
+        //    JOptionPane.showMessageDialog(null, "pub"+nombrePub);
             publicadorS=publicador;
             nombrePublicacion=nombrePub;
                     setTitle("S U S C R I P C I O N "+Clientes.nombrePubPasar);
@@ -273,12 +273,13 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +303,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                         .addComponent(btnFinalizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
 
         pack();
@@ -556,7 +557,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
     public void cargarTablasSuscriptor(JComboBox jc){
         //String[] tablas=new String();
         //suscriptorName=cbSuscriptores.getSelectedItem().toString();
-        JOptionPane.showMessageDialog(null,"servidor"+suscriptorName);
+    //    JOptionPane.showMessageDialog(null,"servidor"+suscriptorName);
         char slash=92;
 //        suscriptorName="TOSHIBA".concat(String.valueOf(slash)).concat("SITIOA");
       //  Vector tablas=new Vector();
@@ -576,11 +577,11 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                 }
                 
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+    //        JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+      //      JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -588,7 +589,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
     
     public void crearBase(String baseNueva){
         Conexion cc = new Conexion();
-        JOptionPane.showMessageDialog(null,"suscriptor "+suscriptorName);
+      //  JOptionPane.showMessageDialog(null,"suscriptor "+suscriptorName);
         Connection cn=cc.conectar(suscriptorName);
         String sql="";
         sql="USE [master]\n" +
@@ -653,9 +654,9 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
          TransaInstantanea tran = new TransaInstantanea();
          TransaCola tran1 = new TransaCola();
          
-         JOptionPane.showMessageDialog(null, instan.columnasMandarTabla);
-         JOptionPane.showMessageDialog(null, tran.columnasMandarTabla);
-                JOptionPane.showMessageDialog(null, tran1.columnasMandarTabla);
+     //    JOptionPane.showMessageDialog(null, instan.columnasMandarTabla);
+       //  JOptionPane.showMessageDialog(null, tran.columnasMandarTabla);
+         //       JOptionPane.showMessageDialog(null, tran1.columnasMandarTabla);
         sql="USE ["+baseNueva+"]\n" +
             "/****** Object:  Table [dbo].[CLIENTES]    Script Date: 01/17/2016 19:13:45 ******/\n" +
             "SET ANSI_NULLS ON\n" +

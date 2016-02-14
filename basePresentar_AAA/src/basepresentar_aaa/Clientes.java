@@ -108,11 +108,11 @@ public class Clientes extends javax.swing.JFrame {
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -149,11 +149,11 @@ public class Clientes extends javax.swing.JFrame {
             CargarTabla(servidor1);
         }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }        
@@ -181,11 +181,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -207,11 +207,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -229,7 +229,7 @@ public class Clientes extends javax.swing.JFrame {
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
                 
-                if(column.equals("msrepl_tran_version"))
+                if(column.equals("msrepl_tran_version")||column.equals("rowguid"))
                   resta = 1;
                 else
                     resta=0;
@@ -892,6 +892,7 @@ public class Clientes extends javax.swing.JFrame {
         txtbase = new javax.swing.JTextField();
         txtTabla = new javax.swing.JTextField();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -1355,6 +1356,13 @@ public class Clientes extends javax.swing.JFrame {
         txtTabla.setMaximumSize(new java.awt.Dimension(10, 10));
         txtTabla.setMinimumSize(new java.awt.Dimension(5, 5));
 
+        jButton2.setText("Subscripciones");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
         jMenu2.setText("Snapshot");
@@ -1491,6 +1499,10 @@ public class Clientes extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDesktopPane1))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1514,7 +1526,9 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jDesktopPane1))
-                .addGap(99, 99, 99))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(70, 70, 70))
         );
 
         pack();
@@ -1737,6 +1751,10 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaP2P();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -2000,6 +2018,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JComboBox cbSeleccionar;
     private javax.swing.JComboBox cmbServidores;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

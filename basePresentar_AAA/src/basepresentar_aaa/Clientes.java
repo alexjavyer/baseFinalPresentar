@@ -1940,31 +1940,90 @@ public class Clientes extends javax.swing.JFrame {
             }
     }
     static String nombrePubPasar;
+    String verificador;
+    String mensajedePublicacion;
     void suscripcionAcceder(String servidor, String publcacion){
         if(cbSeleccionar.getSelectedItem().equals("SNAPSHOT")){
             nombrePubPasar = "  S N A P S H O T";
-            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
+            verificador="Snapshot publication of database";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){
+                ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+                jDesktopPane1.add(repl);
+                repl.show();
+            }else{
+                if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication of database")){
+                    mensajedePublicacion = "Transaccional Standar";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication with updatable")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+            }
         }else{
             if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL STANDAR")){
             nombrePubPasar = "  T R A N S A C C I O N A L    E S T A N D A R";
-            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
-     
+            verificador="Transactional publication of database";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){
+                ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+                jDesktopPane1.add(repl);
+                repl.show();
+            }else{
+              if(verificarPublicaciones(servidor, publcacion).contains("Snapshot publication of database")){
+                    mensajedePublicacion = "Snapshot";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication with updatable")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+               
+            }
         }else{
                 if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL QUEUE")){
-            ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
+                    verificador="Transactional publication with updatable";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){   
+                   ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
+                   jDesktopPane1.add(repl);
+                   repl.show();
+            } else{
+              if(verificarPublicaciones(servidor, publcacion).contains("Snapshot publication of database")){
+                    mensajedePublicacion = "Snapshot";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication of database")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+               }            
+                }   
               }
             }
     }
         //    this.dispose();
    
-    }
     
+    
+    
+     public String verificarPublicaciones(String servidor, String nombrePublicacion){
+         String sqlCargarPublicaciones="";
+        sqlCargarPublicaciones="Use distribution  \n" +
+            "SELECT  description\n" +
+            "FROM DBO.MSpublications \n" +
+            "where publication = '"+nombrePublicacion+"'";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectar(servidor1);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarPublicaciones);
+            while(rs.next()){
+                return rs.getString("description");
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al cargar publicacion");
+        }
+        return null;
+    }
     
     /**
      * @param args the command line arguments

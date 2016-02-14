@@ -252,6 +252,7 @@ public class errores {
             //contiene la cadena con el mensaje de error a mostrar al usuario
             String mensaje = null;
             // Verificamos el nuemero de error y personalizar el mensaje.
+            JOptionPane.showMessageDialog(null,"Error nombre"+exception);
             switch (exception.getMessage())
             {
             

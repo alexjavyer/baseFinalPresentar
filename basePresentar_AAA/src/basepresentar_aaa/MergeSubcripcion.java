@@ -430,6 +430,9 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
 
     private void btnCrearSubsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearSubsActionPerformed
         // TODO add your handling code here:
+            if(modeloSubs.isEmpty()||modeloBasesLista.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Complete toda la información requerida.");
+            }else
             CrearSubscripcion();
     }//GEN-LAST:event_btnCrearSubsActionPerformed
 

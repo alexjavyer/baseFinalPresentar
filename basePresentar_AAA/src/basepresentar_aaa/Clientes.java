@@ -613,7 +613,7 @@ public class Clientes extends javax.swing.JFrame {
               errores.Gestionar(ex);
               errores.mensaje();  
         }
-        txtNombre_Base.setText(jcmTablas.getSelectedItem().toString());
+        txtNombre_Base.setText(jcbBases.getSelectedItem().toString());
     }
     void cargarBase(){
         Conexion cc = new Conexion();
@@ -1726,6 +1726,8 @@ public class Clientes extends javax.swing.JFrame {
     private void jcbBasesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbBasesItemStateChanged
         // TODO add your handling code here:
         cargarTabla();
+        if(jcbBases.getItemCount()>=1)
+            txtNombre_Base.setText(jcbBases.getSelectedItem().toString());
     }//GEN-LAST:event_jcbBasesItemStateChanged
 
     private void jcbBasesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbBasesPropertyChange
@@ -1746,8 +1748,6 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jcmTablasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmTablasItemStateChanged
         // TODO add your handling code here:
-        if(jcmTablas.getItemCount()>=1)
-            txtNombre_Base.setText(jcmTablas.getSelectedItem().toString());
     }//GEN-LAST:event_jcmTablasItemStateChanged
 
     private void jcmTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmTablasActionPerformed

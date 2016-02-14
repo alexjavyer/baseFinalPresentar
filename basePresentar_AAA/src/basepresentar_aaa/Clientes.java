@@ -880,11 +880,11 @@ public class Clientes extends javax.swing.JFrame {
                 SnapPubliSA(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText());
                 if(jcb_2.isSelected()==true && jcb_1.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),2);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText(),2);
                     }
                     if(jcb_1.isSelected()==true && jcb_2.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText(),1);
                     }
                     else{
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());

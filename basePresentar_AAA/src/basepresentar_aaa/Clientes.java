@@ -108,11 +108,11 @@ public class Clientes extends javax.swing.JFrame {
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException ");
+         //   JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception ");
+         //   JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -149,11 +149,11 @@ public class Clientes extends javax.swing.JFrame {
             CargarTabla(servidor1);
         }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException ");
+           // JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception ");
+          //  JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }        
@@ -182,11 +182,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException ");
+           // JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception ");
+           // JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -208,11 +208,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException ");
+           // JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception ");
+           // JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -263,11 +263,11 @@ public class Clientes extends javax.swing.JFrame {
             model.addRow(vacio);
             jtbDatos.setModel(model);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -286,11 +286,11 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se creo la subscripcion");
             jtbDatos.setModel(model);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -350,7 +350,7 @@ public class Clientes extends javax.swing.JFrame {
             jtbDatos.setModel(model);
             S_Pull_Cont_Inme();
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+           // JOptionPane.showMessageDialog(null, ex);
         }
     }
     void P2PPublicacion(String publicacion,String baseori,String basenue){
@@ -408,11 +408,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P Local para "+servidor1);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
+           // JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -441,11 +441,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P para "+ ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException PeerSA"+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException PeerSA"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
+           // JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -474,11 +474,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd2.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P para "+ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception Peersa"+ex);
+            //JOptionPane.showMessageDialog(null,"Exception Peersa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -569,11 +569,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la subscripcion P2P "+s);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException Peer sus "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException Peer sus "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception Peer sus "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception Peer sus "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -592,11 +592,11 @@ public class Clientes extends javax.swing.JFrame {
                 jcmTablas.addItem(rs.getString("TABLE_NAME"));
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -615,11 +615,11 @@ public class Clientes extends javax.swing.JFrame {
                 jcbBases.addItem(rs.getString("NAME"));
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -673,11 +673,11 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException crear base "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException crear base "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception crear base "+ex);
+          //  JOptionPane.showMessageDialog(null,"Exception crear base "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }     
@@ -707,11 +707,11 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException SPub "+ex);
+            //JOptionPane.showMessageDialog(null,"SQLException SPub "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception SPub "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception SPub "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -742,11 +742,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException SPubSA "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException SPubSA "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception SPubSA"+ex);
+           // JOptionPane.showMessageDialog(null,"Exception SPubSA"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -772,11 +772,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd2.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException SPubSA2 "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException SPubSA2 "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception SPubSA2 "+ex);
+          //  JOptionPane.showMessageDialog(null,"Exception SPubSA2 "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -822,11 +822,11 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la suscrip snap para peer para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException sSus"+ex);
+         //   JOptionPane.showMessageDialog(null,"SQLException sSus"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception sSus"+ex);
+          //  JOptionPane.showMessageDialog(null,"Exception sSus"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -1879,11 +1879,11 @@ public class Clientes extends javax.swing.JFrame {
                     }
                     
                 }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            //JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -1913,11 +1913,11 @@ public class Clientes extends javax.swing.JFrame {
             }
         
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -1941,11 +1941,11 @@ public class Clientes extends javax.swing.JFrame {
                 }
                 
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+           // JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }       
@@ -1975,11 +1975,11 @@ public class Clientes extends javax.swing.JFrame {
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+          //  JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -2003,11 +2003,11 @@ public class Clientes extends javax.swing.JFrame {
             }
            // JOptionPane.showMessageDialog(null, nombreJob);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+         //   JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+         //   JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }   

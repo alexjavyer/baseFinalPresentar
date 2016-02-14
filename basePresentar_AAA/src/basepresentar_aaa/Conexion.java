@@ -52,12 +52,12 @@ public class Conexion {
             System.out.println(cadenaConexion);
             cn=DriverManager.getConnection(cadenaConexion);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();
             
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+          //  JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -105,11 +105,11 @@ public class Conexion {
 
             System.out.println("exito  ");
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            //JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+           // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }

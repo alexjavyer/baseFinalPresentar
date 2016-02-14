@@ -536,6 +536,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     String igualdad[] = new String[20];
     String logico[] = new String[20];
     private void btnAgregarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFiltroActionPerformed
+        verdad="true";
         condicion[m] = cbSigno.getSelectedItem().toString();
         igualdad[m] = txtCondicion.getText();
         logico[m] =  cbOPeradorLogico.getSelectedItem().toString();
@@ -588,15 +589,15 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         verdad = "false";
-        filtroColum[0]="CI_RENT";
-        filtroColum[1]="NOM_RENT";
-        filtroColum[2]="APE_RENT";
-        filtroColum[3]="TEL_RENT";
-                modelo1.addElement("CI_RENT");
-                modelo1.addElement("NOM_RENT");
-                modelo1.addElement("APE_RENT");
-                modelo1.addElement("TEL_RENT");
-                txtColumnas.setModel(modelo1);
+      //  filtroColum[0]="CI_RENT";
+      //  filtroColum[1]="NOM_RENT";
+      //  filtroColum[2]="APE_RENT";
+      //  filtroColum[3]="TEL_RENT";
+        //        modelo1.addElement("CI_RENT");
+        //        modelo1.addElement("NOM_RENT");
+        //        modelo1.addElement("APE_RENT");
+        //        modelo1.addElement("TEL_RENT");
+        //        txtColumnas.setModel(modelo1);
  
     }//GEN-LAST:event_jButton4ActionPerformed
       public void crearPub(){

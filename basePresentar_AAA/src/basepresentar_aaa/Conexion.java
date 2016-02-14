@@ -40,7 +40,7 @@ public class Conexion {
             }else{
                 instancia="192.168.1.6";
 //                   instancia="172.21.105.248";
-                   instancia="192.168.1.6";
+                   //instancia="192.168.1.6";
                    //instancia="172.21.105.248";
             }
         }

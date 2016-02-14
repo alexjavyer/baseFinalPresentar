@@ -331,6 +331,9 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtAgenteMouseEntered"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

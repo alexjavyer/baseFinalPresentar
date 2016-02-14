@@ -1971,11 +1971,11 @@ public class Clientes extends javax.swing.JFrame {
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }

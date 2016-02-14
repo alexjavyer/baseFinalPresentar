@@ -68,7 +68,7 @@ public class Conexion {
         Connection cn=null;
         String instancia="";
         if(server.equals("ADRIAN")){
-            instancia="192.168.1.4";
+            instancia="192.168.1.8";
             //  instancia="172.21.105.124";
               //instancia="172.21.105.124";
         }else{

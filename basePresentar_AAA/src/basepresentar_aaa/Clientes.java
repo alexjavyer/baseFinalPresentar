@@ -685,7 +685,7 @@ public class Clientes extends javax.swing.JFrame {
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, base);
         String sql="",sus="",sus1="",sus2="";
-        JOptionPane.showMessageDialog(null, "Base "+base+" publicacion "+publicacion+ " ser "+ser);
+        //JOptionPane.showMessageDialog(null, "Base "+base+" publicacion "+publicacion+ " ser "+ser);
         sql="use master\n"+
             "exec sp_replicationdboption @dbname = N'"+base+"', @optname = N'publish', @value = N'true'\n"+
 //            "exec [prueba_ren].sys.sp_addlogreader_agent @job_login = null, @job_password = null, @publisher_security_mode = 1\n"+
@@ -718,7 +718,7 @@ public class Clientes extends javax.swing.JFrame {
     void SnapPubliSA(String base,String publicacion,String ser){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, base);
-        JOptionPane.showMessageDialog(null, "SnapPuSA "+ser+"  la base  "+base);
+        //JOptionPane.showMessageDialog(null, "SnapPuSA "+ser+"  la base  "+base);
         String sql="",sql2="";
         if(jcb_2.getText()==ser){
         sql="use master\n"+
@@ -815,7 +815,7 @@ public class Clientes extends javax.swing.JFrame {
             sql=sus;
         if(jcb_3.getText()==ser && numsql==2)    
             sql=sus1;
-        JOptionPane.showMessageDialog(null, "sql    "+sql);
+        //JOptionPane.showMessageDialog(null, "sql    "+sql);
         try {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
@@ -835,44 +835,44 @@ public class Clientes extends javax.swing.JFrame {
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
             //crearBase(bas, servidor);
             //crearTabla(bas, servidor);
-            JOptionPane.showMessageDialog(null, "valores "+P2P1control+" "+P2P2control+" "+P2P3control);
+           // JOptionPane.showMessageDialog(null, "valores "+P2P1control+" "+P2P2control+" "+P2P3control);
             String nombrePublicacion="Snap"+txtNombrePubP2P.getText();
             if(P2P1control==1){
                 SnapPubli(jcbBases.getSelectedItem().toString(),nombrePublicacion, jcb_1.getText());
                 if(jcb_2.isSelected()==true && jcb_3.isSelected()==false){
-                    JOptionPane.showMessageDialog(null, " sitio 2 ");
+                    //JOptionPane.showMessageDialog(null, " sitio 2 ");
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),2);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_1.getText(),2);
                     }
                     if(jcb_3.isSelected()==true && jcb_2.isSelected()==false){
-                        JOptionPane.showMessageDialog(null, " sitio 3 ");
+                      //  JOptionPane.showMessageDialog(null, " sitio 3 ");
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_1.getText(),3);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, " 2 sitios ");
+                        //JOptionPane.showMessageDialog(null, " 2 sitios ");
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_1.getText(),3);
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),2);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_1.getText(),2);
                     }
             }
             if(P2P2control==1){
                 SnapPubliSA(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText());
                 if(jcb_1.isSelected()==true && jcb_3.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText().toString(), nombrePublicacion, jcb_2.getText(),1);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText(),1);
                     }
                     if(jcb_3.isSelected()==true && jcb_1.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),3);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText(),3);
                     }
                     else{
                         if(jcb_3.isSelected()==true && jcb_1.isSelected()==true){
                             crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                            SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),3);
+                            SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText(),3);
                             crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                            SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),1);
+                            SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText(),1);
                         }
                     }
             }
@@ -888,9 +888,9 @@ public class Clientes extends javax.swing.JFrame {
                     }
                     else{
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),3);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText(),3);
                         crearBase(jcbBases.getSelectedItem().toString(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1);
+                        SnapSus(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText(),1);
                     }
             }
             bas=jcbBases.getSelectedItem().toString();

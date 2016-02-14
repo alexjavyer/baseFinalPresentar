@@ -644,7 +644,7 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
 "exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa'\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
-"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy'\n" +
+//"exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy'\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT'\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin'\n" +

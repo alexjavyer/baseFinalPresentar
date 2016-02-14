@@ -461,11 +461,9 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                 System.out.println(fecha);
      
         
-                String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
-             
+       String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
         String va = suscriptor;
-        
-        JOptionPane.showMessageDialog(null, "Sucrip"+va+ Clientes.baseInicial);
+        JOptionPane.showMessageDialog(null, "Sucrip "+va+ Clientes.baseInicial);
     
         String sqlCrearSubs="-----------------BEGIN: Script to be run at Publisher '"+publicadorS+"'----------------- \n" +
         "use ["+baseOrigen+"]\n" +
@@ -478,6 +476,8 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
       try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
+            this.dispose();
+            
         }catch(SQLException ex){
       //      JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);

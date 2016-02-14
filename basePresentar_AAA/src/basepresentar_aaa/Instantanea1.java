@@ -56,7 +56,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                  setTitle("P U B L I C A C I O N  S N A P S H O T");
        // servidor2="JAVY-PC";
     }
-    String tiempo,intervalo;
+    String tiempo="",intervalo;
     
     public void cargarTabla(String servidor){
         //String sql ="SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = BASE TABLE AND TABLE_SCHEMA=dbName";
@@ -128,10 +128,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         jlOperadorLogico = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        chVertical1 = new javax.swing.JCheckBox();
-        chHorizontal1 = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
-        chSinFiltro1 = new javax.swing.JCheckBox();
         jButton6 = new javax.swing.JButton();
 
         chVertical.setText("Vertical");
@@ -160,10 +157,31 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiempo", "Inmediatamente" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Snapshot Agent");
 
         jcTiempo1.setEnabled(false);
+        jcTiempo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcTiempo1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcTiempo1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jcTiempo1MouseReleased(evt);
+            }
+        });
+        jcTiempo1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcTiempo1ItemStateChanged(evt);
+            }
+        });
         jcTiempo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTiempo1ActionPerformed(evt);
@@ -184,7 +202,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,11 +210,10 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addComponent(jcTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jcTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(jcTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,46 +282,50 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setText("Filtro");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnPasarNomCol, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbOPeradorLogico, 0, 63, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addComponent(btnAgregarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addGap(20, 20, 20)
+                                .addComponent(btnPasarNomCol, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(136, 136, 136))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(226, 226, 226)
-                                .addComponent(jButton1)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbOPeradorLogico, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAgregar)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAgregarFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,67 +335,31 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                     .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbOPeradorLogico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPasarNomCol))
+                    .addComponent(btnPasarNomCol)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregarFiltro)
-                    .addComponent(btnAgregar))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnAgregarFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton1))))
-                .addGap(17, 17, 17))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-
-        chVertical1.setText("Vertical");
-        chVertical1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chVertical1ItemStateChanged(evt);
-            }
-        });
-        chVertical1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chVertical1ActionPerformed(evt);
-            }
-        });
-
-        chHorizontal1.setText("Horizontal");
-        chHorizontal1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chHorizontal1ItemStateChanged(evt);
-            }
-        });
-        chHorizontal1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chHorizontal1ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Filtro");
-
-        chSinFiltro1.setText("Sin Filtro");
-        chSinFiltro1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                chSinFiltro1ItemStateChanged(evt);
-            }
-        });
-        chSinFiltro1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chSinFiltro1ActionPerformed(evt);
-            }
-        });
 
         jButton6.setText("Cargar Campos");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -388,67 +373,47 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(chVertical1)
-                                            .addComponent(chHorizontal1)
-                                            .addComponent(chSinFiltro1)
-                                            .addComponent(jButton6))))
-                                .addGap(46, 46, 46))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(59, 59, 59)
+                                .addComponent(jButton6)
+                                .addGap(54, 54, 54))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(chVertical1)
-                                        .addGap(2, 2, 2)
-                                        .addComponent(chHorizontal1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(chSinFiltro1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton6)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(jLabel1)))
         );
 
         pack();
@@ -468,16 +433,19 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        filtrosTabla();
         //publicacionFiltros(txtNombrePublicacion.getText());
+        tiempo = jcTiempo1.getSelectedItem().toString();
+        
         crearPublicacion();
-         if(jlTablasBase.isSelectionEmpty()){
-             
-         }else{
-             if(txtNombrePublicacion.getText().isEmpty()){
-             
-             }else{
-             correrPublicacion();
-             }
-         }
+        correrPublicacion();
+//         if(jlTablasBase.isSelectionEmpty()){
+//             
+//         }else{
+//             if(txtNombrePublicacion.getText().isEmpty()){
+//             
+//             }else{
+//             correrPublicacion();
+//             }
+         //}
 //        if(!jlTablasBase.isSelectionEmpty()||!txtNombrePublicacion.getText().isEmpty()){
 //        correrPublicacion();
 //        }
@@ -487,37 +455,48 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 
     private void jcTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTiempoActionPerformed
         // TODO add your handling code here:
-        if(jcTiempo.getSelectedItem()=="segundos"){
+             jcTiempo1.removeAllItems();
+
+        if(jcTiempo.getSelectedItem().toString().contains("segundos")){
             intervalo = "2";
-            jcTiempo1.removeAllItems();
+   //         jcTiempo1.removeAllItems();
 
             for(int i=10;i<60;i++){
                 jcTiempo1.addItem(i);
             }
-        }else{
-            if(jcTiempo.getSelectedItem()=="minutos"){
+        }
+        //else{
+            if(jcTiempo.getSelectedItem().toString().contains("minutos")){
                 intervalo = "4";
-                jcTiempo1.removeAllItems();
+     //           jcTiempo1.removeAllItems();
 
                 for(int i=1;i<60;i++){
                     jcTiempo1.addItem(i);
                 }
-            }else{
-                if(jcTiempo.getSelectedItem()=="horas"){
+            }
+            //else{
+                if(jcTiempo.getSelectedItem().toString().contains("horas")){
                     intervalo = "8";
-                    jcTiempo1.removeAllItems();
+       //             jcTiempo1.removeAllItems();
 
                     for(int i=1;i<=12;i++){
                         jcTiempo1.addItem(i);
                     }
-                }
+              //  }
             }
-        }
+       // }
     }//GEN-LAST:event_jcTiempoActionPerformed
 
     private void jcTiempo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTiempo1ActionPerformed
         // TODO add your handling code here:
-        tiempo = jcTiempo1.getSelectedItem().toString();
+  //         tiempo = jcTiempo1.getSelectedItem().toString();
+ //      else
+  //          if(jcTiempo.getSelectedItem().toString().contains("segundos"))
+ //           tiempo = jcTiempo1.getSelectedItem().toString();
+ //      else
+ //                if(jcTiempo.getSelectedItem().toString().contains("horas"))
+   //         tiempo = jcTiempo1.getSelectedItem().toString();
+       
     }//GEN-LAST:event_jcTiempo1ActionPerformed
 
     public static final String[] DATA = { "=",">","<",">=","<=","like","<>" };
@@ -558,41 +537,8 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnAgregarFiltroActionPerformed
 
-    private void chSinFiltro1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chSinFiltro1ItemStateChanged
-        // TODO add your handling code here:
-        sinfiltro=false;
-    }//GEN-LAST:event_chSinFiltro1ItemStateChanged
-
-    private void chHorizontal1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chHorizontal1ItemStateChanged
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_chHorizontal1ItemStateChanged
-
     DefaultTableModel modeloTabla=new DefaultTableModel();
     
-    private void chVertical1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chVertical1ItemStateChanged
-        // TODO add your handling code here:
-         
-    }//GEN-LAST:event_chVertical1ItemStateChanged
-
-    private void chVertical1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chVertical1ActionPerformed
-        // TODO add your handling code here:
-        //String base= jlTablasBase.getSelectedValue().toString();
-       // cargarColumnas(base);
-        sinfiltro=false;
-    }//GEN-LAST:event_chVertical1ActionPerformed
-
-    private void chHorizontal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chHorizontal1ActionPerformed
-        // TODO add your handling code here:
-         cargarColumnas("Clientes");
-         sinfiltro=false;
-    }//GEN-LAST:event_chHorizontal1ActionPerformed
-
-    private void chSinFiltro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chSinFiltro1ActionPerformed
-        // TODO add your handling code here:
-        sinfiltro=true;
-    }//GEN-LAST:event_chSinFiltro1ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         String base= jlTablasBase.getSelectedValue().toString();
@@ -600,6 +546,30 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jcTiempo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jcTiempo1MouseClicked
+
+    private void jcTiempo1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MousePressed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jcTiempo1MousePressed
+
+    private void jcTiempo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcTiempo1ItemStateChanged
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_jcTiempo1ItemStateChanged
+
+    private void jcTiempo1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MouseReleased
+        // TODO add your handling code here:
+    
+    }//GEN-LAST:event_jcTiempo1MouseReleased
       public void crearPub(){
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
@@ -698,7 +668,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                             "exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1 \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa' \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM' \n" +
-                            "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy' \n" +
+               //             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'JAvy-PC\\JAvy' \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\SQLSERVERAGENT' \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER' \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin' \n" +
@@ -944,11 +914,8 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbOPeradorLogico;
     private javax.swing.JComboBox cbSigno;
     private javax.swing.JCheckBox chHorizontal;
-    private javax.swing.JCheckBox chHorizontal1;
     private javax.swing.JCheckBox chSinFiltro;
-    private javax.swing.JCheckBox chSinFiltro1;
     private javax.swing.JCheckBox chVertical;
-    private javax.swing.JCheckBox chVertical1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -2100,11 +2100,12 @@ public class Clientes extends javax.swing.JFrame {
     
     
      public String verificarPublicaciones(String servidor, String nombrePublicacion){
-         String sqlCargarPublicaciones="";
+        String sqlCargarPublicaciones="";
         sqlCargarPublicaciones="Use distribution  \n" +
             "SELECT  description\n" +
             "FROM DBO.MSpublications \n" +
             "where publication = '"+nombrePublicacion+"'";
+        
         Conexion cc = new Conexion();
         Connection cn=cc.conectar(servidor1);
         try{

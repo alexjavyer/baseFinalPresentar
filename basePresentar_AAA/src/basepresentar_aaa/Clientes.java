@@ -919,7 +919,7 @@ public class Clientes extends javax.swing.JFrame {
             if(txtNombre_Base.getText().equals(""))
                 JOptionPane.showMessageDialog(null, "Debe escribir un nombre para la base");
         }
-        JOptionPane.showMessageDialog(null, "Repolicacion Peer to Peer creada exitosamente");
+        JOptionPane.showMessageDialog(null, "Replicación Peer to Peer creada exitosamente");
         P2P.dispose();
     }
     void VentanaP2P(){
@@ -935,6 +935,7 @@ public class Clientes extends javax.swing.JFrame {
             jcb_3.setEnabled(false);
             P2P3control=1;
         }
+        P2P.setTitle("Configurar replicación Peer to Peer");
         P2P.setBounds(200, 200, 500, 280);
         P2P.setLocationRelativeTo(null);
         P2P.setVisible(true);

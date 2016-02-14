@@ -129,6 +129,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         chVertical.setText("Vertical");
@@ -284,6 +285,13 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Filtro");
 
+        jButton4.setText("Sin Filtros");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -299,9 +307,12 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                                 .addComponent(btnPasarNomCol, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(136, 136, 136))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton4)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(27, 27, 27)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -355,7 +366,9 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                         .addComponent(jButton1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnAgregar)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAgregar)
+                            .addComponent(jButton4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -434,6 +447,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 //        filtrosTabla();
         //publicacionFiltros(txtNombrePublicacion.getText());
+        
         tiempo = jcTiempo1.getSelectedItem().toString();
         
         crearPublicacion();
@@ -514,7 +528,6 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-
         almacenarColumnasSelectas();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -571,6 +584,21 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     
     }//GEN-LAST:event_jcTiempo1MouseReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        verdad = "false";
+        filtroColum[0]="CI_RENT";
+        filtroColum[1]="NOM_RENT";
+        filtroColum[2]="APE_RENT";
+        filtroColum[3]="TEL_RENT";
+                modelo1.addElement("CI_RENT");
+                modelo1.addElement("NOM_RENT");
+                modelo1.addElement("APE_RENT");
+                modelo1.addElement("TEL_RENT");
+                txtColumnas.setModel(modelo1);
+ 
+    }//GEN-LAST:event_jButton4ActionPerformed
       public void crearPub(){
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
@@ -610,7 +638,8 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         }
 
     }
-    
+    String verdad;
+      
       public void crearPublicacion(){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1, Clientes.baseInicial);
@@ -674,7 +703,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT SERVICE\\MSSQLSERVER' \n" +
                             "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'distributor_admin' \n" +
                             "use ["+Clientes.baseInicial+"] \n" +
-                            "exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'true', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL' \n" +             
+                            "exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'"+verdad+"', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL' \n" +             
                             filtros +"  "+ filtroFilas+" "+filtroS ;
         boolean exitosa=true;
         try {
@@ -817,6 +846,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     String filtroFila [] = new String [20];
     
     public void almacenarColumnasSelectas(){
+        verdad = "true";
         String seleccion;
         seleccion=jlColumnas.getSelectedValue().toString();
         filtroColum[k]= seleccion;
@@ -920,6 +950,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;

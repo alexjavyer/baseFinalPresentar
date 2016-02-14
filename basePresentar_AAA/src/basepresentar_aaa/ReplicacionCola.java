@@ -323,7 +323,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                     
             crearSubscripcion(jcbSuscriptor3.getText(),cbBasesSuscriptores3.getSelectedItem().toString());
         }
-        
+        this.dispose();
       //  correrPublicacion();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -468,6 +468,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
         try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
+    //        this.dispose();
         }catch(SQLException ex){
       //      JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);

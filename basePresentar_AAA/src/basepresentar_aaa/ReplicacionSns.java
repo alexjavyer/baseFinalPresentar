@@ -328,7 +328,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
         if(jcbSuscriptor3.isSelected()){                    
             crearSubscripcion(jcbSuscriptor3.getText(),cbBasesSuscriptores3.getSelectedItem().toString());
         }
-        
+        this.dispose();
       //  correrPublicacion();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
@@ -476,7 +476,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
       try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
-            this.dispose();
+    //        this.dispose();
             
         }catch(SQLException ex){
       //      JOptionPane.showMessageDialog(null,"SQLException ");

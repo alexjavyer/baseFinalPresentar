@@ -1758,6 +1758,7 @@ public class Clientes extends javax.swing.JFrame {
 //        correrPublicacion(nombrePubli);
           CargarTabla(servidor1);
 
+          
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnSelSusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelSusActionPerformed

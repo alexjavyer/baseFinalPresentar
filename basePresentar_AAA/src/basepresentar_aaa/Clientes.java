@@ -165,8 +165,9 @@ public class Clientes extends javax.swing.JFrame {
         int fila=jtbDatos.getSelectedRow();
         try {
             String campos="";
-            for(int k=1;k<modeloNombreColumnas.getSize();k++){
-                if(modeloNombreColumnas.getSize()-1==k){
+            for(int k=1;k<modeloNombreColumnas.getSize()-resta;k++){
+          
+                if(modeloNombreColumnas.getSize()-1-resta==k){
                     campos=campos+modeloNombreColumnas.getElementAt(k)+"='"+jtbDatos.getValueAt(fila, k)+"' ";
                 }else{
                     campos=campos+modeloNombreColumnas.getElementAt(k)+"='"+jtbDatos.getValueAt(fila, k)+"',";
@@ -1750,11 +1751,13 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerSubsActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        DefaultMutableTreeNode selectedNode =
-        (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
-        nombrePubli=selectedNode.toString();
-        correrPublicacion(nombrePubli);
+        // TODO add youeeeer handling code here:
+//        DefaultMutableTreeNode selectedNode =
+//        (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
+//        nombrePubli=selectedNode.toString();
+//        correrPublicacion(nombrePubli);
+          CargarTabla(servidor1);
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnSelSusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelSusActionPerformed

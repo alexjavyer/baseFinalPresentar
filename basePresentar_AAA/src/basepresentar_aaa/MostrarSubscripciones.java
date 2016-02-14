@@ -74,33 +74,83 @@ public void cargarPub(){
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Subscripciones");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(jTree1);
 
+        jButton1.setText("Ver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        cargarSubs();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    public void cargarSubs(){
+        String publi=jTree1.getLastSelectedPathComponent().toString();
+        //JOptionPane.showMessageDialog(null, "Publi " +publi);
+        String sqlCargarSubs="Use distribution  SELECT\n" +
+        "*\n" +
+        "            FROM\n" +
+        "                DBO.MSsubscriptions AS MSA\n";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(servidor1, baseInicial);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarSubs);
+            while(rs.next()){
+               // JOptionPane.showMessageDialog(null, "Publi " +publi);
+                //taPublicaciones.setText(taPublicaciones.getText().concat(rs.getString("Publication Name")));
+                DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("["+rs.getString("subscriber")+"]: "+rs.getString("subscriber_db"));
+                DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
+                DefaultTreeModel dt= (DefaultTreeModel)jTree1.getModel();
+                dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            errores.Gestionar(ex);
+             errores.mensaje();
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception "+ex);
+              errores.Gestionar(ex);
+              errores.mensaje();  
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -137,6 +187,7 @@ public void cargarPub(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables

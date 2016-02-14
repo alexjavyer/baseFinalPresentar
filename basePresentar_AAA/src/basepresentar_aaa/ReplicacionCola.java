@@ -339,11 +339,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+       //     JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -469,11 +469,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+      //      JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+      //      JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -499,11 +499,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                 return rs.getString("publisher_db");
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+       //     JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+       //     JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -533,11 +533,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+     //       JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+     //       JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -568,11 +568,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                 }
                 
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+      //      JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+      //      JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -628,11 +628,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE");
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+       //     JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }     
@@ -668,11 +668,11 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la TABLA");
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+       //     JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception "+ex);  
             errores.Gestionar(ex);
               errores.mensaje();   
         }

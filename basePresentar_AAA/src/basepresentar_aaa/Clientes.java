@@ -352,13 +352,39 @@ public class Clientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    void P2PPublicacion(String publicacion){
-        Conexion cc = new Conexion();
-        bas=jcbBases.getSelectedItem().toString();
-        Connection cn=cc.conectarBase(servidor1, bas);
+    void P2PPublicacion(String publicacion,String baseori,String basenue){
         String sql="",sql1="",sql2="",usu="";
         if(jcb_1.isSelected()==true || jcb_1.getText()==servidor1){
-            sql="-- Enabling the replication database\n" +
+            P2P1=1;
+            if(jcb_1.isSelected()==true){
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),basenue);
+            }else{
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),baseori);
+            }
+        }
+        if(jcb_2.isSelected()==true || jcb_2.getText()==servidor1){
+            P2P2=1;
+            if(jcb_2.isSelected()==true){
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),basenue);
+            }else{
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),baseori);
+            }
+        }
+        if(jcb_3.isSelected()==true || jcb_3.getText()==servidor1){
+            P2P3=1;
+            if(jcb_2.isSelected()==true){
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),basenue);
+            }else{
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),baseori);
+            }
+        }
+    }
+    void P2PPublicacionSA(String publicacion, String ser, String base){
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(ser, base);
+        String sql="",sql2="";
+        if(jcb_1.getText()==ser){
+                sql="-- Enabling the replication database\n" +
             "use master\n" +
             "exec sp_replicationdboption @dbname = N'"+bas+"', @optname = N'publish', @value = N'true'\n" +
 //            "exec ["+bas+"].sys.sp_addlogreader_agent @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
@@ -381,30 +407,15 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P Local para "+servidor1);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
-            P2P1=1;
         }
-        if(jcb_2.isSelected()==true || jcb_2.getText()==servidor1){
-            P2P2=1;
-            P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText());
-        }
-        if(jcb_3.isSelected()==true || jcb_3.getText()==servidor1){
-            P2P3=1;            
-            P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText());
-        }
-    }
-    void P2PPublicacionSA(String publicacion, String ser){
-        Conexion cc = new Conexion();
-        bas=jcbBases.getSelectedItem().toString();
-        Connection cn=cc.conectarBase(ser, bas);
-        String sql="",sql2="";
         if(jcb_2.getText()==ser){
             sql="-- Enabling the replication database\n" +
             "use master\n" +
@@ -429,11 +440,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P para "+ ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException PeerSA"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception PeerSa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -462,11 +473,11 @@ public class Clientes extends javax.swing.JFrame {
                 psd2.execute();
                 JOptionPane.showMessageDialog(null, "Se creo la Publicacion P2P para "+ser);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException PeerSa"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception Peersa"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -476,12 +487,12 @@ public class Clientes extends javax.swing.JFrame {
         int numero_ins;
         String sql="",sus1="",sus2="",sus3="",s="";
         numero_ins=P2P1+P2P2+P2P3;
+        JOptionPane.showMessageDialog(null, "valores "+P2P1+" "+P2P2+" "+P2P3);
         Conexion cc = new Conexion();
         s=servidor1;
         bas=jcbBases.getSelectedItem().toString();
         for(int i=0;i<numero_ins;i++){
-            System.out.println("servi "+s);
-            Connection cn=cc.conectarBase(s, bas);
+            
             sus1="-- Adding the transactional subscriptions\n" +
             "use ["+bas+"]\n" +
             "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+bas+"', @subscription_type = N'Push', @sync_type = N'replication support only', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
@@ -496,16 +507,16 @@ public class Clientes extends javax.swing.JFrame {
             if(P2P1==1){
                 if(numero_ins==3){
                     sql=sus2+"\n"+sus3;
-                    s=jcb_2.getText();
+                    s=jcb_1.getText();
                 }
                 else{
                     if(P2P2==1){
                         sql=sus2;
-                        s=jcb_2.getText();
+                        s=jcb_1.getText();
                     }
                     else{
                         sql=sus3;
-                        s=jcb_3.getText();
+                        s=jcb_1.getText();
                     }
                 }
                 P2P1=0;
@@ -516,14 +527,16 @@ public class Clientes extends javax.swing.JFrame {
                     P2P1=1;
                     if(numero_ins==3){
                         sql=sus1+"\n"+sus3;
-                        s=jcb_3.getText();
+                        s=jcb_2.getText();
                     }
                     else{
-                        if(P2P1==1)
+                        if(P2P1==1){
                             sql=sus1;
+                            s=jcb_2.getText();
+                        }
                         else{
                             sql=sus3;
-                            s=jcb_3.getText();
+                            s=jcb_2.getText();
                         }
                     }
                     P2P1=0; P2P2=0;
@@ -531,28 +544,35 @@ public class Clientes extends javax.swing.JFrame {
                 else{
                     if(P2P3==1){
                         P2P1=1;
-                        if(numero_ins==3)
+                        if(numero_ins==3){
                             sql=sus1+"\n"+sus2;
+                            s=jcb_3.getText();
+                        }
                         else{
-                            if(P2P1==1)
+                            if(P2P1==1){
                                 sql=sus1;
-                            else
+                                s=jcb_3.getText();
+                            }
+                            else{
                                 sql=sus2;
+                                s=jcb_3.getText();
+                            }
                         }
                     }
                 }
             }
+            Connection cn=cc.conectarBase(s, bas);
             System.out.println("sql  "+ sql +"   \n servidor   "+s);
             try {
                 PreparedStatement psd= cn.prepareStatement(sql);
                 psd.execute();
-                JOptionPane.showMessageDialog(null, "Se creo la subscripcion P2P");
+                JOptionPane.showMessageDialog(null, "Se creo la subscripcion P2P "+s);
             }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException Peer sus "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception Peer sus "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -585,7 +605,8 @@ public class Clientes extends javax.swing.JFrame {
         System.out.println("cargar base "+servidor);
         Connection cn=cc.conectarBase(servidor1, "master");
         String sql="";
-        sql="SELECT name, database_id, create_date FROM sys.databases";
+        sql="SELECT name, database_id, create_date FROM sys.databases Where database_id <> 1 and database_id <> 2 and database_id <> 3 and database_id <> 4 and database_id <> 5\n" +
+            " and database_id <> 6";
         try {
             Statement psd = cn.createStatement();
             ResultSet rs=psd.executeQuery(sql);
@@ -651,11 +672,11 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la BASE para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException crear base "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception crear base "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }     
@@ -663,8 +684,7 @@ public class Clientes extends javax.swing.JFrame {
     void SnapPubli(String base,String publicacion, String ser){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, base);
-        String sql="";
-        publicacion=publicacion+"_S";
+        String sql="",sus="",sus1="",sus2="";
         JOptionPane.showMessageDialog(null, "Base "+base+" publicacion "+publicacion+ " ser "+ser);
         sql="use master\n"+
             "exec sp_replicationdboption @dbname = N'"+base+"', @optname = N'publish', @value = N'true'\n"+
@@ -686,20 +706,85 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException SPub "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception SPub "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
+        }
+    }
+    void SnapPubliSA(String base,String publicacion,String ser){
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(ser, base);
+        JOptionPane.showMessageDialog(null, "SnapPuSA "+ser+"  la base  "+base);
+        String sql="",sql2="";
+        if(jcb_2.getText()==ser){
+        sql="use master\n"+
+            "exec sp_replicationdboption @dbname = N'"+base+"', @optname = N'publish', @value = N'true'\n"+
+//            "exec [prueba_ren].sys.sp_addlogreader_agent @job_login = null, @job_password = null, @publisher_security_mode = 1\n"+
+//            "exec [prueba_ren].sys.sp_addqreader_agent @job_login = null, @job_password = null, @frompublisher = 1\n"+
+            "use ["+base+"]\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Snapshot publication of database ''"+base+"'' from Publisher ''"+ser+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
+            "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 0, @publisher_login = N'sa', @publisher_password = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'JAvy-PC\\JAvy'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\SQLSERVERAGENT'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'distributor_admin'\n" +
+            "use ["+base+"]\n" +
+            "exec sp_addarticle @publication = N'"+publicacion+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL'\n";
+        try {
+                PreparedStatement psd= cn.prepareStatement(sql);
+                psd.execute();
+                JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
+            }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException SPubSA "+ex);
+            errores.Gestionar(ex);
+             errores.mensaje();
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception SPubSA"+ex);
+              errores.Gestionar(ex);
+              errores.mensaje();  
+        }
+        }
+        if(jcb_3.getText()==ser){
+            sql2="use master\n"+
+            "exec sp_replicationdboption @dbname = N'"+base+"', @optname = N'publish', @value = N'true'\n"+
+//            "exec [prueba_ren].sys.sp_addlogreader_agent @job_login = null, @job_password = null, @publisher_security_mode = 1\n"+
+//            "exec [prueba_ren].sys.sp_addqreader_agent @job_login = null, @job_password = null, @frompublisher = 1\n"+
+            "use ["+base+"]\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Snapshot publication of database ''"+base+"'' from Publisher ''"+ser+"''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
+            "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 0, @publisher_login = N'sa', @publisher_password = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'TOSHIBA\\Anita'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\SQLSERVERAGENT'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT SERVICE\\MSSQLSERVER'\n" +
+            "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'distributor_admin'\n" +
+            "use ["+base+"]\n" +
+            "exec sp_addarticle @publication = N'"+publicacion+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'false', @ins_cmd = N'SQL', @del_cmd = N'SQL', @upd_cmd = N'SQL'\n";
+            try {
+                PreparedStatement psd2= cn.prepareStatement(sql2);
+                psd2.execute();
+                JOptionPane.showMessageDialog(null, "Se creo la Publicacion snap para peer para "+ser);
+            }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"SQLException SPubSA2 "+ex);
+            errores.Gestionar(ex);
+             errores.mensaje();
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"Exception SPubSA2 "+ex);
+              errores.Gestionar(ex);
+              errores.mensaje();  
+        }
         }
     }
     void SnapSus(String base, String publicacion, String ser, int numsql){
         int numero_ins;
         numero_ins=P2P1control+P2P2control+P2P3control;
         Conexion cc = new Conexion();
-        publicacion=publicacion+"_S";
         Connection cn=cc.conectarBase(ser, base);
         String sql="",sus="",sus1="",sus2="";
 //        sql=" -- Adding the snapshot subscriptions\n" +
@@ -736,75 +821,80 @@ public class Clientes extends javax.swing.JFrame {
             psd.execute();
             JOptionPane.showMessageDialog(null, "Se creo la suscrip snap para peer para "+ser);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException sSus"+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception sSus"+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
     }
+    //control
     void ControlP2P(){
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
             //crearBase(bas, servidor);
             //crearTabla(bas, servidor);
+            JOptionPane.showMessageDialog(null, "valores "+P2P1control+" "+P2P2control+" "+P2P3control);
+            String nombrePublicacion="Snap"+txtNombrePubP2P.getText();
             if(P2P1control==1){
-                SnapPubli(jcbBases.getSelectedItem().toString(), txtNombrePubP2P.getText(), jcb_1.getText());
+                SnapPubli(jcbBases.getSelectedItem().toString(),nombrePublicacion, jcb_1.getText());
                 if(jcb_2.isSelected()==true && jcb_3.isSelected()==false){
                     JOptionPane.showMessageDialog(null, " sitio 2 ");
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText(),2);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),2);
                     }
                     if(jcb_3.isSelected()==true && jcb_2.isSelected()==false){
                         JOptionPane.showMessageDialog(null, " sitio 3 ");
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText(),3);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, " 2 sitios ");
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText(),3);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3);
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_1.getText(),2);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),2);
                     }
             }
             if(P2P2control==1){
-                SnapPubli(jcbBases.getSelectedItem().toString(), txtNombrePubP2P.getText(), jcb_2.getText());
+                SnapPubliSA(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_2.getText());
                 if(jcb_1.isSelected()==true && jcb_3.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText(),1);
+                        SnapSus(txtNombre_Base.getText().toString(), nombrePublicacion, jcb_2.getText(),1);
                     }
                     if(jcb_3.isSelected()==true && jcb_1.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText(),3);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),3);
                     }
                     else{
-                        crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText(),3);
-                        crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_2.getText(),1);
+                        if(jcb_3.isSelected()==true && jcb_1.isSelected()==true){
+                            crearBase(txtNombre_Base.getText(), jcb_3.getText());
+                            SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),3);
+                            crearBase(txtNombre_Base.getText(), jcb_1.getText());
+                            SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_2.getText(),1);
+                        }
                     }
             }
             if(P2P3control==1){
-                SnapPubli(jcbBases.getSelectedItem().toString(), txtNombrePubP2P.getText(), jcb_3.getText());
+                SnapPubliSA(jcbBases.getSelectedItem().toString(), nombrePublicacion, jcb_3.getText());
                 if(jcb_2.isSelected()==true && jcb_1.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText(),2);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),2);
                     }
                     if(jcb_1.isSelected()==true && jcb_2.isSelected()==false){
                         crearBase(txtNombre_Base.getText(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText(),1);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1);
                     }
                     else{
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText(),3);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),3);
                         crearBase(jcbBases.getSelectedItem().toString(), jcb_1.getText());
-                        SnapSus(txtNombre_Base.getText(), txtNombrePubP2P.getText(), jcb_3.getText(),1);
+                        SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1);
                     }
             }
             bas=jcbBases.getSelectedItem().toString();
-            P2PPublicacion(txtNombrePubP2P.getText());
+            P2PPublicacion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText());
             P2PSuscripcion(txtNombrePubP2P.getText());
         }else{
             if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))

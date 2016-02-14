@@ -108,11 +108,11 @@ public class Clientes extends javax.swing.JFrame {
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -149,11 +149,11 @@ public class Clientes extends javax.swing.JFrame {
             CargarTabla(servidor1);
         }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }        
@@ -181,11 +181,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -207,11 +207,11 @@ public class Clientes extends javax.swing.JFrame {
                 CargarTabla(servidor1);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+            JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+            JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -229,7 +229,7 @@ public class Clientes extends javax.swing.JFrame {
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
                 
-                if(column.equals("msrepl_tran_version"))
+                if(column.equals("msrepl_tran_version")||column.equals("rowguid"))
                   resta = 1;
                 else
                     resta=0;
@@ -981,6 +981,7 @@ public class Clientes extends javax.swing.JFrame {
         txtbase = new javax.swing.JTextField();
         txtTabla = new javax.swing.JTextField();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -1444,6 +1445,13 @@ public class Clientes extends javax.swing.JFrame {
         txtTabla.setMaximumSize(new java.awt.Dimension(10, 10));
         txtTabla.setMinimumSize(new java.awt.Dimension(5, 5));
 
+        jButton2.setText("Subscripciones");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
 
         jMenu2.setText("Snapshot");
@@ -1580,6 +1588,10 @@ public class Clientes extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDesktopPane1))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1603,7 +1615,9 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jDesktopPane1))
-                .addGap(99, 99, 99))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(70, 70, 70))
         );
 
         pack();
@@ -1826,6 +1840,10 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         VentanaP2P();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -2011,31 +2029,90 @@ public class Clientes extends javax.swing.JFrame {
             }
     }
     static String nombrePubPasar;
+    String verificador;
+    String mensajedePublicacion;
     void suscripcionAcceder(String servidor, String publcacion){
         if(cbSeleccionar.getSelectedItem().equals("SNAPSHOT")){
             nombrePubPasar = "  S N A P S H O T";
-            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
+            verificador="Snapshot publication of database";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){
+                ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+                jDesktopPane1.add(repl);
+                repl.show();
+            }else{
+                if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication of database")){
+                    mensajedePublicacion = "Transaccional Standar";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication with updatable")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+            }
         }else{
             if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL STANDAR")){
             nombrePubPasar = "  T R A N S A C C I O N A L    E S T A N D A R";
-            ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
-     
+            verificador="Transactional publication of database";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){
+                ReplicacionSns repl=new ReplicacionSns(servidor,publcacion);
+                jDesktopPane1.add(repl);
+                repl.show();
+            }else{
+              if(verificarPublicaciones(servidor, publcacion).contains("Snapshot publication of database")){
+                    mensajedePublicacion = "Snapshot";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication with updatable")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+               
+            }
         }else{
                 if(cbSeleccionar.getSelectedItem().equals("TRANSACTIONAL QUEUE")){
-            ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
-            jDesktopPane1.add(repl);
-            repl.show();
+                    verificador="Transactional publication with updatable";
+            if(verificarPublicaciones(servidor, publcacion).contains(verificador)){   
+                   ReplicacionCola repl=new ReplicacionCola(servidor,publcacion);
+                   jDesktopPane1.add(repl);
+                   repl.show();
+            } else{
+              if(verificarPublicaciones(servidor, publcacion).contains("Snapshot publication of database")){
+                    mensajedePublicacion = "Snapshot";
+                }else{
+                 if(verificarPublicaciones(servidor, publcacion).contains("Transactional publication of database")){
+                    mensajedePublicacion = "Transaccional de Cola";
+                  }   
+                }
+              JOptionPane.showMessageDialog(null,"Escoja el tipo de publicacion correcto La publicacion seleccionada es "+mensajedePublicacion);    
+               }            
+                }   
               }
             }
     }
         //    this.dispose();
    
-    }
     
+    
+    
+     public String verificarPublicaciones(String servidor, String nombrePublicacion){
+         String sqlCargarPublicaciones="";
+        sqlCargarPublicaciones="Use distribution  \n" +
+            "SELECT  description\n" +
+            "FROM DBO.MSpublications \n" +
+            "where publication = '"+nombrePublicacion+"'";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectar(servidor1);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarPublicaciones);
+            while(rs.next()){
+                return rs.getString("description");
+            }
+        }catch(Exception ex){
+             JOptionPane.showMessageDialog(null,ex+ "Error al cargar publicacion");
+        }
+        return null;
+    }
     
     /**
      * @param args the command line arguments
@@ -2089,6 +2166,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JComboBox cbSeleccionar;
     private javax.swing.JComboBox cmbServidores;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

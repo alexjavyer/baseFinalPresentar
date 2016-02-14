@@ -116,7 +116,6 @@ public class Servidor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
         String instancia=cmbServidores.getSelectedItem().toString();
         Clientes cli = new Clientes(instancia);
         cli.setExtendedState(MAXIMIZED_BOTH);
@@ -127,7 +126,7 @@ public class Servidor extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbServidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbServidoresActionPerformed

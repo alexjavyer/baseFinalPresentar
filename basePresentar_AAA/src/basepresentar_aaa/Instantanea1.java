@@ -73,12 +73,12 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             }
             jlTablasBase.setModel(model);
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+      //      JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
               errores.mensaje();
             
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -469,7 +469,19 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
 //        filtrosTabla();
         //publicacionFiltros(txtNombrePublicacion.getText());
         crearPublicacion();
-        correrPublicacion();
+         if(jlTablasBase.isSelectionEmpty()){
+             
+         }else{
+             if(txtNombrePublicacion.getText().isEmpty()){
+             
+             }else{
+             correrPublicacion();
+             }
+         }
+//        if(!jlTablasBase.isSelectionEmpty()||!txtNombrePublicacion.getText().isEmpty()){
+//        correrPublicacion();
+//        }
+        
 //        crearPub();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -635,6 +647,9 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         String frequency_type="1",frequency_interval="0",frequency_relative_interval="0",frequency_subday="0",frequency_subday_interval="0",nombrePub="";
         String sqlFiltro="";
         String nombreTabla;
+        if(jlTablasBase.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null,"Selecciones una base de datos");
+        }else{
         nombreTabla=jlTablasBase.getSelectedValue().toString();
         nombrePub=txtNombrePublicacion.getText();
         String sqlParte4="",sqlParte5="",sqlFiltroCol1="",sqlFiltroCol2="";
@@ -672,7 +687,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         filtroFilas= filtroVertical();
         filtroS = filtroVertical1();
         
-        JOptionPane.showMessageDialog(null, filtros+"\n"+filtroFilas+"\n"+filtroS);
+       // JOptionPane.showMessageDialog(null, filtros+"\n"+filtroFilas+"\n"+filtroS);
         
         sqlCrearPublicacion="use master\n" +
                             "exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true' \n" +
@@ -695,16 +710,17 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sqlCrearPublicacion);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Publicacion Creada!");
-             
+             this.dispose();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
               errores.mensaje();
             
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+          //  JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
+        }
         }
     }
 
@@ -752,11 +768,11 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+        //    JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);  
+        //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -780,7 +796,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
   
   public String getSQLFIltros(){
         String sqlFiltro="";
-        JOptionPane.showMessageDialog(null, "Valork" + k);
+        //JOptionPane.showMessageDialog(null, "Valork" + k);
                 for(int k1=0;k1<k;k1++){
                     sqlFiltro = sqlFiltro + "exec sp_articlecolumn @publication = N'"+txtNombrePublicacion.getText()+"', @article = N'CLIENTES', @column = N'"+filtroColum[k1]+"', @operation = N'add', @force_invalidate_snapshot = 1, @force_reinit_subscription = 1 \n";
                 }
@@ -861,11 +877,11 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                     }
                     jlColumnas.setModel(modelo);
                 }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null,"SQLException "+ex);
+             //       JOptionPane.showMessageDialog(null,"SQLException ");
                     errores.Gestionar(ex);
                     errores.mensaje(); 
                 }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null,"Exception "+ex);  
+              //      JOptionPane.showMessageDialog(null,"Exception ");  
                     errores.Gestionar(ex);
                     errores.mensaje();   
                 }

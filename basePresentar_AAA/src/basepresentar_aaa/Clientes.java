@@ -1683,7 +1683,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TransaInstantanea trans = new TransaInstantanea(servidor1);
+        TransaInstantanea1 trans = new TransaInstantanea1(servidor1);
         jDesktopPane1.add(trans);
         trans.show();
  

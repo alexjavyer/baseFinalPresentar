@@ -6,6 +6,7 @@
 package basepresentar_aaa;
 
 
+import static basepresentar_aaa.Clientes.servidor;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -30,7 +31,7 @@ import javax.swing.table.TableColumn;
  *
  * @author Anita
  */
-public class TransaCola1 extends javax.swing.JInternalFrame {
+public class TransaInstantanea1 extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Instantanea
@@ -39,21 +40,21 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
     String servidor2;
     DefaultListModel model;
     String sqlFiltro;
-    public TransaCola1()
+    public TransaInstantanea1()
             {
                initComponents();
         this.setFocusable(true);     
-         setTitle("P U B L I C A C I O N  T R A N S A C T I  O N A L  Q U E U E");
+         setTitle("P U B L I C A C I O N  T R A N S A C T I O N A L  S T A N D A R");
             }
     
     
    
-    public TransaCola1(String servidor) {
+    public TransaInstantanea1(String servidor) {
         initComponents();
         cargarTabla(servidor);
         servidor1=servidor;
         this.setFocusable(true);
-                 setTitle("P U B L I C A C I O N  T R A N S A C T I  O N A L  Q U E U E");
+                 setTitle("P U B L I C A C I O N  T R A N S A C T I O N A L  S T A N D A R");
        // servidor2="JAVY-PC";
     }
     String tiempo="0",intervalo;
@@ -75,7 +76,8 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
         }catch(SQLException ex){
       //      JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
-              errores.mensaje();    
+              errores.mensaje();
+            
         } catch(Exception ex){
         //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
@@ -147,7 +149,7 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Nombre de la Publicacion");
 
-        txtNombrePublicacion.setText("pub_trans_queue_");
+        txtNombrePublicacion.setText("pub_transactional_");
 
         jButton2.setText("Listo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -157,10 +159,31 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tiempo", "Inmediatamente" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Snapshot Agent");
 
         jcTiempo1.setEnabled(false);
+        jcTiempo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcTiempo1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcTiempo1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jcTiempo1MouseReleased(evt);
+            }
+        });
+        jcTiempo1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcTiempo1ItemStateChanged(evt);
+            }
+        });
         jcTiempo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcTiempo1ActionPerformed(evt);
@@ -181,7 +204,7 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -189,11 +212,10 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
                         .addComponent(jcTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jcTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(jcTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,14 +304,17 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(20, 20, 20)
                                 .addComponent(btnPasarNomCol, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28))
+                                .addGap(136, 136, 136))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton4)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(27, 27, 27)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,59 +326,53 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbOPeradorLogico, 0, 63, Short.MAX_VALUE)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(cbOPeradorLogico, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(226, 226, 226)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregarFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAgregar)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAgregarFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbOPeradorLogico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPasarNomCol))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregarFiltro)
-                    .addComponent(btnAgregar)
-                    .addComponent(jButton4))
+                    .addComponent(cbSigno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCondicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbOPeradorLogico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPasarNomCol)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnAgregarFiltro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton1))))
-                .addGap(17, 17, 17))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAgregar)
+                            .addComponent(jButton4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jButton6.setText("Cargar Campos");
@@ -375,8 +394,9 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(59, 59, 59)
-                                .addComponent(jButton6))
-                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(54, 54, 54))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -385,31 +405,29 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 37, Short.MAX_VALUE))
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNombrePublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(jLabel1)))
         );
 
         pack();
@@ -426,48 +444,75 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
         // TODO add your handling code here:
 //        filtrosTabla();
         //publicacionFiltros(txtNombrePublicacion.getText());
+        
         tiempo = jcTiempo1.getSelectedItem().toString();
+        
         crearPublicacion();
         correrPublicacion();
+//         if(jlTablasBase.isSelectionEmpty()){
+//             
+//         }else{
+//             if(txtNombrePublicacion.getText().isEmpty()){
+//             
+//             }else{
+//             correrPublicacion();
+//             }
+         //}
+//        if(!jlTablasBase.isSelectionEmpty()||!txtNombrePublicacion.getText().isEmpty()){
+//        correrPublicacion();
+//        }
+        
 //        crearPub();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jcTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTiempoActionPerformed
         // TODO add your handling code here:
-        if(jcTiempo.getSelectedItem()=="segundos"){
+             jcTiempo1.removeAllItems();
+
+        if(jcTiempo.getSelectedItem().toString().contains("segundos")){
             intervalo = "2";
-            jcTiempo1.removeAllItems();
+   //         jcTiempo1.removeAllItems();
 
             for(int i=10;i<60;i++){
                 jcTiempo1.addItem(i);
             }
-        }else{
-            if(jcTiempo.getSelectedItem()=="minutos"){
+        }
+        //else{
+            if(jcTiempo.getSelectedItem().toString().contains("minutos")){
                 intervalo = "4";
-                jcTiempo1.removeAllItems();
+     //           jcTiempo1.removeAllItems();
 
                 for(int i=1;i<60;i++){
                     jcTiempo1.addItem(i);
                 }
-            }else{
-                if(jcTiempo.getSelectedItem()=="horas"){
+            }
+            //else{
+                if(jcTiempo.getSelectedItem().toString().contains("horas")){
                     intervalo = "8";
-                    jcTiempo1.removeAllItems();
+       //             jcTiempo1.removeAllItems();
 
                     for(int i=1;i<=12;i++){
                         jcTiempo1.addItem(i);
                     }
-                }
+              //  }
             }
-        }
+       // }
     }//GEN-LAST:event_jcTiempoActionPerformed
 
     private void jcTiempo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTiempo1ActionPerformed
         // TODO add your handling code here:
-      //  tiempo = jcTiempo1.getSelectedItem().toString();
+  //         tiempo = jcTiempo1.getSelectedItem().toString();
+ //      else
+  //          if(jcTiempo.getSelectedItem().toString().contains("segundos"))
+ //           tiempo = jcTiempo1.getSelectedItem().toString();
+ //      else
+ //                if(jcTiempo.getSelectedItem().toString().contains("horas"))
+   //         tiempo = jcTiempo1.getSelectedItem().toString();
+       
     }//GEN-LAST:event_jcTiempo1ActionPerformed
 
     public static final String[] DATA = { "=",">","<",">=","<=","like","<>" };
@@ -484,7 +529,6 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-
         almacenarColumnasSelectas();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -493,11 +537,11 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
     String igualdad[] = new String[20];
     String logico[] = new String[20];
     private void btnAgregarFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFiltroActionPerformed
-       verdad="true";
+        verdad="true";
         condicion[m] = cbSigno.getSelectedItem().toString();
         igualdad[m] = txtCondicion.getText();
         logico[m] =  cbOPeradorLogico.getSelectedItem().toString();
-        m++;    
+    m++;    
         modeloCondicion.addElement(txtCondicion.getText());
         jlCondicion.setModel(modeloCondicion);
         txtCondicion.setText("");
@@ -518,21 +562,96 @@ public class TransaCola1 extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_jButton6ActionPerformed
-String verdad="false";
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jcTiempo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jcTiempo1MouseClicked
+
+    private void jcTiempo1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MousePressed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jcTiempo1MousePressed
+
+    private void jcTiempo1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcTiempo1ItemStateChanged
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_jcTiempo1ItemStateChanged
+
+    private void jcTiempo1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcTiempo1MouseReleased
+        // TODO add your handling code here:
     
-    
+    }//GEN-LAST:event_jcTiempo1MouseReleased
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         verdad = "false";
+      //  filtroColum[0]="CI_RENT";
+      //  filtroColum[1]="NOM_RENT";
+      //  filtroColum[2]="APE_RENT";
+      //  filtroColum[3]="TEL_RENT";
+        //        modelo1.addElement("CI_RENT");
+        //        modelo1.addElement("NOM_RENT");
+        //        modelo1.addElement("APE_RENT");
+        //        modelo1.addElement("TEL_RENT");
+        //        txtColumnas.setModel(modelo1);
+ 
     }//GEN-LAST:event_jButton4ActionPerformed
-  
-    public void crearPublicacion(){
+      public void crearPub(){
+        Conexion cc = new Conexion();
+        //JOptionPane.showMessageDialog(null, "El servidor "+servidor1);
+        //Connection cn=cc.conectarBase(servidor1, "Renta de Autos");
+        //String servidor33="TOSHIBA".concat("'\'").concat("PRINCIPAL");
+        Connection cn=cc.conectarBase(servidor1, "Renta de Auto");
+        String sqlCrearPublicacion="";
+        sqlCrearPublicacion="-- Enabling the replication database\n" +
+"use master\n" +
+"exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true'\n" +
+
+"\n" +
+"-- Adding the snapshot publication\n" +
+"use ["+Clientes.baseInicial+"]\n" +
+"exec sp_addpublication @publication = N'Pub_11', @description = N'Snapshot publication of database ''"+Clientes.baseInicial+"'' from Publisher ''TOSHIBA''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'snapshot', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1\n" +
+
+"\n" +
+"\n" +
+"exec sp_addpublication_snapshot @publication = N'Pub_11', @frequency_type = 1, @frequency_interval = 0, @frequency_relative_interval = 0, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
+"\n" +
+"\n" +
+"use ["+Clientes.baseInicial+"]\n" +
+"exec sp_addarticle @publication = N'Pub_11', @article = N'Clientes', @source_owner = N'dbo', @source_object = N'Clientes', @type = N'logbased', @description = null, @creation_script = null, @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509D, @identityrangemanagementoption = N'manual', @destination_table = N'Clientes', @destination_owner = N'dbo', @vertical_partition = N'false'\n" +
+
+"\n" +
+"\n" +
+"\n" +
+"";
+        //JOptionPane.showMessageDialog(null, "sentencia sql "+sqlCrearPublicacion);
+        try {
+            Statement psd= cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCrearPublicacion);
+            //sS_Pull_Cont_Inme();
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex+"Reportar");
+        }
+
+    }
+    String verdad="false";
+      
+      public void crearPublicacion(){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1, Clientes.baseInicial);
         String sqlCrearPublicacion="";
         String frequency_type="1",frequency_interval="0",frequency_relative_interval="0",frequency_subday="0",frequency_subday_interval="0",nombrePub="";
         String sqlFiltro="";
         String nombreTabla;
+        if(jlTablasBase.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null,"Selecciones una base de datos");
+        }else{
         nombreTabla=jlTablasBase.getSelectedValue().toString();
         nombrePub=txtNombrePublicacion.getText();
         String sqlParte4="",sqlParte5="",sqlFiltroCol1="",sqlFiltroCol2="";
@@ -543,42 +662,41 @@ String verdad="false";
 
         if(jComboBox1.getSelectedItem().equals("Tiempo")){   
             if(jcTiempo.getSelectedItem().equals("segundos")){
-            frequency_type="1";
-            frequency_interval="0";
-            frequency_relative_interval="0";
+            frequency_type="4";
+            frequency_interval="1";
+            frequency_relative_interval="1";
             frequency_subday=intervalo;
             frequency_subday_interval=tiempo;
             }else{
             if(jcTiempo.getSelectedItem().equals("horas")){
-                frequency_type="1";
-                frequency_interval="0";
-                frequency_relative_interval="0";
+                frequency_type="4";
+                frequency_interval="1";
+                frequency_relative_interval="1";
                 frequency_subday=intervalo;
                 frequency_subday_interval=tiempo;
             }else{
-                frequency_type="1";
-                frequency_interval="0";
-                frequency_relative_interval="0";
+                frequency_type="4";
+                frequency_interval="1";
+                frequency_relative_interval="1";
                 frequency_subday=intervalo;
                 frequency_subday_interval=tiempo;
             }
             }
             
-      //      JOptionPane.showMessageDialog(null,tiempo+""+frequency_subday);
         }
         
+        filtros = getSQLFIltros();
+        filtroFilas= filtroVertical();
+        filtroS = filtroVertical1();
         
-      //  JOptionPane.showMessageDialog(null, "filtros"+filtros+ " filtrosFilas       "+  filtroFilas+" filtrosS   "+filtroS);
-       
-        sqlCrearPublicacion="-- Enabling the replication database\n" +
+       // JOptionPane.showMessageDialog(null, filtros+"\n"+filtroFilas+"\n"+filtroS);
+        
+       sqlCrearPublicacion="-- Enabling the replication database\n" +
 "use master\n" +
 "exec sp_replicationdboption @dbname = N'"+Clientes.baseInicial+"', @optname = N'publish', @value = N'true'\n" +
-"\n" +
 "-- Adding the transactional publication\n" +
 "use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Transactional publication with updatable subscriptions of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor1+"''.', @sync_method = N'concurrent', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'true', @autogen_sync_procs = N'true', @allow_queued_tran = N'true', @allow_dts = N'false', @conflict_policy = N'pub wins', @centralized_conflicts = N'true', @conflict_retention = 14, @queue_type = N'sql', @replicate_ddl = 1, @allow_initialize_from_backup = N'false', @enabled_for_p2p = N'false', @enabled_for_het_sub = N'false'\n" +
-"\n" +
-"\n" +
+"exec sp_addpublication @publication = N'"+nombrePub+"', @description = N'Transactional publication of database ''"+Clientes.baseInicial+"'' from Publisher ''"+servidor+"''.', @sync_method = N'concurrent', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'true', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'false', @enabled_for_p2p = N'false', @enabled_for_het_sub = N'false'\n" +
 "exec sp_addpublication_snapshot @publication = N'"+nombrePub+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", @frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+", @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'sa'\n" +
 "exec sp_grant_publication_access @publication = N'"+nombrePub+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
@@ -589,28 +707,42 @@ String verdad="false";
 "\n" +
 "-- Adding the transactional articles\n" +
 "use ["+Clientes.baseInicial+"]\n" +
-"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x0000000008035CDF, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'"+verdad+"', @ins_cmd = N'CALL [dbo].[sp_MSins_dboCLIENTES]', @del_cmd = N'VCALL [dbo].[sp_MSdel_dboCLIENTES]', @upd_cmd = N'VCALL [dbo].[sp_MSupd_dboCLIENTES]'\n" +
-                      filtros +"  "+ filtroFilas +"  "+ filtroS ;
-        boolean exitosa=true;
-         try {
+"exec sp_addarticle @publication = N'"+nombrePub+"', @article = N'CLIENTES', @source_owner = N'dbo', @source_object = N'CLIENTES', @type = N'logbased', @description = N'', @creation_script = N'', @pre_creation_cmd = N'drop', @schema_option = 0x000000000803509F, @identityrangemanagementoption = N'none', @destination_table = N'CLIENTES', @destination_owner = N'dbo', @status = 24, @vertical_partition = N'"+verdad+"', @ins_cmd = N'CALL [dbo].[sp_MSins_dboCLIENTES]', @del_cmd = N'CALL [dbo].[sp_MSdel_dboCLIENTES]', @upd_cmd = N'SCALL [dbo].[sp_MSupd_dboCLIENTES]'\n" +
+                
+        filtros +"  "+ filtroFilas +"  "+ filtroS ;
+       boolean exitosa=true;
+        try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearPublicacion);
             psd.execute();
-            JOptionPane.showMessageDialog(null,"Publicacion Creada ");
+            JOptionPane.showMessageDialog(null, "Publicacion Creada!");
+             this.dispose();
         }catch(SQLException ex){
-     //       JOptionPane.showMessageDialog(null,"SQLException ");
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
-            errores.mensaje();    
+              errores.mensaje();
+            
         } catch(Exception ex){
-     //       JOptionPane.showMessageDialog(null,"Exception ");  
+          //  JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
-            errores.mensaje();   
+              errores.mensaje();   
         }
-      
+        }
     }
 
     DefaultTableModel modeloR;
       DefaultTableModel model1;
-   
+    public void filtrarColumna(){
+//        int tamaño=modeloR.size();
+//        String []titulo=new String[tamaño];
+//        sqlFiltro="SELECT "+txtFiltro.getText()+" FROM "+jlTablasBase.getSelectedValue();
+//        JOptionPane.showMessageDialog(null, "Filtro Columna sql: "+sqlFiltro);
+    }
+    public void filtrarFila(){
+//        sqlFiltro="SELECT * FROM "+jlTablasBase.getSelectedValue()+" "
+//                + "where "+cbCampos.getSelectedItem()+" "+cbSigno.getSelectedItem()+" '"+txtFiltro1.getText()+"'";
+//        JOptionPane.showMessageDialog(null, "Filtro Fila sql: "+sqlFiltro);
+    }
+    
    public static  String nombreJob="";
     
     void seleccionaJob(){
@@ -618,25 +750,16 @@ String verdad="false";
         sql = "SELECT  name \n" +
               "FROM    msdb.dbo.sysjobs J\n" +
               "WHERE   name like '%"+Clientes.baseInicial+"-"+txtNombrePublicacion.getText()+"%'\n" + "";
-    
-    
-    Conexion cc = new Conexion();
-    Connection cn=cc.conectar(servidor1);
-
-     try {
+            Conexion cc = new Conexion();
+            Connection cn=cc.conectar(servidor1);
+        try {
             Statement psd1 = cn.createStatement();
             ResultSet rs1=psd1.executeQuery(sql);
             while(rs1.next()){
                 nombreJob=(rs1.getString("name"));
             }
-        } catch(SQLException ex){
-     //       JOptionPane.showMessageDialog(null,"SQLException ");
-            errores.Gestionar(ex);
-              errores.mensaje();    
-        } catch(Exception ex){
-     //       JOptionPane.showMessageDialog(null,"Exception ");  
-            errores.Gestionar(ex);
-              errores.mensaje();   
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex+"al cargar tabla");
         }   
     }
     
@@ -645,19 +768,16 @@ String verdad="false";
         String sql="USE msdb ;\n" +
         "EXEC dbo.sp_start_job N'"+nombreJob+"' ;";
         Conexion cc = new Conexion();
-        //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         Connection cn=cc.conectar(servidor1);
-       // escribir(sqlCrearSubs);
          try {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
-            this.dispose();
         }catch(SQLException ex){
-    //        JOptionPane.showMessageDialog(null,"SQLException ");
+        //    JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
               errores.mensaje();    
         } catch(Exception ex){
-    //        JOptionPane.showMessageDialog(null,"Exception ");  
+        //    JOptionPane.showMessageDialog(null,"Exception ");  
             errores.Gestionar(ex);
               errores.mensaje();   
         }
@@ -666,7 +786,7 @@ String verdad="false";
     
     // filtros
     public static String columnasMandarTabla = "";
-    String filtros="",filtroFilas="",filtroS="";
+    String filtros,filtroFilas,filtroS;
   int contador;
   
   
@@ -681,7 +801,7 @@ String verdad="false";
   
   public String getSQLFIltros(){
         String sqlFiltro="";
-        JOptionPane.showMessageDialog(null, "Valork" + k);
+        //JOptionPane.showMessageDialog(null, "Valork" + k);
                 for(int k1=0;k1<k;k1++){
                     sqlFiltro = sqlFiltro + "exec sp_articlecolumn @publication = N'"+txtNombrePublicacion.getText()+"', @article = N'CLIENTES', @column = N'"+filtroColum[k1]+"', @operation = N'add', @force_invalidate_snapshot = 1, @force_reinit_subscription = 1 \n";
                 }
@@ -731,8 +851,7 @@ String verdad="false";
     String filtroFila [] = new String [20];
     
     public void almacenarColumnasSelectas(){
-         verdad="true";
-    
+        verdad = "true";
         String seleccion;
         seleccion=jlColumnas.getSelectedValue().toString();
         filtroColum[k]= seleccion;
@@ -746,13 +865,9 @@ String verdad="false";
     public void cargarColumnas(String tabla){
             String sql="";
             base_de_autos= Clientes.baseInicial;
-        //    sql="SELECT COLUMN_NAME \n" +
-        //    "FROM [Renta de Autos].INFORMATION_SCHEMA.COLUMNS\n" +
-        //    "WHERE TABLE_NAME = N'"+nomTabla+"'";
             sql="SELECT COLUMN_NAME\n" +
-        "        FROM ["+base_de_autos+"].INFORMATION_SCHEMA.COLUMNS\n" +
-        "        WHERE TABLE_NAME ='"+tabla+"'";
-           // JOptionPane.showMessageDialog(null,"cl "+Clientes.baseInicial);
+                "        FROM ["+base_de_autos+"].INFORMATION_SCHEMA.COLUMNS\n" +
+                "        WHERE TABLE_NAME ='"+tabla+"'";
             String [] ListaColumnas=new String[4];
             Conexion cc = new Conexion();
             Connection cn=cc.conectarBase(servidor1,base_de_autos);
@@ -767,16 +882,15 @@ String verdad="false";
                         modelo.addElement(rs1.getString("COLUMN_NAME"));
                     }
                     jlColumnas.setModel(modelo);
-             }catch(SQLException ex){
-     //           JOptionPane.showMessageDialog(null,"SQLException ");
-                errores.Gestionar(ex);
-                errores.mensaje();    
-              } catch(Exception ex){
-    //             JOptionPane.showMessageDialog(null,"Exception ");  
-                 errores.Gestionar(ex);
-                 errores.mensaje();   
-        }
-
+                }catch(SQLException ex){
+             //       JOptionPane.showMessageDialog(null,"SQLException ");
+                    errores.Gestionar(ex);
+                    errores.mensaje(); 
+                }catch(Exception ex){
+              //      JOptionPane.showMessageDialog(null,"Exception ");  
+                    errores.Gestionar(ex);
+                    errores.mensaje();   
+                }
     }
     
     public void PasarDatosConsulta(){
@@ -811,20 +925,20 @@ String verdad="false";
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaInstantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaInstantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaInstantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TransaCola1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TransaInstantanea1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TransaCola1().setVisible(true);
+                new TransaInstantanea1().setVisible(true);
             }
         });
     }

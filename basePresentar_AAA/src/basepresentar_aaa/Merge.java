@@ -598,7 +598,7 @@ public class Merge extends javax.swing.JInternalFrame {
                     if(cbFrequenciaP.getSelectedItem()=="Horas"){
                         frequency_subday="8";
                     }else{
-                        frequency_subday="2";
+                        frequency_subday="2"; 
                     }
                 }               
                 frequency_subday_interval=txtTiempo1.getText();

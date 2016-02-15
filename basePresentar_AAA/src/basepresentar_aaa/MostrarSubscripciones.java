@@ -75,6 +75,7 @@ public void cargarPub(){
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -89,14 +90,23 @@ public void cargarPub(){
             }
         });
 
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -105,9 +115,12 @@ public void cargarPub(){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,33 +131,39 @@ public void cargarPub(){
         cargarSubs();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     
     public void cargarSubs(){
         String publi=jTree1.getLastSelectedPathComponent().toString();
         //JOptionPane.showMessageDialog(null, "Publi " +publi);
-        String sqlCargarSubs="Use distribution  SELECT\n" +
-        "*\n" +
-        "            FROM\n" +
-        "                DBO.MSsubscriptions AS MSA\n";
+        String sqlCargarSubs="Use distribution  \n" +
+"SELECT   *\n" +
+"          FROM\n" +
+"              DBO.MSsubscriptions MSA	\n" +
+"               where subscriber_db<>'virtual' ";
         Conexion cc = new Conexion();
-        Connection cn=cc.conectarBase(servidor1, baseInicial);
+        Connection cn=cc.conectar(servidor1);
         try{
         Statement psd = cn.createStatement();
             ResultSet rs=psd.executeQuery(sqlCargarSubs);
             while(rs.next()){
                // JOptionPane.showMessageDialog(null, "Publi " +publi);
                 //taPublicaciones.setText(taPublicaciones.getText().concat(rs.getString("Publication Name")));
-                DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("["+rs.getString("subscriber")+"]: "+rs.getString("subscriber_db"));
+                DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("["+rs.getString("publisher_db")+"]: "+rs.getString("subscriber_db"));
                 DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
                 DefaultTreeModel dt= (DefaultTreeModel)jTree1.getModel();
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException "+ex);
+          //  JOptionPane.showMessageDialog(null,"SQLException "+ex);
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception "+ex);
+          //  JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
         }
@@ -188,6 +207,7 @@ public void cargarPub(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables

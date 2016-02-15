@@ -49,7 +49,26 @@ public class errores {
                         mensajeFinal;
 
                     break;
-
+                case 8152:
+                    mensaje=problema+
+                            saltoLinea+
+                            "Debe respetar el formato de datos establecido para cada campo."
+                            +saltoLinea+
+                            saltoLinea+
+                            solucion+
+                            "Ingrese correctamente los valores"
+                            ;
+                    break;
+                case 2627:
+                    mensaje=problema+
+                            saltoLinea+
+                            "No puede asignar a dos registros la misma clave primaria."
+                            +saltoLinea+
+                            saltoLinea+
+                            solucion+
+                            saltoLinea+
+                            "1. Ingrese otra clave primaria.";
+                    break;
                 case 4060:
                     //Error personalizado
                 mensaje = problema +

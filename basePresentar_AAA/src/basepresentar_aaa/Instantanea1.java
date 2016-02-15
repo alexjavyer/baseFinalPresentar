@@ -39,6 +39,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
     String servidor2;
     DefaultListModel model;
     String sqlFiltro;
+    
     public Instantanea1()
             {
                initComponents();
@@ -56,7 +57,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
                  setTitle("P U B L I C A C I O N  S N A P S H O T");
        // servidor2="JAVY-PC";
     }
-    String tiempo="",intervalo;
+    String tiempo="0",intervalo;
     
     public void cargarTabla(String servidor){
         //String sql ="SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = BASE TABLE AND TABLE_SCHEMA=dbName";
@@ -639,7 +640,7 @@ public class Instantanea1 extends javax.swing.JInternalFrame {
         }
 
     }
-    String verdad;
+    String verdad="false";
       
       public void crearPublicacion(){
         Conexion cc = new Conexion();

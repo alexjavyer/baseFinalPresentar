@@ -251,6 +251,11 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
             }
         ));
         jtAgente.setEnabled(false);
+        jtAgente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jtAgenteMouseEntered(evt);
+            }
+        });
         jScrollPane3.setViewportView(jtAgente);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -335,7 +340,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(cbPublicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(cbBasedeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,7 +376,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -430,6 +435,9 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
 
     private void btnCrearSubsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearSubsActionPerformed
         // TODO add your handling code here:
+            if(modeloSubs.isEmpty()||modeloBasesLista.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Complete toda la información requerida.");
+            }else
             CrearSubscripcion();
     }//GEN-LAST:event_btnCrearSubsActionPerformed
 
@@ -467,6 +475,12 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
         modeloSubs.removeElement(jlSubscriptores.getSelectedValue());
         
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void jtAgenteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAgenteMouseEntered
+        // TODO add your handling code here:
+        
+        //if(modeloTabSubs.isCellEditable(i, WIDTH))
+    }//GEN-LAST:event_jtAgenteMouseEntered
     public void crearBase(String baseNueva){
         
         String subscriptor="";
@@ -521,6 +535,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
             JOptionPane.showMessageDialog(null, "Creación de base exitosa!");
+            cargarBases(jlSubscriptores.getSelectedValue().toString());
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }     
@@ -574,9 +589,9 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
               
                 
             }
-            if(modeloTabSubs.getValueAt(j, 4)=="Servidor"){
+            if(modeloTabSubs.getValueAt(j, 3)=="Servidor"){
                 subscriber_type="Global";
-                subscription_priority=modeloTabSubs.getValueAt(j, 5).toString();
+                subscription_priority=modeloTabSubs.getValueAt(j, 4).toString();
             }else{
                 subscriber_type="Local";
                 subscription_priority="0";
@@ -598,7 +613,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
             + "@frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = "+active_start_date+", "
             + "@active_end_date = 99991231, @enabled_for_syncmgr = N'False'";
         }
-      //  escribir(sqlCrearSubs);
+        escribir(sqlCrearSubs);
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         
@@ -675,7 +690,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
     
     public void escribir(String codigo){
         File f;
-        f = new File("C:\\Users\\Anita\\Desktop\\SCRIPTS\\SUB_MERGE_TOSHIBA.txt");
+        f = new File("C:\\Users\\Anita\\Desktop\\UltimasComprobaciones\\NSubRunContiInmediateServer75.txt");
         //Escritura
         try{
         FileWriter w = new FileWriter(f);

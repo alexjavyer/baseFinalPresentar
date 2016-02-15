@@ -32,7 +32,7 @@ public class Clientes extends javax.swing.JFrame {
     DefaultTableModel model;
     public static String servidor="",bas="";
     public static int P2P1=0,P2P2=0,P2P3=0;
-    public static int P2P1control=0,P2P2control=0,P2P3control=0;
+    public static int P2P1control=0,P2P2control=0,P2P3control=0,ID=0;
     public Clientes() {
         initComponents();
         jDesktopPane1.setBorder(new ImagenFondo());
@@ -354,32 +354,32 @@ public class Clientes extends javax.swing.JFrame {
            // JOptionPane.showMessageDialog(null, ex);
         }
     }
-    void P2PPublicacion(String publicacion,String baseori,String basenue){
+    void P2PPublicacion(String publicacion,String baseori,String basenue,int Id){
 //        if(editar!=""){
 //            P2PPublicacionSA(txtNombrePubEdi.getText(), editar,basenue,baseori);
 //        }else{
         if(jcb_1.isSelected()==true || jcb_1.getText()==servidor1){
             P2P1=1;
             if(jcb_1.isSelected()==true){
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),basenue,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),basenue,baseori,Id);
             }else{
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),baseori,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_1.getText(),baseori,baseori,Id);
             }
         }
         if(jcb_2.isSelected()==true || jcb_2.getText()==servidor1){
             P2P2=1;
             if(jcb_2.isSelected()==true){
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),basenue,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),basenue,baseori,Id);
             }else{
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),baseori,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_2.getText(),baseori,baseori,Id);
             }
         }
         if(jcb_3.isSelected()==true || jcb_3.getText()==servidor1){
             P2P3=1;
             if(jcb_2.isSelected()==true){
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),basenue,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),basenue,baseori,Id);
             }else{
-                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),baseori,baseori);
+                P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),baseori,baseori,Id);
             }
 //        }
         }
@@ -413,10 +413,11 @@ public class Clientes extends javax.swing.JFrame {
         }
 //        }
     }
-    void P2PPublicacionSA(String publicacion, String ser, String baseori,String basedes){
+    void P2PPublicacionSA(String publicacion, String ser, String baseori,String basedes, int Id){
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(ser, baseori);
         String sql="",sql2="";
+        ID=ID+Id;
         if(jcb_1.getText()==ser){
                 sql="-- Enabling the replication database\n" +
             "use master\n" +
@@ -425,7 +426,7 @@ public class Clientes extends javax.swing.JFrame {
 //            "exec ["+bas+"].sys.sp_addqreader_agent @job_login = null, @job_password = null, @frompublisher = 1\n" +
             "-- Adding the transactional publication\n" +
             "use ["+baseori+"]\n" +
-            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = 1\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = "+ID+"\n" +
             "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 2, @frequency_subday_interval = 10, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 0, @publisher_login = N'sa', @publisher_password = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
@@ -458,7 +459,7 @@ public class Clientes extends javax.swing.JFrame {
 //            "exec ["+bas+"].sys.sp_addqreader_agent @job_login = null, @job_password = null, @frompublisher = 1\n" +
             "-- Adding the transactional publication\n" +
             "use ["+baseori+"]\n" +
-            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = 2\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = "+ID+"\n" +
             "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 8, @frequency_subday_interval = 1, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
@@ -491,7 +492,7 @@ public class Clientes extends javax.swing.JFrame {
 //            "exec ["+bas+"].sys.sp_addqreader_agent @job_login = null, @job_password = null, @frompublisher = 1\n" +
             "-- Adding the transactional publication\n" +
             "use ["+baseori+"]\n" +
-            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = 2\n" +
+            "exec sp_addpublication @publication = N'"+publicacion+"', @description = N'Transactional publication of database ''"+basedes+"'' from Publisher ''ADRIAN''.', @sync_method = N'native', @retention = 0, @allow_push = N'true', @allow_pull = N'true', @allow_anonymous = N'false', @enabled_for_internet = N'false', @snapshot_in_defaultfolder = N'true', @compress_snapshot = N'false', @ftp_port = 21, @ftp_login = N'anonymous', @allow_subscription_copy = N'false', @add_to_active_directory = N'false', @repl_freq = N'continuous', @status = N'active', @independent_agent = N'true', @immediate_sync = N'true', @allow_sync_tran = N'false', @autogen_sync_procs = N'false', @allow_queued_tran = N'false', @allow_dts = N'false', @replicate_ddl = 1, @allow_initialize_from_backup = N'true', @enabled_for_p2p = N'true', @enabled_for_het_sub = N'false', @p2p_conflictdetection = N'true', @p2p_originator_id = "+ID+"\n" +
             "exec sp_addpublication_snapshot @publication = N'"+publicacion+"', @frequency_type = 4, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 8, @frequency_subday_interval = 1, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'sa'\n" +
             "exec sp_grant_publication_access @publication = N'"+publicacion+"', @login = N'NT AUTHORITY\\SYSTEM'\n" +
@@ -515,7 +516,7 @@ public class Clientes extends javax.swing.JFrame {
               errores.Gestionar(ex);
               errores.mensaje();  
         }
-        }     
+        }    
     }
     void P2PSuscripcion(String publicacion,String baseori,String basedes){
         int numero_ins;
@@ -608,7 +609,11 @@ public class Clientes extends javax.swing.JFrame {
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1, jcbBases.getSelectedItem().toString());
         String sql="";
-        sql="SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_TYPE ='base table' and TABLE_NAME not like 'MS%'and TABLE_NAME not like 'sys%'";
+        sql="SELECT * FROM INFORMATION_SCHEMA.TABLES \n" +
+            "where TABLE_TYPE ='base table' \n" +
+            "and TABLE_NAME not like 'MS%'\n" +
+            "and TABLE_NAME not like 'sys%'\n" +
+            "and TABLE_NAME not like 'conflict%'";
         jcmTablas.removeAllItems();
         try {
             Statement psd = cn.createStatement();
@@ -632,8 +637,12 @@ public class Clientes extends javax.swing.JFrame {
         System.out.println("cargar base "+servidor);
         Connection cn=cc.conectarBase(servidor1, "master");
         String sql="";
-        sql="SELECT name, database_id, create_date FROM sys.databases Where database_id <> 1 and database_id <> 2 and database_id <> 3 and database_id <> 4 and database_id <> 5\n" +
-            " and database_id <> 6";
+        sql="SELECT name, database_id, create_date FROM sys.databases \n" +
+            "where name <> 'master'\n" +
+            "and name <> 'tempdb'\n" +
+            "and name <> 'model'\n" +
+            "and name <> 'msdb'\n" +
+            "and name not like 'Report%'";
         try {
             Statement psd = cn.createStatement();
             ResultSet rs=psd.executeQuery(sql);
@@ -819,15 +828,15 @@ public class Clientes extends javax.swing.JFrame {
 //            "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
 //            "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
         sus=" -- Adding the snapshot subscriptions\n" +
-            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "use ["+baseorigen+"]\n" +
             "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
             "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'ADRIAN', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
         sus1=" -- Adding the snapshot subscriptions\n" +
-            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "use ["+baseorigen+"]\n" +
             "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'JAVY-PC', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
             "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'JAVY-PC', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
         sus2 =" -- Adding the snapshot subscriptions\n" +
-            "use ["+jcbBases.getSelectedItem().toString()+"]\n" +
+            "use ["+baseorigen+"]\n" +
             "exec sp_addsubscription @publication = N'"+publicacion+"', @subscriber = N'TOSHIBA', @destination_db = N'"+base+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0\n" +
             "exec sp_addpushsubscription_agent @publication = N'"+publicacion+"', @subscriber = N'TOSHIBA', @subscriber_db = N'"+base+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
         if(jcb_1.getText()==ser && numsql==2)    
@@ -842,7 +851,7 @@ public class Clientes extends javax.swing.JFrame {
             sql=sus;
         if(jcb_3.getText()==ser && numsql==2)    
             sql=sus1;
-        //JOptionPane.showMessageDialog(null, "sql    "+sql);
+        JOptionPane.showMessageDialog(null, "sql  snap  "+sql);
         try {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
@@ -886,7 +895,7 @@ public class Clientes extends javax.swing.JFrame {
               errores.mensaje();  
         }
     }
-    //control
+    //controles Peer
     void ControlP2P(){
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
             //crearBase(bas, servidor);
@@ -906,11 +915,12 @@ public class Clientes extends javax.swing.JFrame {
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3,jcbBases.getSelectedItem().toString());
                     }
                     else{
-                        //JOptionPane.showMessageDialog(null, " 2 sitios ");
+                        if(jcb_3.isSelected()==true && jcb_2.isSelected()==true){
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),3,jcbBases.getSelectedItem().toString());
                         crearBase(txtNombre_Base.getText(), jcb_2.getText());
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_1.getText(),2,jcbBases.getSelectedItem().toString());
+                        }
                     }
             }
             if(P2P2control==1){
@@ -943,14 +953,16 @@ public class Clientes extends javax.swing.JFrame {
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1,jcbBases.getSelectedItem().toString());
                     }
                     else{
+                        if(jcb_1.isSelected()==true && jcb_2.isSelected()==true){
                         crearBase(txtNombre_Base.getText(), jcb_3.getText());
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),3,jcbBases.getSelectedItem().toString());
                         crearBase(jcbBases.getSelectedItem().toString(), jcb_1.getText());
                         SnapSus(txtNombre_Base.getText(), nombrePublicacion, jcb_3.getText(),1,jcbBases.getSelectedItem().toString());
+                        }
                     }
             }
             bas=jcbBases.getSelectedItem().toString();
-            P2PPublicacion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText());
+            P2PPublicacion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText(),Integer.valueOf(jcbPeerId.getSelectedItem().toString()));
 //            P2PSuscripcion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText());
         }else{
             if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
@@ -1014,6 +1026,8 @@ public class Clientes extends javax.swing.JFrame {
         jcb_3 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         txtNombre_Base = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jcbPeerId = new javax.swing.JComboBox();
         EditarP2P = new javax.swing.JDialog();
         jLabel10 = new javax.swing.JLabel();
         btnAceptarP2P1 = new javax.swing.JButton();
@@ -1183,10 +1197,10 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
         jcmTablas.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jcmTablasInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jcmTablas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1236,6 +1250,10 @@ public class Clientes extends javax.swing.JFrame {
 
         jLabel7.setText("Nombre de la Base");
 
+        jLabel15.setText("Peer ID");
+
+        jcbPeerId.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
         javax.swing.GroupLayout P2PLayout = new javax.swing.GroupLayout(P2P.getContentPane());
         P2P.getContentPane().setLayout(P2PLayout);
         P2PLayout.setHorizontalGroup(
@@ -1257,15 +1275,17 @@ public class Clientes extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, P2PLayout.createSequentialGroup()
                                         .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6)
-                                            .addComponent(jLabel7))
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel15))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtNombrePubP2P, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                            .addComponent(txtNombre_Base))))))
+                                            .addComponent(txtNombre_Base)
+                                            .addComponent(jcbPeerId, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addGap(31, 31, 31)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(P2PLayout.createSequentialGroup()
-                        .addGap(104, 104, 104)
+                        .addGap(106, 106, 106)
                         .addComponent(btnAceptarP2P)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar1)))
@@ -1296,11 +1316,15 @@ public class Clientes extends javax.swing.JFrame {
                         .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre_Base, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jcbPeerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarP2P)
                     .addComponent(btnCancelar1))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         EditarP2P.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -1365,10 +1389,10 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
         jcmBaseEdi.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jcmBaseEdiInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jcmBaseEdi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1441,10 +1465,10 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
         jcmTablasEdi1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jcmTablasEdi1InputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jcmTablasEdi1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1602,6 +1626,7 @@ public class Clientes extends javax.swing.JFrame {
 
         jLabel2.setText("Publicaciones");
 
+        jTree1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Publicaciones");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane2.setViewportView(jTree1);
@@ -1878,7 +1903,7 @@ public class Clientes extends javax.swing.JFrame {
                             .addGap(10, 10, 10)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(20, 20, 20)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1903,7 +1928,6 @@ public class Clientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1916,15 +1940,18 @@ public class Clientes extends javax.swing.JFrame {
                                     .addComponent(txtTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jDesktopPane1))
-                .addGap(21, 21, 21))
+                        .addComponent(jButton2)
+                        .addGap(33, 33, 33))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
         );
 
         pack();
@@ -2581,6 +2608,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2615,6 +2643,7 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTree jTree1;
     public javax.swing.JComboBox jcbBases;
+    private javax.swing.JComboBox jcbPeerId;
     public javax.swing.JComboBox jcbPublicaciones;
     public javax.swing.JCheckBox jcb_1;
     public javax.swing.JCheckBox jcb_11;

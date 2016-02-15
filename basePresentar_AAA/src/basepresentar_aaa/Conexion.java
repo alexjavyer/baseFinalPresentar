@@ -31,15 +31,15 @@ public class Conexion {
         if(server.equals("ADRIAN")){
             //instancia="192.168.1.8";
 //              instancia="172.21.105.124";
-              instancia="172.21.105.124";
+              instancia="172.16.0.170";
         }else{
             if(server.equals("JAVY-PC")){
-               // instancia="192.168.1.4";
+              //  instancia="192.168.1.4";
+//               instancia="172.21.105.123";
                instancia="172.21.105.123";
-              // instancia="172.21.105.123";
             }else{
-               // instancia="192.168.1.6";
-                  instancia="172.21.105.248";
+                instancia="192.168.1.6";
+                   instancia="172.21.105.248";
                    //instancia="192.168.1.6";
                    //instancia="172.21.105.248";
             }
@@ -70,19 +70,17 @@ public class Conexion {
         if(server.equals("ADRIAN")){
             //instancia="192.168.1.8";
             //  instancia="172.21.105.124";
-              instancia="172.21.105.124";
+              instancia="172.16.0.170";
         }else{
             if(server.equals("JAVY-PC")){
-            //   instancia="192.168.1.4";
+               //instancia="192.168.1.4";
                instancia="172.21.105.123";
              //   instancia="192.168.1.5";
                //instancia="172.21.105.123";
             }else{
-                
-                   //instancia="192.168.1.6";
-                //   instancia="172.21.105.248";
+                //   instancia="192.168.1.6";
                    instancia="172.21.105.248";
-                
+                   //instancia="172.21.105.248";
             }
             }
          //   JOptionPane.showMessageDialog(null, instancia);

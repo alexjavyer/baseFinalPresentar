@@ -93,6 +93,36 @@ public class errores {
                                  saltoLinea+
                                  "Asigne un nombre a la publicación.";
                     break;
+                        case 20804:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "La tabla seleccionada ya contiene una replica peer to peer" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Elinima la anterior replicación peer to peer\n" +
+                        "2.- Seleccione otra tabla para realizar la replicación" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
+                        case 15007:
+                    //Error personalizado
+                mensaje = problema +
+                        saltoLinea +
+                        "Fallo la conexión o no tiene permisos" +
+                        saltoLinea +
+                        saltoLinea +
+                        solucion +
+                        saltoLinea +
+                        "1.- Comprueba que la base seleccionada exista en la instancia\n" +
+                        "2.- Compruebe si tiene conexión" +
+                        saltoLinea +
+                        saltoLinea +
+                        mensajeFinal;
+                    break;
                         case 21745:
                     //Error personalizado
                 mensaje = problema +

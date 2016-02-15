@@ -126,6 +126,7 @@ public class Clientes extends javax.swing.JFrame {
         System.out.println(jtbDatos.getSelectedRow());
         String cedula,nombre,apellido,telefono;
         String nomCol="", values="";
+        System.out.println("Resta "+(modeloNombreColumnas.getSize()-resta));
         
         for(int i=0;i<modeloNombreColumnas.getSize()-resta;i++){
             if(i<modeloNombreColumnas.getSize()-1-resta){
@@ -227,14 +228,16 @@ public class Clientes extends javax.swing.JFrame {
         String column="";
         //jtbDatos.setModel(model);
         for(int j=0;j<nColumnas;j++){
+             
             if(j==nColumnas-1){
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
-                
+               
                 if(column.equals("msrepl_tran_version")||column.equals("rowguid"))
                   resta = 1;
                 else
                     resta=0;
+             //   System.out.println(resta);
             }else{
                 column=modeloNombreColumnas.getElementAt(j).toString();
                 model.addColumn(column);
@@ -1988,7 +1991,7 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        TransaInstantanea trans = new TransaInstantanea(servidor1);
+        TransaInstantanea1 trans = new TransaInstantanea1(servidor1);
         jDesktopPane1.add(trans);
         trans.show();
  

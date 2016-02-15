@@ -49,6 +49,16 @@ public class errores {
                         mensajeFinal;
 
                     break;
+                    case 1205:
+                    mensaje=problema+
+                            saltoLinea+
+                            "Otro proceso esta utilizando el mismo ID 101"
+                            +saltoLinea+
+                            saltoLinea+
+                            solucion+
+                            "Vuelva a intentar el proceso para restablecer la ID"
+                            ;
+                    break;
                 case 8152:
                     mensaje=problema+
                             saltoLinea+
@@ -101,6 +111,17 @@ public class errores {
                         saltoLinea +
                         saltoLinea +
                         mensajeFinal;
+                    break;
+                        case 20805:
+                    mensaje=problema+
+                            saltoLinea+
+                            "La topologia de Peer to Peer requiere un nombre de publicador unico\n"
+                            + "el nombre  de la publicación ya esta usada por otra"
+                            +saltoLinea+
+                            saltoLinea+
+                            solucion+
+                            "1.- Elinima la anterior replicación peer to peer\n" +
+                            "2.- Seleccione otra tabla para realizar la replicación";
                     break;
                     case 14043:
                          mensaje=problema+

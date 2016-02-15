@@ -2155,6 +2155,9 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+    MostrarSubscripciones ins=new MostrarSubscripciones(servidor1);
+        jDesktopPane1.add(ins);
+        ins.show();        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jcmTablasInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jcmTablasInputMethodTextChanged

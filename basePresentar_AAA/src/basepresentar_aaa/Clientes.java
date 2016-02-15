@@ -4,6 +4,7 @@
  */
 package basepresentar_aaa;
 
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -354,6 +355,9 @@ public class Clientes extends javax.swing.JFrame {
         }
     }
     void P2PPublicacion(String publicacion,String baseori,String basenue){
+//        if(editar!=""){
+//            P2PPublicacionSA(txtNombrePubEdi.getText(), editar,basenue,baseori);
+//        }else{
         if(jcb_1.isSelected()==true || jcb_1.getText()==servidor1){
             P2P1=1;
             if(jcb_1.isSelected()==true){
@@ -377,8 +381,15 @@ public class Clientes extends javax.swing.JFrame {
             }else{
                 P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),baseori,baseori);
             }
+//        }
         }
         //Suscripciones
+//        if(editar!=""){
+//            P2PSuscripcion(txtNombrePubEdi.getText(), basenue, baseori);
+//            P2PSuscripcion(txtNombrePubEdi.getText(), basenue, baseori);
+//            P2PSuscripcion(txtNombrePubEdi.getText(), basenue, baseori);
+//            P2PSuscripcion(txtNombrePubEdi.getText(),baseori,baseori);
+//        }else{
         if(jcb_1.isSelected()==true || jcb_1.getText()==servidor1){
             if(jcb_1.isSelected()==true){
                 P2PSuscripcion(txtNombrePubP2P.getText(), basenue, baseori);
@@ -400,6 +411,7 @@ public class Clientes extends javax.swing.JFrame {
                 P2PSuscripcion(txtNombrePubP2P.getText(),baseori,baseori);
             }
         }
+//        }
     }
     void P2PPublicacionSA(String publicacion, String ser, String baseori,String basedes){
         Conexion cc = new Conexion();
@@ -845,6 +857,35 @@ public class Clientes extends javax.swing.JFrame {
               errores.mensaje();  
         }
     }
+    public void cargarPublicacionesPeer(String servidor){
+        String sqlCargarPublicaciones="Use distribution  SELECT\n" +
+"           *\n" +
+"            FROM\n" +
+"                DBO.MSpublications AS MSA\n" +
+"            INNER JOIN DBO.MSpublications AS MSP\n" +
+"                    ON MSA.publication_id = MSP.publication_id";
+        Conexion cc = new Conexion();
+        Connection cn=cc.conectarBase(servidor, baseInicial);
+        try{
+        Statement psd = cn.createStatement();
+            ResultSet rs=psd.executeQuery(sqlCargarPublicaciones);
+            while(rs.next()){
+                //taPublicaciones.setText(taPublicaciones.getText().concat(rs.getString("Publication Name")));
+                if(rs.getString("publication_type").equals("0")){
+                    jcbPublicaciones.addItem(rs.getString("publication"));
+                    jcmBaseEdi.addItem(rs.getString("publisher_db"));
+                }
+            }
+        }catch(SQLException ex){
+         //   JOptionPane.showMessageDialog(null,"SQLException ");
+            errores.Gestionar(ex);
+             errores.mensaje();
+        } catch(Exception ex){
+         //   JOptionPane.showMessageDialog(null,"Exception ");
+              errores.Gestionar(ex);
+              errores.mensaje();  
+        }
+    }
     //control
     void ControlP2P(){
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
@@ -973,6 +1014,23 @@ public class Clientes extends javax.swing.JFrame {
         jcb_3 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         txtNombre_Base = new javax.swing.JTextField();
+        EditarP2P = new javax.swing.JDialog();
+        jLabel10 = new javax.swing.JLabel();
+        btnAceptarP2P1 = new javax.swing.JButton();
+        btnCancelar2 = new javax.swing.JButton();
+        jcbPublicaciones = new javax.swing.JComboBox();
+        jcmBaseEdi = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        txtNombrePubEdi = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jcb_11 = new javax.swing.JCheckBox();
+        jcb_12 = new javax.swing.JCheckBox();
+        jcb_13 = new javax.swing.JCheckBox();
+        jLabel13 = new javax.swing.JLabel();
+        txtNombre_BaseEdi = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jcmTablasEdi1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbDatos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -1204,14 +1262,14 @@ public class Clientes extends javax.swing.JFrame {
                                         .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtNombrePubP2P, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                             .addComponent(txtNombre_Base))))))
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(P2PLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(104, 104, 104)
                         .addComponent(btnAceptarP2P)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar1)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         P2PLayout.setVerticalGroup(
             P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1237,12 +1295,232 @@ public class Clientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNombre_Base, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7))))
+                .addGap(18, 18, 18)
+                .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptarP2P)
+                    .addComponent(btnCancelar1))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        EditarP2P.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                EditarP2PPropertyChange(evt);
+            }
+        });
+
+        jLabel10.setText("Publicaciones");
+
+        btnAceptarP2P1.setText("Aceptar");
+        btnAceptarP2P1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarP2P1ActionPerformed(evt);
+            }
+        });
+
+        btnCancelar2.setText("Cancelar");
+        btnCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar2ActionPerformed(evt);
+            }
+        });
+
+        jcbPublicaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbPublicacionesMouseClicked(evt);
+            }
+        });
+        jcbPublicaciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbPublicacionesItemStateChanged(evt);
+            }
+        });
+        jcbPublicaciones.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcbPublicacionesPropertyChange(evt);
+            }
+        });
+        jcbPublicaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jcbPublicacionesKeyPressed(evt);
+            }
+        });
+
+        jcmBaseEdi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcmBaseEdiMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcmBaseEdiMouseClicked(evt);
+            }
+        });
+        jcmBaseEdi.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmBaseEdiItemStateChanged(evt);
+            }
+        });
+        jcmBaseEdi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmBaseEdiActionPerformed(evt);
+            }
+        });
+        jcmBaseEdi.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jcmBaseEdiInputMethodTextChanged(evt);
+            }
+        });
+        jcmBaseEdi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jcmBaseEdiKeyPressed(evt);
+            }
+        });
+
+        jLabel11.setText("Base");
+
+        txtNombrePubEdi.setEditable(false);
+
+        jLabel12.setText("Nombre de la Publicación");
+
+        jcb_11.setText("ADRIAN");
+        jcb_11.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcb_11ItemStateChanged(evt);
+            }
+        });
+
+        jcb_12.setText("JAVY-PC");
+
+        jcb_13.setText("TOSHIBA");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcb_11)
+                    .addComponent(jcb_12)
+                    .addComponent(jcb_13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jcb_11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcb_12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcb_13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel13.setText("Nombre de la Base");
+
+        jLabel14.setText("Tablas");
+
+        jcmTablasEdi1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jcmTablasEdi1MousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcmTablasEdi1MouseClicked(evt);
+            }
+        });
+        jcmTablasEdi1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcmTablasEdi1ItemStateChanged(evt);
+            }
+        });
+        jcmTablasEdi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmTablasEdi1ActionPerformed(evt);
+            }
+        });
+        jcmTablasEdi1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jcmTablasEdi1InputMethodTextChanged(evt);
+            }
+        });
+        jcmTablasEdi1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jcmTablasEdi1KeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EditarP2PLayout = new javax.swing.GroupLayout(EditarP2P.getContentPane());
+        EditarP2P.getContentPane().setLayout(EditarP2PLayout);
+        EditarP2PLayout.setHorizontalGroup(
+            EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditarP2PLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditarP2PLayout.createSequentialGroup()
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombrePubEdi)
+                            .addComponent(txtNombre_BaseEdi, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EditarP2PLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(btnAceptarP2P1)
                         .addGap(18, 18, 18)
-                        .addGroup(P2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAceptarP2P)
-                            .addComponent(btnCancelar1))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(btnCancelar2))
+                    .addGroup(EditarP2PLayout.createSequentialGroup()
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel14))
+                        .addGap(121, 121, 121)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcmBaseEdi, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcmTablasEdi1, 0, 138, Short.MAX_VALUE)
+                            .addComponent(jcbPublicaciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        EditarP2PLayout.setVerticalGroup(
+            EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditarP2PLayout.createSequentialGroup()
+                .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditarP2PLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EditarP2PLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(EditarP2PLayout.createSequentialGroup()
+                                .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jcbPublicaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcmBaseEdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcmTablasEdi1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombrePubEdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre_BaseEdi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(EditarP2PLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAceptarP2P1)
+                            .addComponent(btnCancelar2))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1882,6 +2160,89 @@ public class Clientes extends javax.swing.JFrame {
     private void jcmTablasInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jcmTablasInputMethodTextChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jcmTablasInputMethodTextChanged
+
+    private void btnAceptarP2P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarP2P1ActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnAceptarP2P1ActionPerformed
+
+    private void btnCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelar2ActionPerformed
+
+    private void jcbPublicacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbPublicacionesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbPublicacionesMouseClicked
+
+    private void jcbPublicacionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPublicacionesItemStateChanged
+        // TODO add your handling code here:
+        if(jcbPublicaciones.getItemCount()>=1)
+            txtNombrePubEdi.setText(jcbPublicaciones.getSelectedItem().toString());
+    }//GEN-LAST:event_jcbPublicacionesItemStateChanged
+
+    private void jcbPublicacionesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbPublicacionesPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbPublicacionesPropertyChange
+
+    private void jcbPublicacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcbPublicacionesKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbPublicacionesKeyPressed
+
+    private void jcmBaseEdiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcmBaseEdiMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiMouseClicked
+
+    private void jcmBaseEdiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcmBaseEdiMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiMousePressed
+
+    private void jcmBaseEdiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmBaseEdiItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiItemStateChanged
+
+    private void jcmBaseEdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmBaseEdiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiActionPerformed
+
+    private void jcmBaseEdiInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jcmBaseEdiInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiInputMethodTextChanged
+
+    private void jcmBaseEdiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcmBaseEdiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmBaseEdiKeyPressed
+
+    private void jcb_11ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_11ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_11ItemStateChanged
+
+    private void EditarP2PPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_EditarP2PPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditarP2PPropertyChange
+
+    private void jcmTablasEdi1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcmTablasEdi1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1MousePressed
+
+    private void jcmTablasEdi1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcmTablasEdi1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1MouseClicked
+
+    private void jcmTablasEdi1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcmTablasEdi1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1ItemStateChanged
+
+    private void jcmTablasEdi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmTablasEdi1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1ActionPerformed
+
+    private void jcmTablasEdi1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jcmTablasEdi1InputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1InputMethodTextChanged
+
+    private void jcmTablasEdi1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcmTablasEdi1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcmTablasEdi1KeyPressed
     DefaultListModel modeloNombreColumnas;
     
     public void cargarColumnas(String tabla){
@@ -2188,13 +2549,16 @@ public class Clientes extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog EditarP2P;
     private javax.swing.JDialog P2P;
     private javax.swing.JDialog Usuario;
     private javax.swing.JButton btnAceptar;
     public javax.swing.JButton btnAceptarP2P;
+    public javax.swing.JButton btnAceptarP2P1;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelar1;
+    private javax.swing.JButton btnCancelar2;
     private javax.swing.JButton btnCargarBase;
     private javax.swing.JButton btnEditarTabla;
     private javax.swing.JButton btnEliminar;
@@ -2209,6 +2573,11 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2237,19 +2606,28 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTree jTree1;
     public javax.swing.JComboBox jcbBases;
+    public javax.swing.JComboBox jcbPublicaciones;
     public javax.swing.JCheckBox jcb_1;
+    public javax.swing.JCheckBox jcb_11;
+    public javax.swing.JCheckBox jcb_12;
+    public javax.swing.JCheckBox jcb_13;
     public javax.swing.JCheckBox jcb_2;
     public javax.swing.JCheckBox jcb_3;
+    public javax.swing.JComboBox jcmBaseEdi;
     public javax.swing.JComboBox jcmTablas;
+    public javax.swing.JComboBox jcmTablasEdi1;
     private javax.swing.JTree jtBaseDatos;
     private javax.swing.JTable jtbDatos;
+    private javax.swing.JTextField txtNombrePubEdi;
     private javax.swing.JTextField txtNombrePubP2P;
     private javax.swing.JTextField txtNombre_Base;
+    private javax.swing.JTextField txtNombre_BaseEdi;
     private javax.swing.JTextField txtTabla;
     private javax.swing.JTextField txtbase;
     // End of variables declaration//GEN-END:variables

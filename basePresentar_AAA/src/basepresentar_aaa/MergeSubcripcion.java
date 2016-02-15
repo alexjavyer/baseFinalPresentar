@@ -589,9 +589,9 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
               
                 
             }
-            if(modeloTabSubs.getValueAt(j, 4)=="Servidor"){
+            if(modeloTabSubs.getValueAt(j, 3)=="Servidor"){
                 subscriber_type="Global";
-                subscription_priority=modeloTabSubs.getValueAt(j, 5).toString();
+                subscription_priority=modeloTabSubs.getValueAt(j, 4).toString();
             }else{
                 subscriber_type="Local";
                 subscription_priority="0";
@@ -613,7 +613,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
             + "@frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = "+active_start_date+", "
             + "@active_end_date = 99991231, @enabled_for_syncmgr = N'False'";
         }
-      //  escribir(sqlCrearSubs);
+        escribir(sqlCrearSubs);
         Conexion cc = new Conexion();
         //JOptionPane.showMessageDialog(null,"Suscriptor"+suscriptorName);
         
@@ -690,7 +690,7 @@ public class MergeSubcripcion extends javax.swing.JInternalFrame {
     
     public void escribir(String codigo){
         File f;
-        f = new File("C:\\Users\\Anita\\Desktop\\SCRIPTS\\SUB_MERGE_TOSHIBA.txt");
+        f = new File("C:\\Users\\Anita\\Desktop\\UltimasComprobaciones\\NSubRunContiInmediateServer75.txt");
         //Escritura
         try{
         FileWriter w = new FileWriter(f);

@@ -129,8 +129,15 @@ public class Merge extends javax.swing.JInternalFrame {
         txtNombrePubli = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         chSinFiltro = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        chInmediatamente = new javax.swing.JCheckBox();
+        chShedule = new javax.swing.JCheckBox();
+        txtTiempo1 = new javax.swing.JTextField();
+        cbFrequencia = new javax.swing.JComboBox();
+        txtTiempo = new javax.swing.JTextField();
+        cbFrequenciaP = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Tablas");
 
@@ -334,6 +341,16 @@ public class Merge extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("SnapshotAgent");
+
+        chInmediatamente.setText("Crear inmediatamente un Snapshot");
+
+        chShedule.setText("Horario de ejcucion del Agente Snapshot");
+
+        cbFrequencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diariamente" }));
+
+        cbFrequenciaP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Horas", "Minutos", "Segundos" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,23 +358,37 @@ public class Merge extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cbBaseDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chHorizontal)
-                    .addComponent(chVertical)
-                    .addComponent(jLabel3)
-                    .addComponent(chSinFiltro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(chShedule)
+                            .addComponent(chInmediatamente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTiempo1)
+                            .addComponent(cbFrequenciaP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTiempo)
+                            .addComponent(cbFrequencia, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(cbBaseDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chHorizontal)
+                            .addComponent(chVertical)
+                            .addComponent(jLabel3)
+                            .addComponent(chSinFiltro))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,23 +396,49 @@ public class Merge extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chHorizontal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chVertical)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chSinFiltro))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(cbBaseDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(cbBaseDeDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chHorizontal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chVertical)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chSinFiltro)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chInmediatamente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(chShedule)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGap(31, 31, 31))
+                                .addGap(53, 53, 53))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(cbFrequencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbFrequenciaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTiempo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -522,7 +579,59 @@ public class Merge extends javax.swing.JInternalFrame {
             }
             
         }
-        String frequency_type="4";
+        String frequency_type="",frequency_interval="",frequency_relative_interval="",frequency_subday="",frequency_subday_interval="";
+        if(chInmediatamente.isSelected()&&!chShedule.isSelected()){
+            frequency_type="1";
+            frequency_interval="0";
+            frequency_relative_interval="0";
+            frequency_subday="0";
+            frequency_subday_interval="0";
+        }else{
+            if(!chInmediatamente.isSelected()&&chShedule.isSelected()){
+                frequency_type="4";
+                //frequency_interval="14";
+                frequency_relative_interval="1";
+                
+                if(cbFrequenciaP.getSelectedItem()=="Minutos"){
+                    frequency_subday="4";
+                }else{
+                    if(cbFrequenciaP.getSelectedItem()=="Horas"){
+                        frequency_subday="8";
+                    }else{
+                        frequency_subday="2";
+                    }
+                }               
+                frequency_subday_interval=txtTiempo1.getText();
+                //Solo shedule
+                if(cbFrequencia.getSelectedItem().equals("Diariamente"))
+                    frequency_interval=txtTiempo.getText();
+                
+            }else{
+                if(chInmediatamente.isSelected()&&chShedule.isSelected()){
+                     frequency_type="4";
+                //frequency_interval="14";
+                frequency_relative_interval="1";
+                
+                if(cbFrequenciaP.getSelectedItem()=="Minutos"){
+                    frequency_subday="4";
+                }else{
+                    if(cbFrequenciaP.getSelectedItem()=="Horas"){
+                        frequency_subday="8";
+                    }else{
+                        frequency_subday="2";
+                    }
+                }               
+                frequency_subday_interval=txtTiempo1.getText();
+                //Solo shedule
+                if(cbFrequencia.getSelectedItem().equals("Diariamente"))
+                    frequency_interval=txtTiempo.getText();
+                
+                }
+            }
+            
+        }
+        
+        
         //frequency_interval = 0
         //String frequency_relative_interval = 0;
         sqlPubliMerge="use ["+base_de_datos+"] \n" +
@@ -541,14 +650,14 @@ public class Merge extends javax.swing.JInternalFrame {
         + " @conflict_logging = N'both', @automatic_reinitialization_policy = 0\n" +        
         " \n" +
         " \n" +
-        " exec sp_addpublication_snapshot @publication = N'"+nombrePubli+"', @frequency_type = "+frequency_type+", @frequency_interval = 1, "
-        + "@frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0,"
+        " exec sp_addpublication_snapshot @publication = N'"+nombrePubli+"', @frequency_type = "+frequency_type+", @frequency_interval = "+frequency_interval+", "
+        + "@frequency_relative_interval = "+frequency_relative_interval+", @frequency_recurrence_factor = 0, @frequency_subday = "+frequency_subday+", @frequency_subday_interval = "+frequency_subday_interval+","
         + " @active_start_time_of_day = 500, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, "
         + "@job_login = null, @job_password = null, @publisher_security_mode = 1\n" +
         " \n" +
         " \n" +
-        " use ["+base_de_datos+"]\n"+ " exec sp_addmergearticle @publication = N'"+nombrePubli+"', @article = N'Clientes', @source_owner = N'dbo', "
-            + "@source_object = N'Clientes', @type = N'table', @description = null, @creation_script = null, @pre_creation_cmd = N'drop',"
+        " use ["+base_de_datos+"]\n"+ " exec sp_addmergearticle @publication = N'"+nombrePubli+"', @article = N'"+modeloTabla.getValueAt(tblTablas.getSelectedRow(),tblTablas.getSelectedColumn())+"', @source_owner = N'dbo', "
+            + "@source_object = N'"+modeloTabla.getValueAt(tblTablas.getSelectedRow(),tblTablas.getSelectedColumn())+"', @type = N'table', @description = null, @creation_script = null, @pre_creation_cmd = N'drop',"
             + " @schema_option = 0x000000010C034FD1, @identityrangemanagementoption = N'manual', @destination_owner = N'dbo', "
             + "@force_reinit_subscription = 1, @column_tracking = N'false', @subset_filterclause = "+sqlFiltro+", @vertical_partition = N'"+vertical_partition+"',"
             + " @verify_resolver_signature = 1, @allow_interactive_resolver = N'false', @fast_multicol_updateproc = N'true', "
@@ -556,7 +665,7 @@ public class Merge extends javax.swing.JInternalFrame {
             + "@stream_blob_columns = N'false', @partition_options = 0\n" +
             " \n" +
             " "+sqlAdicionalVertical;
-        //escribir(sqlPubliMerge);
+      // escribir(sqlPubliMerge);
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1,"Renta de Auto");
         boolean seCreo=true;
@@ -595,7 +704,7 @@ public class Merge extends javax.swing.JInternalFrame {
     }
       public void escribir(String codigo){
         File f;
-        f = new File("C:\\Users\\Anita\\Desktop\\SCRIPTS\\PUB_MERGE_TOSHIBA.txt");
+        f = new File("C:\\Users\\Anita\\Desktop\\UltimasComprobaciones\\NPubSinFiltrosHSinFiltrosVOnlySnapshotInmed.txt");
 
         //Escritura
         try{
@@ -732,9 +841,13 @@ public class Merge extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnPasarNomCol;
     private javax.swing.JComboBox cbBaseDeDatos;
+    private javax.swing.JComboBox cbFrequencia;
+    private javax.swing.JComboBox cbFrequenciaP;
     private javax.swing.JComboBox cbOPeradorLogico;
     private javax.swing.JComboBox cbSigno;
     private javax.swing.JCheckBox chHorizontal;
+    private javax.swing.JCheckBox chInmediatamente;
+    private javax.swing.JCheckBox chShedule;
     private javax.swing.JCheckBox chSinFiltro;
     private javax.swing.JCheckBox chVertical;
     private javax.swing.JButton jButton1;
@@ -742,6 +855,7 @@ public class Merge extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -759,5 +873,7 @@ public class Merge extends javax.swing.JInternalFrame {
     private javax.swing.JList txtColumnas;
     private javax.swing.JTextField txtCondicion;
     private javax.swing.JTextField txtNombrePubli;
+    private javax.swing.JTextField txtTiempo;
+    private javax.swing.JTextField txtTiempo1;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,16 +29,21 @@ public class Conexion {
 //      JOptionPane.showMessageDialog(null, "Servidor"+server);
         String instancia="";
         if(server.equals("ADRIAN")){
-            //instancia="192.168.1.8";
-//              instancia="172.21.105.124";
-              instancia="172.16.0.170";
+//            instancia="192.168.1.8";
+              instancia="172.21.105.124";
+            //  instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
+
+//                instancia="192.168.1.4";
+               instancia="172.21.105.123";
+              // instancia="172.21.105.123";
+
               //  instancia="192.168.1.4";
 //               instancia="172.21.105.123";
                instancia="172.21.105.123";
+
             }else{
-                instancia="192.168.1.6";
                    instancia="172.21.105.248";
                    //instancia="192.168.1.6";
                    //instancia="172.21.105.248";
@@ -68,9 +73,11 @@ public class Conexion {
         Connection cn=null;
         String instancia="";
         if(server.equals("ADRIAN")){
-            //instancia="192.168.1.8";
-            //  instancia="172.21.105.124";
-              instancia="172.16.0.170";
+
+              //  instancia="192.168.1.6";
+
+                instancia="192.168.1.6";
+
         }else{
             if(server.equals("JAVY-PC")){
                //instancia="192.168.1.4";
@@ -78,7 +85,15 @@ public class Conexion {
              //   instancia="192.168.1.5";
                //instancia="172.21.105.123";
             }else{
-                //   instancia="192.168.1.6";
+
+          //  instancia="192.168.1.8";
+              instancia="172.21.105.124";
+              //instancia="172.21.105.124";
+
+            //instancia="192.168.1.8";
+            //  instancia="172.21.105.124";
+              instancia="172.16.0.170";
+
                    instancia="172.21.105.248";
                    //instancia="172.21.105.248";
             }
@@ -113,3 +128,9 @@ public class Conexion {
     }
     
 }
+
+                
+            //       instancia="192.168.1.6";
+
+                //   instancia="192.168.1.6";
+

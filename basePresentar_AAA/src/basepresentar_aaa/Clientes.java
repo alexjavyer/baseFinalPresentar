@@ -149,11 +149,11 @@ public class Clientes extends javax.swing.JFrame {
             CargarTabla(servidor1);
         }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null,"SQLException ");
+            //JOptionPane.showMessageDialog(null,"SQLException ");
             errores.Gestionar(ex);
              errores.mensaje();
         } catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"Exception ");
+           // JOptionPane.showMessageDialog(null,"Exception ");
               errores.Gestionar(ex);
               errores.mensaje();  
         }        

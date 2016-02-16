@@ -678,6 +678,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
             errores.Gestionar(ex);
               errores.mensaje();   
         }
+        
     }
     
     

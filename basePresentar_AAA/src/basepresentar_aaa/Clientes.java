@@ -1143,6 +1143,7 @@ public class Clientes extends javax.swing.JFrame {
             bas=jcbBases.getSelectedItem().toString();
             P2PPublicacion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText(),Integer.valueOf(jcbPeerId.getSelectedItem().toString()));
 //            P2PSuscripcion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText());
+            //P2PSuscripcion(txtNombrePubP2P.getText(),jcbBases.getSelectedItem().toString(),txtNombre_Base.getText());
         }else{
             if((jcb_1.isSelected()==false)  && (jcb_2.isSelected()==false) && (jcb_3.isSelected()==false))
                 JOptionPane.showMessageDialog(null, "Debe elegir una instancia");

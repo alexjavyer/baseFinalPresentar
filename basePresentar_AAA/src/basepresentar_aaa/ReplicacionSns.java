@@ -165,6 +165,12 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
             }
         });
 
+        cbBasesSuscriptores3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBasesSuscriptores3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -303,7 +309,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
                         .addComponent(btnFinalizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addGap(0, 47, Short.MAX_VALUE))
         );
 
         pack();
@@ -439,6 +445,10 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cbBasesSuscriptores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBasesSuscriptores3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbBasesSuscriptores3ActionPerformed
     
         Calendar calobj = Calendar.getInstance();
 
@@ -463,7 +473,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
         
        String baseOrigen =cargarBasedePublicaciones(Clientes.servidor1, nombrePublicacion);
         String va = suscriptor;
-        JOptionPane.showMessageDialog(null, "Sucrip "+va+ Clientes.baseInicial);
+    //    JOptionPane.showMessageDialog(null, "Sucrip "+va+ Clientes.baseInicial);
     
         String sqlCrearSubs="-----------------BEGIN: Script to be run at Publisher '"+publicadorS+"'----------------- \n" +
         "use ["+baseOrigen+"]\n" +
@@ -476,6 +486,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
       try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
+            JOptionPane.showMessageDialog(null, "Se Creo La Suscipcion...");
     //        this.dispose();
             
         }catch(SQLException ex){
@@ -492,7 +503,7 @@ public class ReplicacionSns extends javax.swing.JInternalFrame {
     
     
      public String cargarBasedePublicaciones(String servidor, String publicacion){
-        JOptionPane.showMessageDialog(null, "Ver base");
+   //     JOptionPane.showMessageDialog(null, "Ver base");
         String sqlCargarPublicaciones="";
           sqlCargarPublicaciones="Use distribution  SELECT\n" +
 "*\n" +

@@ -17,32 +17,26 @@ public class Conexion {
     /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
-
-/**
- *
- 
- */
-    
+ */  
     public Connection conectar(String server){
         Connection cn=null;
 //      JOptionPane.showMessageDialog(null, "Servidor"+server);
         String instancia="";
         if(server.equals("ADRIAN")){
 //            instancia="192.168.1.8";
-              instancia="172.21.106.173";
+              //instancia="172.21.106.173";
             //  instancia="172.21.105.124";
+            instancia="172.21.105.124";
         }else{
             if(server.equals("JAVY-PC")){
 
-//                instancia="192.168.1.4";
-               instancia="172.21.106.190";
+                instancia="172.21.105.123";
+         //      instancia="172.21.106.190";
               // instancia="172.21.105.123";
-
               //  instancia="192.168.1.4";
 //               instancia="172.21.105.123";
               // instancia="172.21.105.123";
-
+             //  instancia="172.21.105.123";
             }else{
                    instancia="172.21.105.248";
                    //instancia="192.168.1.6";
@@ -73,22 +67,27 @@ public class Conexion {
         Connection cn=null;
         String instancia="";
         if(server.equals("ADRIAN")){
-
+            //instancia="169.254.184.7";
               //  instancia="192.168.1.6";
-            instancia="172.21.106.173";
+            instancia="172.21.105.124";
                 //instancia="192.168.1.6";
 
         }else{
             if(server.equals("JAVY-PC")){
                //instancia="192.168.1.4";
-               //instancia="172.21.105.123";
-                instancia="172.21.106.190";
+               instancia="172.21.105.123";
+                //instancia="169.254.193.212";
              //   instancia="192.168.1.5";
+               //instancia="192.168.1.2";
+               //instancia="172.21.105.123";
+//                            instancia="172.21.106.190";
+               //   instancia="192.168.1.5";
                //instancia="172.21.105.123";
             }else{
 
           //  instancia="192.168.1.8";
-              instancia="172.21.105.124";
+              instancia="172.21.105.248";
+              
               //instancia="172.21.105.124";
 
             //instancia="192.168.1.8";
@@ -123,15 +122,8 @@ public class Conexion {
            // JOptionPane.showMessageDialog(null,"Exception "+ex);
               errores.Gestionar(ex);
               errores.mensaje();  
-        }
-        
+        }       
          return cn;
     }
     
 }
-
-                
-            //       instancia="192.168.1.6";
-
-                //   instancia="192.168.1.6";
-

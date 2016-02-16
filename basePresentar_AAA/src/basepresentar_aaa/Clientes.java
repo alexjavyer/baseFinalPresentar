@@ -379,7 +379,7 @@ public class Clientes extends javax.swing.JFrame {
         }
         if(jcb_3.isSelected()==true || jcb_3.getText()==servidor1){
             P2P3=1;
-            if(jcb_2.isSelected()==true){
+            if(jcb_3.isSelected()==true){
                 P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),basenue,baseori,Id);
             }else{
                 P2PPublicacionSA(txtNombrePubP2P.getText(), jcb_3.getText(),baseori,baseori,Id);
@@ -594,7 +594,7 @@ public class Clientes extends javax.swing.JFrame {
                     }
                 }
             Connection cn=cc.conectarBase(s, baseori);
-            //System.out.println("sql  "+ sql +"   \n servidor   "+s);
+            JOptionPane.showMessageDialog(null, "sql  peer  "+sql);
             try {
                 PreparedStatement psd= cn.prepareStatement(sql);
                 psd.execute();
@@ -858,7 +858,7 @@ public class Clientes extends javax.swing.JFrame {
         try {
             PreparedStatement psd= cn.prepareStatement(sql);
             psd.execute();
-            JOptionPane.showMessageDialog(null, "Se creo la suscrip snap para peer para "+ser);
+            //JOptionPane.showMessageDialog(null, "Se creo la suscrip snap para peer para "+ser);
         }catch(SQLException ex){
          //   JOptionPane.showMessageDialog(null,"SQLException sSus"+ex);
             errores.Gestionar(ex);
@@ -903,7 +903,7 @@ public class Clientes extends javax.swing.JFrame {
         if((!txtNombre_Base.getText().equals("")) && (!txtNombrePubP2P.getText().equals("")) && (jcb_1.isSelected()==true ||jcb_2.isSelected()==true||jcb_3.isSelected()==true)){
             //crearBase(bas, servidor);
             //crearTabla(bas, servidor);
-           // JOptionPane.showMessageDialog(null, "valores "+P2P1control+" "+P2P2control+" "+P2P3control);
+            JOptionPane.showMessageDialog(null, "valores "+P2P1control+" "+P2P2control+" "+P2P3control);
             String nombrePublicacion="Snap"+txtNombrePubP2P.getText();
             if(P2P1control==1){
                 SnapPubli(jcbBases.getSelectedItem().toString(),nombrePublicacion, jcb_1.getText());

@@ -2351,6 +2351,7 @@ public class Clientes extends javax.swing.JFrame {
     }
     public void cargarBases(String servidor){
          //  JOptionPane.showMessageDialog(null, "Servidor "+servidor);
+        
         String sqlTablasSuscriptor="SELECT name FROM master.dbo.sysdatabases WHERE dbid >= 5";
         
         boolean correcto=true;
@@ -2380,14 +2381,22 @@ public class Clientes extends javax.swing.JFrame {
     public void cargarSubs(){
         String publi=jTree1.getLastSelectedPathComponent().toString();
         //JOptionPane.showMessageDialog(null, "Publi " +publi);
-        String sqlCargarSubs="Use distribution  SELECT\n" +
-        "*\n" +
-        "            FROM\n" +
-        "                DBO.MSmerge_subscriptions AS MSA\n" +
-        "            INNER JOIN DBO.MSpublications AS MSP\n" +
-        "                    ON MSA.publication_id = MSP.publication_id"
-                + " AND publication='"+publi+"'\n" +
-        "				";
+        String sqlCargarSubs="Use distribution  \n" +
+"               SELECT   *\n" +
+"               FROM\n" +
+"               DBO.MSsubscriptions MSA\n" +
+"               where subscriber_db<>'virtual'\n" +
+"               and publication_id = (Select publication_id\n" +
+"		FROM DBO.MSpublications \n" +
+"		where publication = '"+publi+"')";
+//                "Use distribution  SELECT\n" +
+//        "*\n" +
+//        "            FROM\n" +
+//        "                DBO.MSmerge_subscriptions AS MSA\n" +
+//        "            INNER JOIN DBO.MSpublications AS MSP\n" +
+//        "                    ON MSA.publication_id = MSP.publication_id"
+//                + " AND publication='"+publi+"'\n" +
+//        "				";
         Conexion cc = new Conexion();
         Connection cn=cc.conectarBase(servidor1, baseInicial);
         try{
@@ -2396,7 +2405,7 @@ public class Clientes extends javax.swing.JFrame {
             while(rs.next()){
                // JOptionPane.showMessageDialog(null, "Publi " +publi);
                 //taPublicaciones.setText(taPublicaciones.getText().concat(rs.getString("Publication Name")));
-                DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("["+rs.getString("subscriber")+"]: "+rs.getString("subscriber_db"));
+                DefaultMutableTreeNode raiz= new DefaultMutableTreeNode("["+rs.getString("publisher_db")+"]: "+rs.getString("subscriber_db"));
                 DefaultMutableTreeNode nodo= (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
                 DefaultTreeModel dt= (DefaultTreeModel)jTree1.getModel();
                 dt.insertNodeInto(raiz, nodo,nodo.getChildCount());

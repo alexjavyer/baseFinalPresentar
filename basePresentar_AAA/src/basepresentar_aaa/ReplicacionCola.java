@@ -458,7 +458,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
                 
                 System.out.println(fecha);
         String va = suscriptor;
-       JOptionPane.showMessageDialog(null, "Sucrip"+va);
+    //   JOptionPane.showMessageDialog(null, "Sucrip"+va);
     String sqlCrearSubs="use ["+baseOrigen+"]\n" +
                         "exec sp_addsubscription @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @destination_db = N'"+lugar+"', @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'queued failover', @subscriber_type = 0\n" +
                         "exec sp_addpushsubscription_agent @publication = N'"+nombrePublicacion+"', @subscriber = N'"+va+"', @subscriber_db = N'"+lugar+"', @job_login = null, @job_password = null, @subscriber_security_mode = 0, @subscriber_login = N'sa', @subscriber_password = N'sa', @frequency_type = 64, @frequency_interval = 1, @frequency_relative_interval = 1, @frequency_recurrence_factor = 0, @frequency_subday = 4, @frequency_subday_interval = 5, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 0, @active_end_date = 0, @dts_package_location = N'Distributor'";
@@ -468,6 +468,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
         try {
             PreparedStatement psd= cn.prepareStatement(sqlCrearSubs);
             psd.execute();
+                        JOptionPane.showMessageDialog(null, "Se Creo La Suscipcion...");
     //        this.dispose();
         }catch(SQLException ex){
       //      JOptionPane.showMessageDialog(null,"SQLException "+ex);
@@ -482,7 +483,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
     }
     
     public String cargarBasedePublicaciones(String servidor, String publicacion){
-        JOptionPane.showMessageDialog(null, "Ver base");
+    //    JOptionPane.showMessageDialog(null, "Ver base");
         String sqlCargarPublicaciones="";
           sqlCargarPublicaciones="Use distribution  SELECT\n" +
 "*\n" +
@@ -581,7 +582,7 @@ public class ReplicacionCola extends javax.swing.JInternalFrame {
     
     public void crearBase(String baseNueva){
         Conexion cc = new Conexion();
-        JOptionPane.showMessageDialog(null,"suscriptor "+suscriptorName);
+     //   JOptionPane.showMessageDialog(null,"suscriptor "+suscriptorName);
         Connection cn=cc.conectar(suscriptorName);
         String sql="";
         sql="USE [master]\n" +

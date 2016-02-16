@@ -35,13 +35,13 @@ public class Conexion {
         }else{
             if(server.equals("JAVY-PC")){
 
-//                instancia="192.168.1.4";
-               instancia="172.21.105.123";
+                instancia="192.168.1.2";
+         //      instancia="172.21.106.190";
               // instancia="172.21.105.123";
 
               //  instancia="192.168.1.4";
 //               instancia="172.21.105.123";
-               instancia="172.21.105.123";
+             //  instancia="172.21.105.123";
 
             }else{
                    instancia="172.21.105.248";
@@ -80,14 +80,16 @@ public class Conexion {
 
         }else{
             if(server.equals("JAVY-PC")){
-               //instancia="192.168.1.4";
-               instancia="172.21.105.123";
-             //   instancia="192.168.1.5";
+               instancia="192.168.1.2";
+               //instancia="172.21.105.123";
+//                            instancia="172.21.106.190";
+               //   instancia="192.168.1.5";
                //instancia="172.21.105.123";
             }else{
 
           //  instancia="192.168.1.8";
               instancia="172.21.105.124";
+              
               //instancia="172.21.105.124";
 
             //instancia="192.168.1.8";
